@@ -1,12 +1,311 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Navigation from "@/components/Navigation";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
+import { 
+  GraduationCap, 
+  Award, 
+  Briefcase, 
+  Code, 
+  MessageSquare,
+  MapPin,
+  Mail,
+  Phone,
+  Trophy,
+  Users,
+  Globe
+} from "lucide-react";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-gradient-hero">
+      <Navigation />
+      
+      {/* Hero Section */}
+      <section className="pt-32 pb-20 px-6">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div className="inline-block">
+              <Badge variant="secondary" className="mb-4 text-sm">
+                Student Leader • Athlete • Innovator
+              </Badge>
+            </div>
+            
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
+              Ethan Hauger
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
+              Rising 12th grader at Science Leadership Academy, dedicated to making a difference through leadership, service, and innovation.
+            </p>
+            
+            <div className="flex flex-wrap justify-center gap-4 pt-4">
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <MapPin className="w-4 h-4" />
+                <span>Philadelphia, PA</span>
+              </div>
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Mail className="w-4 h-4" />
+                <span>ehauger26@slabeeber.org</span>
+              </div>
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Phone className="w-4 h-4" />
+                <span>267-235-3890</span>
+              </div>
+            </div>
+            
+            <div className="pt-6">
+              <Link to="/chat">
+                <Button size="lg" className="gap-2 shadow-glow">
+                  <MessageSquare className="w-5 h-5" />
+                  Ask Me Anything
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="py-20 px-6">
+        <div className="container mx-auto max-w-6xl">
+          <Card className="p-8 md:p-12 bg-card/50 backdrop-blur">
+            <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
+              <Users className="w-8 h-8 text-primary" />
+              About Me
+            </h2>
+            <div className="space-y-4 text-lg text-muted-foreground">
+              <p>
+                I'm a student-athlete and rising 12th grader at SLA@Beeber with a passion for leadership and service. As captain of my varsity basketball team and NHS treasurer, I strive to inspire and support those around me.
+              </p>
+              <p>
+                One of my proudest achievements was presenting on gun violence at the United Nations with my classmates, advocating for safer communities. Through projects like the Microphone for Peace—a 3D-printed microphone made from recycled illegal firearms—I've learned that making a difference doesn't require being powerful; it requires showing up and being willing to use whatever gifts you have.
+              </p>
+              <p>
+                When I'm not studying or playing basketball, I enjoy reading, working out, playing piano, playing video games, and spending time with my pitbull-mix, Honey. I'm a follower of Christianity and strive to reflect my faith in everything I do.
+              </p>
+            </div>
+          </Card>
+        </div>
+      </section>
+
+      {/* Education Section */}
+      <section className="py-20 px-6 bg-muted/30">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
+            <GraduationCap className="w-8 h-8 text-primary" />
+            Education
+          </h2>
+          
+          <Card className="p-8">
+            <div className="space-y-4">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2">
+                <div>
+                  <h3 className="text-2xl font-semibold">Science Leadership Academy at Beeber</h3>
+                  <p className="text-muted-foreground">Philadelphia, PA</p>
+                </div>
+                <Badge variant="secondary" className="w-fit">Class of 2026</Badge>
+              </div>
+              
+              <div className="pt-4 space-y-3">
+                <div className="flex items-center gap-2">
+                  <Trophy className="w-5 h-5 text-primary" />
+                  <span className="font-semibold">4.0/4.0 GPA</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Award className="w-5 h-5 text-primary" />
+                  <span>Distinguished Honor Roll every semester</span>
+                </div>
+              </div>
+
+              <div className="pt-6">
+                <h4 className="font-semibold mb-3">Activities & Leadership</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {[
+                    "NHS Treasurer",
+                    "Varsity Basketball Captain",
+                    "Humanium Co-leader",
+                    "Book Club Member",
+                    "Track & Cross-Country"
+                  ].map((activity) => (
+                    <div key={activity} className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-primary" />
+                      <span>{activity}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </section>
+
+      {/* Experience Section */}
+      <section className="py-20 px-6">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
+            <Briefcase className="w-8 h-8 text-primary" />
+            Experience
+          </h2>
+          
+          <div className="space-y-6">
+            <Card className="p-6">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-4">
+                <div>
+                  <h3 className="text-xl font-semibold">IANSA Ambassador & UN Student Presenter</h3>
+                  <p className="text-muted-foreground">New York, NY</p>
+                </div>
+                <Badge variant="outline">June 2024</Badge>
+              </div>
+              <p className="text-muted-foreground">
+                Presented a speech at the United Nations with classmates, speaking out against illegal firearms and gun violence. Led the creation of the Microphone for Peace, a 3D-printed microphone made from recycled illegal firearms.
+              </p>
+            </Card>
+
+            <Card className="p-6">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-4">
+                <div>
+                  <h3 className="text-xl font-semibold">NHS Treasurer</h3>
+                  <p className="text-muted-foreground">Science Leadership Academy at Beeber</p>
+                </div>
+                <Badge variant="outline">May 2024 - Present</Badge>
+              </div>
+              <p className="text-muted-foreground">
+                Elected NHS Officer, managing chapter finances and organizing community service events including the school's first student vs. staff basketball game.
+              </p>
+            </Card>
+
+            <Card className="p-6">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-4">
+                <div>
+                  <h3 className="text-xl font-semibold">Basketball Tutor</h3>
+                  <p className="text-muted-foreground">Self-Employed</p>
+                </div>
+                <Badge variant="outline">April 2024 - Present</Badge>
+              </div>
+              <p className="text-muted-foreground">
+                Launched self-run basketball coaching business. Created marketing materials, marketed locally, and currently coaching 7 beginner clients.
+              </p>
+            </Card>
+
+            <Card className="p-6">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-4">
+                <div>
+                  <h3 className="text-xl font-semibold">Summer Programs</h3>
+                  <p className="text-muted-foreground">Math Corps • Penn RSSA • C2L</p>
+                </div>
+                <Badge variant="outline">Summers 2023-2025</Badge>
+              </div>
+              <p className="text-muted-foreground">
+                Tutored younger students in math, participated in University of Pennsylvania research program, and worked with engineering teacher to design, construct, and install goat houses.
+              </p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Awards Section */}
+      <section className="py-20 px-6 bg-muted/30">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
+            <Award className="w-8 h-8 text-primary" />
+            Awards & Recognition
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card className="p-6">
+              <Globe className="w-10 h-10 text-primary mb-3" />
+              <h3 className="text-lg font-semibold mb-2">United Nations Presenter</h3>
+              <p className="text-muted-foreground">Presented at UN on gun violence prevention (2024)</p>
+            </Card>
+
+            <Card className="p-6">
+              <Trophy className="w-10 h-10 text-primary mb-3" />
+              <h3 className="text-lg font-semibold mb-2">JV Basketball MVP</h3>
+              <p className="text-muted-foreground">Freshman Year (2022-23)</p>
+            </Card>
+
+            <Card className="p-6">
+              <Award className="w-10 h-10 text-primary mb-3" />
+              <h3 className="text-lg font-semibold mb-2">Distinguished Honor Roll</h3>
+              <p className="text-muted-foreground">Every semester since 2022</p>
+            </Card>
+
+            <Card className="p-6">
+              <Users className="w-10 h-10 text-primary mb-3" />
+              <h3 className="text-lg font-semibold mb-2">NHS Officer</h3>
+              <p className="text-muted-foreground">Elected treasurer (2024-Present)</p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section className="py-20 px-6">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
+            <Code className="w-8 h-8 text-primary" />
+            Skills & Interests
+          </h2>
+          
+          <Card className="p-8">
+            <div className="space-y-6">
+              <div>
+                <h3 className="font-semibold mb-3 text-lg">Athletics</h3>
+                <div className="flex flex-wrap gap-2">
+                  {["Varsity Basketball", "Track", "Cross-Country"].map((skill) => (
+                    <Badge key={skill} variant="secondary">{skill}</Badge>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h3 className="font-semibold mb-3 text-lg">Technical Skills</h3>
+                <div className="flex flex-wrap gap-2">
+                  {["Python", "Fusion 360", "Adobe Illustrator", "DaVinci Resolve", "3D Printing"].map((skill) => (
+                    <Badge key={skill} variant="secondary">{skill}</Badge>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h3 className="font-semibold mb-3 text-lg">Creative & Leadership</h3>
+                <div className="flex flex-wrap gap-2">
+                  {["Piano", "Chess", "Public Speaking", "Team Leadership", "Problem-Solving", "Collaboration"].map((skill) => (
+                    <Badge key={skill} variant="secondary">{skill}</Badge>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-6">
+        <div className="container mx-auto max-w-4xl text-center">
+          <Card className="p-12 bg-gradient-primary text-primary-foreground">
+            <h2 className="text-3xl font-bold mb-4">Want to know more?</h2>
+            <p className="text-lg mb-8 opacity-90">
+              Chat with my AI assistant to learn more about my experiences, projects, and goals.
+            </p>
+            <Link to="/chat">
+              <Button size="lg" variant="secondary" className="gap-2">
+                <MessageSquare className="w-5 h-5" />
+                Start a Conversation
+              </Button>
+            </Link>
+          </Card>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-8 px-6 border-t border-border">
+        <div className="container mx-auto max-w-6xl text-center text-muted-foreground">
+          <p>© 2025 Ethan Hauger. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 };
