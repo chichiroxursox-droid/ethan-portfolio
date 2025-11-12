@@ -1,0 +1,4 @@
+project_id = "wmsmquebhpogjlmmgokm"
+
+[functions.chat-with-ethan]
+verify_jwt = false
