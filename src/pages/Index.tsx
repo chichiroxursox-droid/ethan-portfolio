@@ -3,23 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { 
-  GraduationCap, 
-  Award, 
-  Briefcase, 
-  Code, 
-  MessageSquare,
-  MapPin,
-  Mail,
-  Phone,
-  Trophy,
-  Users,
-  Globe
-} from "lucide-react";
-
+import { GraduationCap, Award, Briefcase, Code, MessageSquare, MapPin, Mail, Phone, Trophy, Users, Globe } from "lucide-react";
 const Index = () => {
-  return (
-    <div className="min-h-screen bg-gradient-hero">
+  return <div className="min-h-screen bg-gradient-hero">
       <Navigation />
       
       {/* Hero Section */}
@@ -36,9 +22,7 @@ const Index = () => {
               Ethan Hauger
             </h1>
             
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
-              Rising 12th grader at Science Leadership Academy, dedicated to making a difference through leadership, service, and innovation.
-            </p>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto md:text-xl"> Current 12th grader at Science Leadership Academy, dedicated to making a difference through leadership, service, and innovation.</p>
             
             <div className="flex flex-wrap justify-center gap-4 pt-4">
               <div className="flex items-center gap-2 text-muted-foreground">
@@ -122,18 +106,10 @@ const Index = () => {
               <div className="pt-6">
                 <h4 className="font-semibold mb-3">Activities & Leadership</h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {[
-                    "NHS Treasurer",
-                    "Varsity Basketball Captain",
-                    "Humanium Co-leader",
-                    "Book Club Member",
-                    "Track & Cross-Country"
-                  ].map((activity) => (
-                    <div key={activity} className="flex items-center gap-2">
+                  {["NHS Treasurer", "Varsity Basketball Captain", "Humanium Co-leader", "Book Club Member", "Track & Cross-Country"].map(activity => <div key={activity} className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-primary" />
                       <span>{activity}</span>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
               </div>
             </div>
@@ -254,27 +230,21 @@ const Index = () => {
               <div>
                 <h3 className="font-semibold mb-3 text-lg">Athletics</h3>
                 <div className="flex flex-wrap gap-2">
-                  {["Varsity Basketball", "Track", "Cross-Country"].map((skill) => (
-                    <Badge key={skill} variant="secondary">{skill}</Badge>
-                  ))}
+                  {["Varsity Basketball", "Track", "Cross-Country"].map(skill => <Badge key={skill} variant="secondary">{skill}</Badge>)}
                 </div>
               </div>
 
               <div>
                 <h3 className="font-semibold mb-3 text-lg">Technical Skills</h3>
                 <div className="flex flex-wrap gap-2">
-                  {["Python", "Fusion 360", "Adobe Illustrator", "DaVinci Resolve", "3D Printing"].map((skill) => (
-                    <Badge key={skill} variant="secondary">{skill}</Badge>
-                  ))}
+                  {["Python", "Fusion 360", "Adobe Illustrator", "DaVinci Resolve", "3D Printing"].map(skill => <Badge key={skill} variant="secondary">{skill}</Badge>)}
                 </div>
               </div>
 
               <div>
                 <h3 className="font-semibold mb-3 text-lg">Creative & Leadership</h3>
                 <div className="flex flex-wrap gap-2">
-                  {["Piano", "Chess", "Public Speaking", "Team Leadership", "Problem-Solving", "Collaboration"].map((skill) => (
-                    <Badge key={skill} variant="secondary">{skill}</Badge>
-                  ))}
+                  {["Piano", "Chess", "Public Speaking", "Team Leadership", "Problem-Solving", "Collaboration"].map(skill => <Badge key={skill} variant="secondary">{skill}</Badge>)}
                 </div>
               </div>
             </div>
@@ -306,8 +276,6 @@ const Index = () => {
           <p>© 2025 Ethan Hauger. All rights reserved.</p>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
