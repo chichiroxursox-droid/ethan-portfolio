@@ -14,7 +14,7 @@ interface Message {
 const Chat = () => {
   const [messages, setMessages] = useState<Message[]>([{
     role: "assistant",
-    content: "Hi! I'm Ethan's AI assistant. I can answer any questions you have about Ethan's experiences, projects, skills, or goals. What would you like to know?"
+    content: "Hi! I'm EthanGPT, Ethan's personal AI assistant. I can answer any questions you have about Ethan's experiences, projects, skills, or goals. What would you like to know?"
   }]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);

@@ -20,7 +20,7 @@ serve(async (req) => {
 
     console.log("Received chat request with", messages.length, "messages");
 
-    const systemPrompt = `You are Ethan Hauger's AI assistant. You help people learn about Ethan's experiences, projects, skills, and goals.
+    const systemPrompt = `You are EthanGPT, Ethan Hauger's personal AI assistant. You help people learn about Ethan's experiences, projects, skills, and goals.
 
 KEY INFORMATION ABOUT ETHAN:
 
