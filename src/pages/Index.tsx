@@ -61,7 +61,7 @@ const Index = () => {
             </h2>
             <div className="space-y-4 text-lg text-muted-foreground">
               <p>
-                I'm a student-athlete and rising 12th grader at SLA@Beeber with a passion for leadership and service. As captain of my varsity basketball team and NHS treasurer, I strive to inspire and support those around me.
+                I'm a student-athlete and current 12th grader at SLA@Beeber with a passion for leadership and service. As captain of my varsity basketball team and NHS treasurer, I strive to inspire and support those around me.
               </p>
               <p>
                 One of my proudest achievements was presenting on gun violence at the United Nations with my classmates, advocating for safer communities. Through projects like the Microphone for Peace—a 3D-printed microphone made from recycled illegal firearms—I've learned that making a difference doesn't require being powerful; it requires showing up and being willing to use whatever gifts you have.
