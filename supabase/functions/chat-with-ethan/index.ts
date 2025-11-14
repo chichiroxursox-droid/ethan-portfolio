@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.81.1';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -11,14 +12,60 @@ serve(async (req) => {
   }
 
   try {
-    const { messages } = await req.json();
+    const { messages, conversationId } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+    const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
+    const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
     
     if (!LOVABLE_API_KEY) {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
 
-    console.log("Received chat request with", messages.length, "messages");
+    if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
+      throw new Error("Supabase configuration is missing");
+    }
+
+    // Get auth token from request
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader) {
+      return new Response(
+        JSON.stringify({ error: "Missing authorization header" }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Create Supabase client with service role for database operations
+    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+
+    // Verify user from auth header
+    const token = authHeader.replace('Bearer ', '');
+    const { data: { user }, error: userError } = await supabase.auth.getUser(token);
+    
+    if (userError || !user) {
+      return new Response(
+        JSON.stringify({ error: "Unauthorized" }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    console.log("Received chat request with", messages.length, "messages for user", user.id);
+
+    // Load conversation history if conversationId is provided
+    let conversationHistory = messages;
+    if (conversationId) {
+      const { data: historyMessages, error: historyError } = await supabase
+        .from('messages')
+        .select('role, content')
+        .eq('conversation_id', conversationId)
+        .order('created_at', { ascending: true });
+
+      if (historyError) {
+        console.error("Error loading conversation history:", historyError);
+      } else if (historyMessages && historyMessages.length > 0) {
+        // Prepend history to current messages (excluding the system message)
+        conversationHistory = [...historyMessages, ...messages];
+      }
+    }
 
     const systemPrompt = `You are EthanGPT, Ethan Hauger's personal AI assistant. You help people learn about Ethan's experiences, projects, skills, and goals.
 
@@ -133,7 +180,7 @@ Answer questions naturally and conversationally. Use specific details from this 
         model: "google/gemini-2.5-flash",
         messages: [
           { role: "system", content: systemPrompt },
-          ...messages,
+          ...conversationHistory,
         ],
       }),
     });
@@ -159,7 +206,26 @@ Answer questions naturally and conversationally. Use specific details from this 
     }
 
     const data = await response.json();
+    const assistantMessage = data.choices[0].message.content;
     console.log("Successfully generated AI response");
+
+    // Save messages to database
+    if (conversationId) {
+      // Save user message
+      const userMessage = messages[messages.length - 1];
+      await supabase.from('messages').insert({
+        conversation_id: conversationId,
+        role: userMessage.role,
+        content: userMessage.content,
+      });
+
+      // Save assistant message
+      await supabase.from('messages').insert({
+        conversation_id: conversationId,
+        role: 'assistant',
+        content: assistantMessage,
+      });
+    }
 
     return new Response(JSON.stringify(data), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
