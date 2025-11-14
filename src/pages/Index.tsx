@@ -181,42 +181,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Awards Section */}
-      <section className="py-20 px-6 bg-muted/30">
-        <div className="container mx-auto max-w-6xl">
-          <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
-            <Award className="w-8 h-8 text-primary" />
-            Awards & Recognition
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card className="p-6">
-              <Globe className="w-10 h-10 text-primary mb-3" />
-              <h3 className="text-lg font-semibold mb-2">United Nations Presenter</h3>
-              <p className="text-muted-foreground">Presented at UN on gun violence prevention (2024)</p>
-            </Card>
-
-            <Card className="p-6">
-              <Trophy className="w-10 h-10 text-primary mb-3" />
-              <h3 className="text-lg font-semibold mb-2">JV Basketball MVP</h3>
-              <p className="text-muted-foreground">Freshman Year (2022-23)</p>
-            </Card>
-
-            <Card className="p-6">
-              <Award className="w-10 h-10 text-primary mb-3" />
-              <h3 className="text-lg font-semibold mb-2">Distinguished Honor Roll</h3>
-              <p className="text-muted-foreground">Every semester since 2022</p>
-            </Card>
-
-            <Card className="p-6">
-              <Users className="w-10 h-10 text-primary mb-3" />
-              <h3 className="text-lg font-semibold mb-2">NHS Officer</h3>
-              <p className="text-muted-foreground">Elected treasurer (2024-Present)</p>
-            </Card>
-          </div>
-        </div>
-      </section>
-
       {/* Skills Section */}
       <section className="py-20 px-6">
         <div className="container mx-auto max-w-6xl">
@@ -237,7 +201,7 @@ const Index = () => {
               <div>
                 <h3 className="font-semibold mb-3 text-lg">Technical Skills</h3>
                 <div className="flex flex-wrap gap-2">
-                  {["Python", "Fusion 360", "Adobe Illustrator", "DaVinci Resolve", "3D Printing"].map(skill => <Badge key={skill} variant="secondary">{skill}</Badge>)}
+                  {["Fusion 360", "Adobe Illustrator", "DaVinci Resolve", "3D Printing", "Laser Cutting"].map(skill => <Badge key={skill} variant="secondary">{skill}</Badge>)}
                 </div>
               </div>
 
