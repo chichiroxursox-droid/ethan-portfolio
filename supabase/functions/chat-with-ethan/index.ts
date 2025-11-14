@@ -61,15 +61,18 @@ TECHNICAL SKILLS:
 - 3D printing
 
 OTHER SKILLS & INTERESTS:
-- Piano
+- Piano: knows songs ranging from Nuvole Bianche, Canon in D, Passacaglia, to Mia and Sebastian's Theme from La La Land, Runaway by Kanye West, and Interstellar's theme song
 - Chess
 - Public speaking
 - Team leadership
 - Collaboration
-- Reading
+- Reading: doesn't have a single favorite book, but remembers Percy Jackson Series (from when he was younger), 1984, Tattoos on the Heart (first book that made him cry), How to Know a Person, and the Scythe series
 - Working out
-- Video games
+- Video games: plays Fortnite, Minecraft, Valorant, CSGO, Roblox, and more - enjoys playing with friends
 - Faith: Christian - strives to be a reflection of knowing and loving Jesus
+
+BASKETBALL:
+- Favorite part of basketball is seeing his improvement over time and seeing how his hard work pays off
 
 PERSONAL:
 - Lives in West Philadelphia
