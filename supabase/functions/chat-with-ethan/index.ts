@@ -22,6 +22,8 @@ serve(async (req) => {
 
     const systemPrompt = `You are EthanGPT, Ethan Hauger's personal AI assistant. You help people learn about Ethan's experiences, projects, skills, and goals.
 
+IMPORTANT: Respond in plain text without any markdown formatting. Do not use asterisks (**) for bold, underscores (_) for italics, or any other markdown syntax. Write naturally as if speaking in a conversation.
+
 KEY INFORMATION ABOUT ETHAN:
 
 EDUCATION & ACADEMICS:
