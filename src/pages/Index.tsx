@@ -4,7 +4,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { GraduationCap, Award, Briefcase, Code, MessageSquare, MapPin, Mail, Phone, Trophy, Users, Globe } from "lucide-react";
-import { ContactForm } from "@/components/ContactForm";
+import educationProtest from "@/assets/education-protest.png";
+import unSpeaking from "@/assets/un-speaking.png";
 const Index = () => {
   return <div className="min-h-screen bg-gradient-hero">
       <Navigation />
@@ -60,12 +61,55 @@ const Index = () => {
               <Users className="w-8 h-8 text-primary" />
               About Me
             </h2>
+            
+            {/* Images Grid */}
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              <div className="space-y-3">
+                <img 
+                  src={educationProtest} 
+                  alt="Ethan Hauger speaking at Stand Up for Philly Schools education protest, featured on front page of Philadelphia Inquirer" 
+                  className="w-full h-auto rounded-lg shadow-lg"
+                />
+                <p className="text-sm text-muted-foreground italic">
+                  Speaking at Stand Up for Philly Schools event - Featured on front page of Philadelphia Inquirer (Tyger Williams / Staff Photographer)
+                </p>
+              </div>
+              <div className="space-y-3">
+                <img 
+                  src={unSpeaking} 
+                  alt="Ethan Hauger presenting at United Nations on gun violence prevention" 
+                  className="w-full h-auto rounded-lg shadow-lg"
+                />
+                <p className="text-sm text-muted-foreground italic">
+                  Presenting at the United Nations on gun violence prevention
+                </p>
+              </div>
+            </div>
+            
             <div className="space-y-4 text-lg text-muted-foreground">
               <p>
                 I'm a student-athlete and current 12th grader at SLA@Beeber with a passion for leadership and service. As captain of my varsity basketball team and NHS treasurer, I strive to inspire and support those around me.
               </p>
               <p>
-                One of my proudest achievements was presenting on gun violence at the United Nations with my classmates, advocating for safer communities. Through projects like the Microphone for Peace—a 3D-printed microphone made from recycled illegal firearms—I've learned that making a difference doesn't require being powerful; it requires showing up and being willing to use whatever gifts you have.
+                One of my proudest achievements was presenting on gun violence at the United Nations with my classmates, advocating for safer communities. Through projects like the Microphone for Peace—a 3D-printed microphone made from{" "}
+                <a 
+                  href="https://reforge-phl-vision.lovable.app" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline font-medium"
+                >
+                  humanium metal
+                </a>
+                {" "}(recycled illegal firearms)—I've learned that making a difference doesn't require being powerful; it requires showing up and being willing to use whatever gifts you have. Visit our{" "}
+                <a 
+                  href="https://reforge-phl-vision.lovable.app" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline font-medium"
+                >
+                  Reforge PHL Vision website
+                </a>
+                {" "}to learn more about this project.
               </p>
               <p>
                 When I'm not studying or playing basketball, I enjoy reading, working out, playing piano, playing video games, and spending time with my pitbull-mix, Honey. I'm a follower of Christianity and strive to reflect my faith in everything I do.
@@ -136,7 +180,16 @@ const Index = () => {
                 <Badge variant="outline">June 2024</Badge>
               </div>
               <p className="text-muted-foreground">
-                Presented a speech at the United Nations with classmates, speaking out against illegal firearms and gun violence. Led the creation of the Microphone for Peace, a 3D-printed microphone made from recycled illegal firearms.
+                Presented a speech at the United Nations with classmates, speaking out against illegal firearms and gun violence. Led the creation of the Microphone for Peace, a 3D-printed microphone made from{" "}
+                <a 
+                  href="https://reforge-phl-vision.lovable.app" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline font-medium"
+                >
+                  humanium metal
+                </a>
+                {" "}(recycled illegal firearms).
               </p>
             </Card>
 
@@ -235,12 +288,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="py-20 px-6 bg-muted/30">
-        <div className="container mx-auto max-w-6xl">
-          <ContactForm />
-        </div>
-      </section>
 
       {/* Footer */}
       <footer className="py-8 px-6 border-t border-border">
