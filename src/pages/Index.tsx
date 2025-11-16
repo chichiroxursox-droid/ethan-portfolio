@@ -4,6 +4,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { GraduationCap, Award, Briefcase, Code, MessageSquare, MapPin, Mail, Phone, Trophy, Users, Globe } from "lucide-react";
+import { ContactForm } from "@/components/ContactForm";
+
 const Index = () => {
   return <div className="min-h-screen bg-gradient-hero">
       <Navigation />
@@ -231,6 +233,13 @@ const Index = () => {
               </Button>
             </Link>
           </Card>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="py-20 px-6 bg-muted/30">
+        <div className="container mx-auto max-w-6xl">
+          <ContactForm />
         </div>
       </section>
 
