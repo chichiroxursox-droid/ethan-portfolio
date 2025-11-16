@@ -5,7 +5,6 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { GraduationCap, Award, Briefcase, Code, MessageSquare, MapPin, Mail, Phone, Trophy, Users, Globe } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
-
 const Index = () => {
   return <div className="min-h-screen bg-gradient-hero">
       <Navigation />
@@ -33,7 +32,7 @@ const Index = () => {
               </div>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Mail className="w-4 h-4" />
-                <span>ehauger26@slabeeber.org</span>
+                <span>chichiroxursox@gmail.com</span>
               </div>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Phone className="w-4 h-4" />
