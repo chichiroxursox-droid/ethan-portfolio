@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
-import { MessageSquare, User, Mail } from "lucide-react";
+import { MessageSquare, User, Mail, Wrench, Trophy } from "lucide-react";
 
 const Navigation = () => {
   const location = useLocation();
@@ -16,7 +16,7 @@ const Navigation = () => {
             <span className="font-semibold text-lg">Ethan Hauger</span>
           </Link>
           
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             <Link to="/">
               <Button 
                 variant={location.pathname === "/" ? "default" : "ghost"}
@@ -25,6 +25,26 @@ const Navigation = () => {
               >
                 <User className="w-4 h-4" />
                 About
+              </Button>
+            </Link>
+            <Link to="/engineering">
+              <Button 
+                variant={location.pathname === "/engineering" ? "default" : "ghost"}
+                size="sm"
+                className="gap-2"
+              >
+                <Wrench className="w-4 h-4" />
+                Engineering
+              </Button>
+            </Link>
+            <Link to="/athletics">
+              <Button 
+                variant={location.pathname === "/athletics" ? "default" : "ghost"}
+                size="sm"
+                className="gap-2"
+              >
+                <Trophy className="w-4 h-4" />
+                Athletics
               </Button>
             </Link>
             <Link to="/chat">
