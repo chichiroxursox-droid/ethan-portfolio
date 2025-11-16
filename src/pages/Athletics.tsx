@@ -1,9 +1,39 @@
 import Navigation from "@/components/Navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Legend } from "recharts";
 import basketballShot from "@/assets/basketball-shot.png";
 
 const Athletics = () => {
+  const seasonData = [
+    { season: "2022-23 (Fr. JV)", team: "JV", ppg: 11.0, rpg: 1.5, apg: 0.5 },
+    { season: "2022-23 (Fr. Var)", team: "Varsity", ppg: 1.8, rpg: 1.2, apg: 0.0 },
+    { season: "2023-24 (So.)", team: "Varsity", ppg: 5.4, rpg: 0.8, apg: 0.8 },
+    { season: "2024-25 (Jr.)", team: "Varsity", ppg: 8.3, rpg: 0.0, apg: 0.0 },
+  ];
+
+  const teamComparisonData = [
+    { team: "JV", ppg: 11.0, apg: 0.5, rpg: 1.5 },
+    { team: "Varsity", ppg: 6.3, apg: 0.6, rpg: 0.6 },
+    { team: "AAU", ppg: 15.0, apg: 5.0, rpg: 5.0 },
+  ];
+
+  const chartConfig = {
+    ppg: {
+      label: "Points Per Game",
+      color: "hsl(var(--primary))",
+    },
+    apg: {
+      label: "Assists Per Game",
+      color: "hsl(var(--accent))",
+    },
+    rpg: {
+      label: "Rebounds Per Game",
+      color: "hsl(var(--secondary))",
+    },
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -59,6 +89,67 @@ const Athletics = () => {
           </div>
 
           <div className="space-y-8">
+            <Card>
+              <CardHeader>
+                <CardTitle>Season Progression</CardTitle>
+                <CardDescription>Points per game evolution throughout high school career</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ChartContainer config={chartConfig} className="h-[300px] w-full">
+                  <LineChart data={seasonData}>
+                    <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                    <XAxis 
+                      dataKey="season" 
+                      className="text-xs"
+                      tick={{ fill: 'hsl(var(--muted-foreground))' }}
+                    />
+                    <YAxis 
+                      className="text-xs"
+                      tick={{ fill: 'hsl(var(--muted-foreground))' }}
+                    />
+                    <ChartTooltip content={<ChartTooltipContent />} />
+                    <Legend />
+                    <Line 
+                      type="monotone" 
+                      dataKey="ppg" 
+                      stroke="hsl(var(--primary))" 
+                      strokeWidth={3}
+                      name="Points Per Game"
+                      dot={{ fill: 'hsl(var(--primary))', r: 5 }}
+                    />
+                  </LineChart>
+                </ChartContainer>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Team Performance Comparison</CardTitle>
+                <CardDescription>Average statistics across JV, Varsity, and AAU teams</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ChartContainer config={chartConfig} className="h-[350px] w-full">
+                  <BarChart data={teamComparisonData}>
+                    <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+                    <XAxis 
+                      dataKey="team" 
+                      className="text-xs"
+                      tick={{ fill: 'hsl(var(--muted-foreground))' }}
+                    />
+                    <YAxis 
+                      className="text-xs"
+                      tick={{ fill: 'hsl(var(--muted-foreground))' }}
+                    />
+                    <ChartTooltip content={<ChartTooltipContent />} />
+                    <Legend />
+                    <Bar dataKey="ppg" fill="hsl(var(--primary))" name="Points Per Game" radius={[8, 8, 0, 0]} />
+                    <Bar dataKey="apg" fill="hsl(var(--accent))" name="Assists Per Game" radius={[8, 8, 0, 0]} />
+                    <Bar dataKey="rpg" fill="hsl(var(--secondary))" name="Rebounds Per Game" radius={[8, 8, 0, 0]} />
+                  </BarChart>
+                </ChartContainer>
+              </CardContent>
+            </Card>
+
             <Card>
               <CardHeader>
                 <CardTitle>Varsity Team Statistics</CardTitle>
