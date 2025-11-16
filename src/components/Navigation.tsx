@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
-import { MessageSquare, User } from "lucide-react";
+import { MessageSquare, User, Mail } from "lucide-react";
 
 const Navigation = () => {
   const location = useLocation();
@@ -35,6 +35,16 @@ const Navigation = () => {
               >
                 <MessageSquare className="w-4 h-4" />
                 Chat
+              </Button>
+            </Link>
+            <Link to="/contact">
+              <Button 
+                variant={location.pathname === "/contact" ? "default" : "ghost"}
+                size="sm"
+                className="gap-2"
+              >
+                <Mail className="w-4 h-4" />
+                Contact
               </Button>
             </Link>
           </div>
