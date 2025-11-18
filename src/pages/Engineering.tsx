@@ -1,6 +1,7 @@
 import Navigation from "@/components/Navigation";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Home, Youtube } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { useState } from "react";
+import { Home, Youtube, X } from "lucide-react";
 import miniHouse1 from "@/assets/mini-house-1.jpg";
 import miniHouse2 from "@/assets/mini-house-2.jpg";
 import miniHouse3 from "@/assets/mini-house-3.jpg";
@@ -9,84 +10,224 @@ import miniHouse5 from "@/assets/mini-house-5.jpg";
 import miniHouse6 from "@/assets/mini-house-6.jpg";
 
 const Engineering = () => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const miniHouseImages = [
+    { src: miniHouse1, caption: "Foundation and frame construction" },
+    { src: miniHouse2, caption: "Platform stage development" },
+    { src: miniHouse3, caption: "Roof framing assembly" },
+    { src: miniHouse4, caption: "Wall framing progress" },
+    { src: miniHouse5, caption: "Completed exterior structure" },
+    { src: miniHouse6, caption: "Finished house with roofing" },
+  ];
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#0A0A0A] font-inter">
       <Navigation />
       
-      <main className="container mx-auto px-6 pt-24 pb-16">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Engineering Projects</h1>
-            <p className="text-lg text-muted-foreground">
-              Building solutions that combine creativity with purpose
+      {/* Lightbox Modal */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 animate-fade-in backdrop-blur-sm"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button 
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10"
+            onClick={() => setSelectedImage(null)}
+          >
+            <X className="w-8 h-8" />
+          </button>
+          <img 
+            src={selectedImage} 
+            alt="Full size view" 
+            className="max-w-full max-h-[90vh] object-contain animate-scale-in"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+      
+      <main className="container mx-auto px-6 pt-32 pb-24">
+        {/* Hero Section */}
+        <div className="max-w-7xl mx-auto mb-20">
+          <div className="space-y-4 mb-8">
+            <div className="inline-block">
+              <span className="font-mono text-xs tracking-wider text-[#00FF9F] uppercase bg-[#00FF9F]/10 px-3 py-1 rounded-full border border-[#00FF9F]/20">
+                Engineering Projects
+              </span>
+            </div>
+            <h1 className="text-6xl md:text-7xl font-bold text-white leading-tight">
+              Building the<br />
+              <span className="bg-gradient-to-r from-[#00FF9F] to-[#00D9FF] bg-clip-text text-transparent">
+                Future
+              </span>
+            </h1>
+            <p className="text-xl text-gray-400 max-w-2xl font-light">
+              Combining technical precision with creative problem-solving to create meaningful impact
             </p>
           </div>
+        </div>
 
-          <div className="space-y-8">
-            <Card className="border-2 hover:border-primary transition-colors">
-              <CardHeader>
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-primary/10 rounded-lg">
-                    <Home className="w-6 h-6 text-primary" />
+        <div className="max-w-7xl mx-auto space-y-32">
+          {/* Mini House Project */}
+          <section className="relative">
+            <div className="grid lg:grid-cols-2 gap-16 items-start">
+              <div className="space-y-8 sticky top-24">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-[#00FF9F]/10 rounded-lg border border-[#00FF9F]/20">
+                    <Home className="w-6 h-6 text-[#00FF9F]" />
                   </div>
-                  <div className="flex-1">
-                    <CardTitle className="text-2xl mb-2">Apocalypse Survival Mini House</CardTitle>
-                    <CardDescription className="text-base">
-                      16' x 16' Sustainable Shelter Design Project
-                    </CardDescription>
-                  </div>
+                  <h2 className="text-4xl font-bold text-white font-mono">
+                    APOCALYPSE_SHELTER.EXE
+                  </h2>
                 </div>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <p className="text-foreground leading-relaxed">
-                  Designed and built a 16' by 16' mini house engineered to survive a hypothetical apocalypse scenario. 
-                  This hands-on project combined structural engineering, sustainable design principles, and practical 
-                  construction skills to create a fully functional shelter from the ground up.
-                </p>
                 
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  <img src={miniHouse1} alt="Mini house foundation and frame construction" className="rounded-lg w-full h-48 object-cover" />
-                  <img src={miniHouse2} alt="Mini house platform stage" className="rounded-lg w-full h-48 object-cover" />
-                  <img src={miniHouse3} alt="Mini house with roof framing" className="rounded-lg w-full h-48 object-cover" />
-                  <img src={miniHouse4} alt="Mini house wall framing progress" className="rounded-lg w-full h-48 object-cover" />
-                  <img src={miniHouse5} alt="Completed mini house exterior" className="rounded-lg w-full h-48 object-cover" />
-                  <img src={miniHouse6} alt="Finished mini house with roofing" className="rounded-lg w-full h-48 object-cover" />
-                </div>
-
-                <div className="bg-muted/50 p-4 rounded-lg">
-                  <h4 className="font-semibold mb-2">Project Highlights:</h4>
-                  <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                    <li>Designed structural foundation and frame using engineering principles</li>
-                    <li>Implemented weatherproofing and insulation techniques</li>
-                    <li>Applied carpentry and construction skills throughout the build process</li>
-                    <li>Incorporated sustainable design elements for long-term durability</li>
-                  </ul>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:border-primary transition-colors">
-              <CardHeader>
-                <div className="flex items-start gap-4">
-                  <div className="p-3 bg-primary/10 rounded-lg">
-                    <Youtube className="w-6 h-6 text-primary" />
+                <div className="space-y-4">
+                  <p className="text-gray-400 text-lg leading-relaxed">
+                    Engineered a 16' x 16' sustainable shelter designed to survive hypothetical apocalypse scenarios. 
+                    This project merged structural engineering principles with hands-on construction expertise.
+                  </p>
+                  
+                  <div className="bg-[#111111] border border-gray-800 rounded-lg p-6 space-y-4">
+                    <h3 className="font-mono text-[#00FF9F] text-sm uppercase tracking-wider">
+                      Technical Specifications
+                    </h3>
+                    <div className="grid grid-cols-2 gap-4 font-mono text-sm">
+                      <div>
+                        <div className="text-gray-500">Dimensions</div>
+                        <div className="text-white">16' × 16'</div>
+                      </div>
+                      <div>
+                        <div className="text-gray-500">Foundation</div>
+                        <div className="text-white">Concrete Base</div>
+                      </div>
+                      <div>
+                        <div className="text-gray-500">Structure</div>
+                        <div className="text-white">Wood Frame</div>
+                      </div>
+                      <div>
+                        <div className="text-gray-500">Status</div>
+                        <div className="text-[#00FF9F]">Completed</div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <CardTitle className="text-2xl mb-2">Rube Goldberg Machine</CardTitle>
-                    <CardDescription className="text-base">
-                      10th Grade Engineering Challenge
-                    </CardDescription>
+
+                  <div className="space-y-3 pt-4">
+                    <h4 className="font-mono text-white text-sm uppercase tracking-wider">
+                      Key Features
+                    </h4>
+                    <ul className="space-y-2 text-gray-400">
+                      {[
+                        "Structural foundation using engineering principles",
+                        "Advanced weatherproofing and insulation",
+                        "Full carpentry and construction implementation",
+                        "Sustainable design for long-term durability"
+                      ].map((item, i) => (
+                        <li key={i} className="flex items-start gap-3 group">
+                          <span className="text-[#00FF9F] mt-1 group-hover:scale-110 transition-transform">→</span>
+                          <span className="group-hover:text-white transition-colors">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-foreground leading-relaxed">
-                  Collaborated with a team to design and build a complex Rube Goldberg machine as part of a 10th grade 
-                  engineering project. My group was responsible for creating the very first section, which set the entire 
-                  chain reaction in motion.
-                </p>
+              </div>
+
+              {/* Interactive Image Grid */}
+              <div className="grid grid-cols-2 gap-4">
+                {miniHouseImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className="relative aspect-square cursor-pointer group overflow-hidden rounded-lg"
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    onClick={() => setSelectedImage(image.src)}
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.caption}
+                      className={`w-full h-full object-cover transition-all duration-500 ${
+                        hoveredIndex === index ? 'scale-110' : 'scale-100'
+                      }`}
+                    />
+                    <div className={`absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-300 ${
+                      hoveredIndex === index ? 'opacity-100' : 'opacity-0'
+                    }`}>
+                      <div className="absolute bottom-0 left-0 right-0 p-4">
+                        <p className="text-white font-mono text-xs">{image.caption}</p>
+                      </div>
+                    </div>
+                    <div className={`absolute inset-0 border-2 border-[#00FF9F] transition-opacity duration-300 ${
+                      hoveredIndex === index ? 'opacity-100' : 'opacity-0'
+                    }`} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Rube Goldberg Project */}
+          <section className="relative">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div className="lg:order-2 space-y-8">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-[#00D9FF]/10 rounded-lg border border-[#00D9FF]/20">
+                    <Youtube className="w-6 h-6 text-[#00D9FF]" />
+                  </div>
+                  <h2 className="text-4xl font-bold text-white font-mono">
+                    RUBE_GOLDBERG.SYS
+                  </h2>
+                </div>
                 
-                <div className="aspect-video bg-muted rounded-lg overflow-hidden">
+                <div className="space-y-4">
+                  <p className="text-gray-400 text-lg leading-relaxed">
+                    Engineered the critical first sequence of a complex chain-reaction machine. 
+                    Precision timing and mechanical understanding were essential to trigger the entire system.
+                  </p>
+                  
+                  <div className="bg-[#111111] border border-gray-800 rounded-lg p-6 space-y-4">
+                    <h3 className="font-mono text-[#00D9FF] text-sm uppercase tracking-wider">
+                      Project Details
+                    </h3>
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center font-mono text-sm">
+                        <span className="text-gray-500">Year</span>
+                        <span className="text-white">10th Grade</span>
+                      </div>
+                      <div className="flex justify-between items-center font-mono text-sm">
+                        <span className="text-gray-500">Team Section</span>
+                        <span className="text-[#00D9FF]">Initiator Module</span>
+                      </div>
+                      <div className="flex justify-between items-center font-mono text-sm">
+                        <span className="text-gray-500">Complexity</span>
+                        <span className="text-white">Multi-Stage Chain</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3 pt-4">
+                    <h4 className="font-mono text-white text-sm uppercase tracking-wider">
+                      Engineering Principles
+                    </h4>
+                    <ul className="space-y-2 text-gray-400">
+                      {[
+                        "Physics and mechanics for chain reactions",
+                        "Precision timing and trigger mechanisms",
+                        "Collaborative system integration",
+                        "Iterative testing and optimization"
+                      ].map((item, i) => (
+                        <li key={i} className="flex items-start gap-3 group">
+                          <span className="text-[#00D9FF] mt-1 group-hover:scale-110 transition-transform">→</span>
+                          <span className="group-hover:text-white transition-colors">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div className="lg:order-1 relative group">
+                <div className="aspect-video bg-black rounded-lg overflow-hidden border-2 border-gray-800 group-hover:border-[#00D9FF] transition-all duration-500">
                   <iframe 
                     width="100%" 
                     height="100%" 
@@ -98,19 +239,32 @@ const Engineering = () => {
                     className="w-full h-full"
                   />
                 </div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-[#00D9FF] to-[#00FF9F] opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500 -z-10" />
+              </div>
+            </div>
+          </section>
 
-                <div className="bg-muted/50 p-4 rounded-lg">
-                  <h4 className="font-semibold mb-2">Engineering Skills Applied:</h4>
-                  <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                    <li>Physics and mechanics principles for chain reaction design</li>
-                    <li>Precision timing and trigger mechanism development</li>
-                    <li>Collaborative problem-solving with team members</li>
-                    <li>Iterative testing and refinement process</li>
-                  </ul>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          {/* Terminal-style Footer Section */}
+          <section className="border border-gray-800 rounded-lg bg-[#111111] p-8">
+            <div className="font-mono text-sm space-y-2">
+              <div className="text-[#00FF9F]">
+                <span className="text-gray-500">user@ethan-hauger</span>
+                <span className="text-white">:</span>
+                <span className="text-[#00D9FF]">~/engineering</span>
+                <span className="text-white">$</span>
+                <span className="text-gray-400 ml-2">cat philosophy.txt</span>
+              </div>
+              <div className="text-gray-300 pl-4 pt-4 leading-relaxed">
+                My approach to engineering is rooted in the belief that technology and design 
+                should serve communities and create positive social impact. Through project-based 
+                learning at Science Leadership Academy, I've learned to combine technical skills 
+                with creative problem-solving to address real-world challenges.
+              </div>
+              <div className="text-[#00FF9F] pt-2">
+                <span className="animate-pulse">▋</span>
+              </div>
+            </div>
+          </section>
         </div>
       </main>
     </div>
