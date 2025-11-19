@@ -47,9 +47,24 @@ const Engineering = () => {
         </div>
       )}
       
-      <main className="container mx-auto px-6 pt-32 pb-24">
+      <main className="container mx-auto px-6 pt-32 pb-24 relative">
+        {/* Animated Grid Background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(0, 255, 159, 0.1) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(0, 255, 159, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px',
+            maskImage: 'radial-gradient(ellipse 80% 50% at 50% 0%, black 40%, transparent 100%)',
+            WebkitMaskImage: 'radial-gradient(ellipse 80% 50% at 50% 0%, black 40%, transparent 100%)'
+          }} />
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00FF9F]/20 rounded-full blur-[100px] animate-pulse" />
+          <div className="absolute top-20 right-1/4 w-96 h-96 bg-[#00D9FF]/20 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }} />
+        </div>
+
         {/* Hero Section */}
-        <div className="max-w-7xl mx-auto mb-20">
+        <div className="max-w-7xl mx-auto mb-20 relative z-10">
           <div className="space-y-4 mb-8">
             <div className="inline-block">
               <span className="font-mono text-xs tracking-wider text-[#00FF9F] uppercase bg-[#00FF9F]/10 px-3 py-1 rounded-full border border-[#00FF9F]/20">
@@ -68,7 +83,7 @@ const Engineering = () => {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto space-y-32">
+        <div className="max-w-7xl mx-auto space-y-32 relative z-10">
           {/* Mini House Project */}
           <section className="relative">
             <div className="grid lg:grid-cols-2 gap-16 items-start">
