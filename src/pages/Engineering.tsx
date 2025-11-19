@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import { Card } from "@/components/ui/card";
 import { useState } from "react";
 import { Home, Youtube, X } from "lucide-react";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import miniHouse1 from "@/assets/mini-house-1.jpg";
 import miniHouse2 from "@/assets/mini-house-2.jpg";
 import miniHouse3 from "@/assets/mini-house-3.jpg";
@@ -12,6 +13,10 @@ import miniHouse6 from "@/assets/mini-house-6.jpg";
 const Engineering = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  
+  const miniHouseReveal = useScrollReveal();
+  const rubeGoldbergReveal = useScrollReveal();
+  const footerReveal = useScrollReveal();
 
   const miniHouseImages = [
     { src: miniHouse1, caption: "Foundation and frame construction" },
@@ -85,7 +90,14 @@ const Engineering = () => {
 
         <div className="max-w-7xl mx-auto space-y-32 relative z-10">
           {/* Mini House Project */}
-          <section className="relative">
+          <section 
+            ref={miniHouseReveal.ref}
+            className={`relative transition-all duration-1000 ${
+              miniHouseReveal.isVisible 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-20'
+            }`}
+          >
             <div className="grid lg:grid-cols-2 gap-16 items-start">
               <div className="space-y-8 sticky top-24">
                 <div className="flex items-center gap-3">
@@ -182,7 +194,14 @@ const Engineering = () => {
           </section>
 
           {/* Rube Goldberg Project */}
-          <section className="relative">
+          <section 
+            ref={rubeGoldbergReveal.ref}
+            className={`relative transition-all duration-1000 delay-200 ${
+              rubeGoldbergReveal.isVisible 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-20'
+            }`}
+          >
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="lg:order-2 space-y-8">
                 <div className="flex items-center gap-3">
@@ -260,7 +279,14 @@ const Engineering = () => {
           </section>
 
           {/* Terminal-style Footer Section */}
-          <section className="border border-gray-800 rounded-lg bg-[#111111] p-8">
+          <section 
+            ref={footerReveal.ref}
+            className={`border border-gray-800 rounded-lg bg-[#111111] p-8 transition-all duration-1000 delay-300 ${
+              footerReveal.isVisible 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-20'
+            }`}
+          >
             <div className="font-mono text-sm space-y-2">
               <div className="text-[#00FF9F]">
                 <span className="text-gray-500">user@ethan-hauger</span>
