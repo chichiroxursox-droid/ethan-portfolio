@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
-import { MessageSquare, User, Mail, Wrench, Trophy } from "lucide-react";
+import { MessageSquare, User, Mail, Wrench, Trophy, Gamepad2 } from "lucide-react";
 
 const Navigation = () => {
   const location = useLocation();
@@ -45,6 +45,16 @@ const Navigation = () => {
               >
                 <Trophy className="w-4 h-4" />
                 Athletics
+              </Button>
+            </Link>
+            <Link to="/games">
+              <Button 
+                variant={location.pathname === "/games" ? "default" : "ghost"}
+                size="sm"
+                className="gap-2"
+              >
+                <Gamepad2 className="w-4 h-4" />
+                Games
               </Button>
             </Link>
             <Link to="/chat">
