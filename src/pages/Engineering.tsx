@@ -10,6 +10,22 @@ import miniHouse3 from "@/assets/mini-house-3.jpg";
 import miniHouse4 from "@/assets/mini-house-4.jpg";
 import miniHouse5 from "@/assets/mini-house-5.jpg";
 import miniHouse6 from "@/assets/mini-house-6.jpg";
+import goatHouse1 from "@/assets/goat-house-1.jpeg";
+import goatHouse2 from "@/assets/goat-house-2.png";
+import goatHouse3 from "@/assets/goat-house-3.png";
+import goatHouse4 from "@/assets/goat-house-4.png";
+import goatHouse5 from "@/assets/goat-house-5.jpeg";
+import goatHouse6 from "@/assets/goat-house-6.jpeg";
+import goatHouse7 from "@/assets/goat-house-7.jpeg";
+import goatHouse8 from "@/assets/goat-house-8.jpeg";
+import goatHouse9 from "@/assets/goat-house-9.jpeg";
+import goatHouse10 from "@/assets/goat-house-10.png";
+import goatHouse11 from "@/assets/goat-house-11.png";
+import goatHouse12 from "@/assets/goat-house-12.png";
+import goatHouse13 from "@/assets/goat-house-13.png";
+import goatHouse14 from "@/assets/goat-house-14.png";
+import goatHouse15 from "@/assets/goat-house-15.png";
+import goatHouse16 from "@/assets/goat-house-16.png";
 
 const Engineering = () => {
   useSectionTheme();
@@ -17,6 +33,7 @@ const Engineering = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   
   const miniHouseReveal = useScrollReveal();
+  const goatHousesReveal = useScrollReveal();
   const rubeGoldbergReveal = useScrollReveal();
 
   const miniHouseImages = [
@@ -26,6 +43,25 @@ const Engineering = () => {
     { src: miniHouse3, caption: "Roof framing assembly" },
     { src: miniHouse5, caption: "Completed exterior structure" },
     { src: miniHouse6, caption: "Finished house with roofing" },
+  ];
+
+  const goatHouseImages = [
+    { src: goatHouse2, caption: "Initial planning and measurements" },
+    { src: goatHouse3, caption: "Foundation preparation" },
+    { src: goatHouse4, caption: "Base construction phase" },
+    { src: goatHouse1, caption: "Frame assembly beginning" },
+    { src: goatHouse5, caption: "Wall structure development" },
+    { src: goatHouse6, caption: "Roof framing progress" },
+    { src: goatHouse7, caption: "Team collaboration on structure" },
+    { src: goatHouse8, caption: "Exterior finishing work" },
+    { src: goatHouse9, caption: "Final assembly stages" },
+    { src: goatHouse10, caption: "Detail work and refinements" },
+    { src: goatHouse11, caption: "Second house foundation" },
+    { src: goatHouse12, caption: "Parallel construction work" },
+    { src: goatHouse13, caption: "Third house framing" },
+    { src: goatHouse14, caption: "Roofing installation" },
+    { src: goatHouse15, caption: "Near completion phase" },
+    { src: goatHouse16, caption: "All three goat houses completed" },
   ];
 
   return (
@@ -194,8 +230,112 @@ const Engineering = () => {
             </div>
           </section>
 
-          {/* Rube Goldberg Project */}
+          {/* Goat Houses Project */}
           <section 
+            ref={goatHousesReveal.ref}
+            className={`transition-all duration-1000 ${
+              goatHousesReveal.isVisible 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-20'
+            }`}
+          >
+            <div className="grid lg:grid-cols-2 gap-16 items-start">
+              <div className="space-y-8 lg:sticky lg:top-24 z-20 bg-[#0A0A0A] p-6 rounded-lg">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-[#FFB800]/10 rounded-lg border border-[#FFB800]/20">
+                    <Home className="w-6 h-6 text-[#FFB800]" />
+                  </div>
+                  <h2 className="text-4xl font-bold text-white font-mono">
+                    GOAT_SHELTERS.BUILD
+                  </h2>
+                </div>
+                
+                <div className="space-y-4">
+                  <p className="text-gray-400 text-lg leading-relaxed">
+                    Built three complete goat houses as part of a summer engineering program. 
+                    Led hands-on construction with a team of engineering students, from foundation to final assembly.
+                  </p>
+                  
+                  <div className="bg-[#111111] border border-gray-800 rounded-lg p-6 space-y-4">
+                    <h3 className="font-mono text-[#FFB800] text-sm uppercase tracking-wider">
+                      Project Details
+                    </h3>
+                    <div className="grid grid-cols-2 gap-4 font-mono text-sm">
+                      <div>
+                        <div className="text-gray-500">Structures Built</div>
+                        <div className="text-white">3 Complete Houses</div>
+                      </div>
+                      <div>
+                        <div className="text-gray-500">Team</div>
+                        <div className="text-white">Engineering Students</div>
+                      </div>
+                      <div>
+                        <div className="text-gray-500">Duration</div>
+                        <div className="text-white">Summer Program</div>
+                      </div>
+                      <div>
+                        <div className="text-gray-500">Status</div>
+                        <div className="text-[#FFB800]">Completed</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3 pt-4">
+                    <h4 className="font-mono text-white text-sm uppercase tracking-wider">
+                      Skills Applied
+                    </h4>
+                    <ul className="space-y-2 text-gray-400">
+                      {[
+                        "Team leadership and collaboration",
+                        "Construction planning and execution",
+                        "Material selection and management",
+                        "Hands-on carpentry and assembly"
+                      ].map((item, i) => (
+                        <li key={i} className="flex items-start gap-3 group">
+                          <span className="text-[#FFB800] mt-1 group-hover:scale-110 transition-transform">→</span>
+                          <span className="group-hover:text-white transition-colors">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* Interactive Image Grid - 4 columns */}
+              <div className="grid grid-cols-4 gap-3">
+                {goatHouseImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className="relative aspect-square cursor-pointer group overflow-hidden rounded-lg"
+                    onMouseEnter={() => setHoveredIndex(index + 100)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    onClick={() => setSelectedImage(image.src)}
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.caption}
+                      className={`w-full h-full object-cover transition-all duration-500 ${
+                        hoveredIndex === index + 100 ? 'scale-110' : 'scale-100'
+                      }`}
+                    />
+                    <div className={`absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-300 ${
+                      hoveredIndex === index + 100 ? 'opacity-100' : 'opacity-0'
+                    }`}>
+                      <div className="absolute bottom-0 left-0 right-0 p-2">
+                        <p className="text-white font-mono text-[10px] leading-tight">{image.caption}</p>
+                      </div>
+                    </div>
+                    <div className={`absolute inset-0 border-2 border-[#FFB800] transition-opacity duration-300 ${
+                      hoveredIndex === index + 100 ? 'opacity-100' : 'opacity-0'
+                    }`} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Rube Goldberg Project */}
+          <section
             ref={rubeGoldbergReveal.ref}
             className={`transition-all duration-1000 delay-200 ${
               rubeGoldbergReveal.isVisible 
