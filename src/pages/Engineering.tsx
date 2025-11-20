@@ -21,8 +21,8 @@ const Engineering = () => {
   const miniHouseImages = [
     { src: miniHouse1, caption: "Foundation and frame construction" },
     { src: miniHouse2, caption: "Platform stage development" },
-    { src: miniHouse3, caption: "Roof framing assembly" },
     { src: miniHouse4, caption: "Wall framing progress" },
+    { src: miniHouse3, caption: "Roof framing assembly" },
     { src: miniHouse5, caption: "Completed exterior structure" },
     { src: miniHouse6, caption: "Finished house with roofing" },
   ];
@@ -54,7 +54,7 @@ const Engineering = () => {
       
       <main className="container mx-auto px-6 pt-32 pb-24 relative">
         {/* Animated Grid Background */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
           <div className="absolute inset-0" style={{
             backgroundImage: `
               linear-gradient(to right, rgba(0, 255, 159, 0.1) 1px, transparent 1px),
@@ -88,18 +88,18 @@ const Engineering = () => {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto space-y-32 relative z-10">
+        <div className="max-w-7xl mx-auto space-y-32">
           {/* Mini House Project */}
           <section 
             ref={miniHouseReveal.ref}
-            className={`relative transition-all duration-1000 ${
+            className={`transition-all duration-1000 ${
               miniHouseReveal.isVisible 
                 ? 'opacity-100 translate-y-0' 
                 : 'opacity-0 translate-y-20'
             }`}
           >
-            <div className="grid lg:grid-cols-2 gap-16 items-start relative">
-              <div className="space-y-8 sticky top-24 z-10">
+            <div className="grid lg:grid-cols-2 gap-16 items-start">
+              <div className="space-y-8 lg:sticky lg:top-24 z-20 bg-[#0A0A0A] p-6 rounded-lg">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-[#00FF9F]/10 rounded-lg border border-[#00FF9F]/20">
                     <Home className="w-6 h-6 text-[#00FF9F]" />
@@ -161,7 +161,7 @@ const Engineering = () => {
               </div>
 
               {/* Interactive Image Grid */}
-              <div className="grid grid-cols-2 gap-4 relative z-0">
+              <div className="grid grid-cols-2 gap-4">
                 {miniHouseImages.map((image, index) => (
                   <div
                     key={index}
@@ -196,14 +196,14 @@ const Engineering = () => {
           {/* Rube Goldberg Project */}
           <section 
             ref={rubeGoldbergReveal.ref}
-            className={`relative transition-all duration-1000 delay-200 ${
+            className={`transition-all duration-1000 delay-200 ${
               rubeGoldbergReveal.isVisible 
                 ? 'opacity-100 translate-y-0' 
                 : 'opacity-0 translate-y-20'
             }`}
           >
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div className="lg:order-2 space-y-8">
+            <div className="grid lg:grid-cols-2 gap-16 items-start">
+              <div className="space-y-8 lg:sticky lg:top-24 z-20 bg-[#0A0A0A] p-6 rounded-lg">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-[#00D9FF]/10 rounded-lg border border-[#00D9FF]/20">
                     <Youtube className="w-6 h-6 text-[#00D9FF]" />
@@ -215,26 +215,26 @@ const Engineering = () => {
                 
                 <div className="space-y-4">
                   <p className="text-gray-400 text-lg leading-relaxed">
-                    Engineered the critical first sequence of a complex chain-reaction machine. 
-                    Precision timing and mechanical understanding were essential to trigger the entire system.
+                    Collaborated on a complex Rube Goldberg machine project in 10th grade. 
+                    My team contributed the very first section, setting the chain reaction in motion.
                   </p>
                   
                   <div className="bg-[#111111] border border-gray-800 rounded-lg p-6 space-y-4">
                     <h3 className="font-mono text-[#00D9FF] text-sm uppercase tracking-wider">
-                      Project Details
+                      Project Highlights
                     </h3>
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-center font-mono text-sm">
-                        <span className="text-gray-500">Year</span>
-                        <span className="text-white">10th Grade</span>
+                    <div className="space-y-3 text-sm">
+                      <div className="flex justify-between border-b border-gray-800 pb-2">
+                        <span className="text-gray-500">Role</span>
+                        <span className="text-white font-mono">Opening Section</span>
                       </div>
-                      <div className="flex justify-between items-center font-mono text-sm">
-                        <span className="text-gray-500">Team Section</span>
-                        <span className="text-[#00D9FF]">Initiator Module</span>
+                      <div className="flex justify-between border-b border-gray-800 pb-2">
+                        <span className="text-gray-500">Team Effort</span>
+                        <span className="text-white font-mono">Collaborative</span>
                       </div>
-                      <div className="flex justify-between items-center font-mono text-sm">
-                        <span className="text-gray-500">Complexity</span>
-                        <span className="text-white">Multi-Stage Chain</span>
+                      <div className="flex justify-between">
+                        <span className="text-gray-500">Status</span>
+                        <span className="text-[#00D9FF] font-mono">Completed</span>
                       </div>
                     </div>
                   </div>
@@ -245,10 +245,10 @@ const Engineering = () => {
                     </h4>
                     <ul className="space-y-2 text-gray-400">
                       {[
-                        "Physics and mechanics for chain reactions",
-                        "Precision timing and trigger mechanisms",
-                        "Collaborative system integration",
-                        "Iterative testing and optimization"
+                        "Energy transfer and momentum",
+                        "Precise timing and synchronization",
+                        "Mechanical chain reactions",
+                        "Problem-solving and iteration"
                       ].map((item, i) => (
                         <li key={i} className="flex items-start gap-3 group">
                           <span className="text-[#00D9FF] mt-1 group-hover:scale-110 transition-transform">→</span>
@@ -260,20 +260,23 @@ const Engineering = () => {
                 </div>
               </div>
 
-              <div className="lg:order-1 relative group">
-                <div className="aspect-video bg-black rounded-lg overflow-hidden border-2 border-gray-800 group-hover:border-[#00D9FF] transition-all duration-500">
-                  <iframe 
-                    width="100%" 
-                    height="100%" 
-                    src="https://www.youtube.com/embed/l9VnBqaSKGw" 
-                    title="Rube Goldberg Machine Project" 
-                    frameBorder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              {/* Video Embed */}
+              <div className="relative">
+                <div className="aspect-video rounded-lg overflow-hidden border-2 border-[#00D9FF]/20 hover:border-[#00D9FF]/40 transition-colors">
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src="https://www.youtube.com/embed/l9VnBqaSKGw?si=7qHm62m26NW4Ad3o"
+                    title="Rube Goldberg Machine Project"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                     className="w-full h-full"
                   />
                 </div>
-                <div className="absolute -inset-1 bg-gradient-to-r from-[#00D9FF] to-[#00FF9F] opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500 -z-10" />
+                <div className="mt-4 text-sm text-gray-500 font-mono text-center">
+                  Watch the full Rube Goldberg machine in action
+                </div>
               </div>
             </div>
           </section>
@@ -281,30 +284,43 @@ const Engineering = () => {
           {/* Terminal-style Footer Section */}
           <section 
             ref={footerReveal.ref}
-            className={`border border-gray-800 rounded-lg bg-[#111111] p-8 transition-all duration-1000 delay-300 ${
+            className={`transition-all duration-1000 delay-300 ${
               footerReveal.isVisible 
                 ? 'opacity-100 translate-y-0' 
                 : 'opacity-0 translate-y-20'
             }`}
           >
-            <div className="font-mono text-sm space-y-2">
-              <div className="text-[#00FF9F]">
-                <span className="text-gray-500">user@ethan-hauger</span>
-                <span className="text-white">:</span>
-                <span className="text-[#00D9FF]">~/engineering</span>
-                <span className="text-white">$</span>
-                <span className="text-gray-400 ml-2">cat philosophy.txt</span>
+            <Card className="bg-[#0D0D0D] border-[#00FF9F]/20 backdrop-blur-sm p-8 relative overflow-hidden z-10">
+              <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-[#00FF9F]/5 to-transparent" />
+              
+              <div className="font-mono text-sm space-y-2">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-3 h-3 rounded-full bg-red-500" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                  <div className="w-3 h-3 rounded-full bg-green-500" />
+                  <span className="ml-2 text-gray-500">ethan@builder:~$</span>
+                </div>
+                
+                <div className="space-y-1 text-gray-400">
+                  <p><span className="text-[#00FF9F]">$</span> cat philosophy.txt</p>
+                  <p className="pl-4 text-gray-300">
+                    Engineering isn't just about building things—it's about solving problems
+                  </p>
+                  <p className="pl-4 text-gray-300">
+                    that matter. Every project is an opportunity to create something that
+                  </p>
+                  <p className="pl-4 text-gray-300">
+                    makes a difference, whether it's a shelter, a machine, or a solution.
+                  </p>
+                  <p className="mt-4"><span className="text-[#00D9FF]">$</span> echo "Let's build something amazing together"</p>
+                  <p className="pl-4 text-[#00D9FF]">Let's build something amazing together</p>
+                  <p className="mt-4 flex items-center gap-2">
+                    <span className="text-[#00FF9F]">$</span>
+                    <span className="animate-pulse">_</span>
+                  </p>
+                </div>
               </div>
-              <div className="text-gray-300 pl-4 pt-4 leading-relaxed">
-                My approach to engineering is rooted in the belief that technology and design 
-                should serve communities and create positive social impact. Through project-based 
-                learning at Science Leadership Academy, I've learned to combine technical skills 
-                with creative problem-solving to address real-world challenges.
-              </div>
-              <div className="text-[#00FF9F] pt-2">
-                <span className="animate-pulse">▋</span>
-              </div>
-            </div>
+            </Card>
           </section>
         </div>
       </main>
