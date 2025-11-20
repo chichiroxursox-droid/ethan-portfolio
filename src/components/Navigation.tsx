@@ -5,24 +5,42 @@ import { MessageSquare, User, Mail, Wrench, Trophy, Gamepad2 } from "lucide-reac
 const Navigation = () => {
   const location = useLocation();
   const isEngineeringPage = location.pathname === "/engineering";
+  const isAthleticsPage = location.pathname === "/athletics";
+  const isMusicPage = location.pathname === "/chat";
+  const isActivismPage = location.pathname === "/contact";
+  
+  const getNavStyle = () => {
+    if (isEngineeringPage) {
+      return 'bg-[#0A0A0A]/80 backdrop-blur-md border-[#00FF9F]/20';
+    } else if (isAthleticsPage) {
+      return 'bg-background/80 backdrop-blur-md border-athletics/30';
+    } else if (isMusicPage) {
+      return 'bg-background/80 backdrop-blur-md border-music/30';
+    } else if (isActivismPage) {
+      return 'bg-background/80 backdrop-blur-md border-activism/30';
+    }
+    return 'bg-background/80 backdrop-blur-md border-border';
+  };
   
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 border-b ${
-      isEngineeringPage 
-        ? 'bg-[#0A0A0A]/80 backdrop-blur-md border-[#00FF9F]/20' 
-        : 'bg-background/80 backdrop-blur-md border-border'
-    }`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-500 ${getNavStyle()}`}>
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group">
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg ${
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg transition-all duration-500 ${
               isEngineeringPage
                 ? 'bg-gradient-to-r from-[#00FF9F] to-[#00D9FF] text-black'
+                : isAthleticsPage
+                ? 'bg-gradient-to-r from-athletics to-athletics-accent text-white'
+                : isMusicPage
+                ? 'bg-gradient-to-r from-music to-music-accent text-white'
+                : isActivismPage
+                ? 'bg-gradient-to-r from-activism to-activism-accent text-white'
                 : 'bg-gradient-primary text-primary-foreground'
             }`}>
               EH
             </div>
-            <span className={`font-semibold text-lg ${
+            <span className={`font-semibold text-lg transition-all duration-500 ${
               isEngineeringPage ? 'text-white font-mono' : ''
             }`}>Ethan Hauger</span>
           </Link>

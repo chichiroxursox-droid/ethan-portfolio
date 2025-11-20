@@ -4,8 +4,12 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Legend } from "recharts";
 import basketballShot from "@/assets/basketball-shot.png";
+import { Scene3D } from "@/components/3d/Scene3D";
+import { Basketball } from "@/components/3d/Basketball";
+import { useSectionTheme } from "@/hooks/use-section-theme";
 
 const Athletics = () => {
+  useSectionTheme();
   const seasonData = [
     { season: "2022-23 (Fr. JV)", team: "JV", ppg: 11.0, rpg: 1.5, apg: 0.5 },
     { season: "2022-23 (Fr. Var)", team: "Varsity", ppg: 1.8, rpg: 1.2, apg: 0.0 },
@@ -35,12 +39,17 @@ const Athletics = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background transition-all duration-500">
       <Navigation />
       
       <main className="container mx-auto px-6 pt-24 pb-16">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 relative">
+            <div className="absolute right-0 top-0 w-64 h-64 opacity-50 pointer-events-none">
+              <Scene3D>
+                <Basketball />
+              </Scene3D>
+            </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Athletics</h1>
             <p className="text-lg text-muted-foreground">
               Competing with passion on and off the court

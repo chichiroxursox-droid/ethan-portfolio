@@ -6,8 +6,11 @@ import { Link } from "react-router-dom";
 import { GraduationCap, Award, Briefcase, Code, MessageSquare, MapPin, Mail, Phone, Trophy, Users, Globe } from "lucide-react";
 import educationProtest from "@/assets/education-protest.png";
 import unSpeaking from "@/assets/un-speaking.png";
+import { useSectionTheme } from "@/hooks/use-section-theme";
 const Index = () => {
-  return <div className="min-h-screen bg-gradient-hero">
+  useSectionTheme();
+  
+  return <div className="min-h-screen bg-gradient-hero transition-all duration-500">
       <Navigation />
       
       {/* Hero Section */}

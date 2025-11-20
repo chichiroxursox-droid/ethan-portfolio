@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { useState } from "react";
 import { Home, Youtube, X } from "lucide-react";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
+import { useSectionTheme } from "@/hooks/use-section-theme";
 import miniHouse1 from "@/assets/mini-house-1.jpg";
 import miniHouse2 from "@/assets/mini-house-2.jpg";
 import miniHouse3 from "@/assets/mini-house-3.jpg";
@@ -11,6 +12,7 @@ import miniHouse5 from "@/assets/mini-house-5.jpg";
 import miniHouse6 from "@/assets/mini-house-6.jpg";
 
 const Engineering = () => {
+  useSectionTheme();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   
@@ -27,7 +29,7 @@ const Engineering = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] font-inter">
+    <div className="min-h-screen bg-[#0A0A0A] font-inter transition-all duration-500">
       <Navigation />
       
       {/* Lightbox Modal */}
