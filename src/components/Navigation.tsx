@@ -4,16 +4,27 @@ import { MessageSquare, User, Mail, Wrench, Trophy, Gamepad2 } from "lucide-reac
 
 const Navigation = () => {
   const location = useLocation();
+  const isEngineeringPage = location.pathname === "/engineering";
   
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+    <nav className={`fixed top-0 left-0 right-0 z-50 border-b ${
+      isEngineeringPage 
+        ? 'bg-[#0A0A0A]/80 backdrop-blur-md border-[#00FF9F]/20' 
+        : 'bg-background/80 backdrop-blur-md border-border'
+    }`}>
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-full bg-gradient-primary flex items-center justify-center text-primary-foreground font-bold text-lg">
+            <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg ${
+              isEngineeringPage
+                ? 'bg-gradient-to-r from-[#00FF9F] to-[#00D9FF] text-black'
+                : 'bg-gradient-primary text-primary-foreground'
+            }`}>
               EH
             </div>
-            <span className="font-semibold text-lg">Ethan Hauger</span>
+            <span className={`font-semibold text-lg ${
+              isEngineeringPage ? 'text-white font-mono' : ''
+            }`}>Ethan Hauger</span>
           </Link>
           
           <div className="flex gap-2 flex-wrap">
@@ -21,7 +32,11 @@ const Navigation = () => {
               <Button 
                 variant={location.pathname === "/" ? "default" : "ghost"}
                 size="sm"
-                className="gap-2"
+                className={`gap-2 ${
+                  isEngineeringPage && location.pathname !== "/" 
+                    ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10' 
+                    : ''
+                }`}
               >
                 <User className="w-4 h-4" />
                 About
@@ -31,7 +46,13 @@ const Navigation = () => {
               <Button 
                 variant={location.pathname === "/engineering" ? "default" : "ghost"}
                 size="sm"
-                className="gap-2"
+                className={`gap-2 ${
+                  isEngineeringPage && location.pathname === "/engineering"
+                    ? 'bg-gradient-to-r from-[#00FF9F] to-[#00D9FF] text-black hover:opacity-90'
+                    : isEngineeringPage
+                    ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10'
+                    : ''
+                }`}
               >
                 <Wrench className="w-4 h-4" />
                 Engineering
@@ -41,7 +62,11 @@ const Navigation = () => {
               <Button 
                 variant={location.pathname === "/athletics" ? "default" : "ghost"}
                 size="sm"
-                className="gap-2"
+                className={`gap-2 ${
+                  isEngineeringPage && location.pathname !== "/athletics" 
+                    ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10' 
+                    : ''
+                }`}
               >
                 <Trophy className="w-4 h-4" />
                 Athletics
@@ -51,7 +76,11 @@ const Navigation = () => {
               <Button 
                 variant={location.pathname === "/games" ? "default" : "ghost"}
                 size="sm"
-                className="gap-2"
+                className={`gap-2 ${
+                  isEngineeringPage && location.pathname !== "/games" 
+                    ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10' 
+                    : ''
+                }`}
               >
                 <Gamepad2 className="w-4 h-4" />
                 Games
@@ -61,7 +90,11 @@ const Navigation = () => {
               <Button 
                 variant={location.pathname === "/chat" ? "default" : "ghost"}
                 size="sm"
-                className="gap-2"
+                className={`gap-2 ${
+                  isEngineeringPage && location.pathname !== "/chat" 
+                    ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10' 
+                    : ''
+                }`}
               >
                 <MessageSquare className="w-4 h-4" />
                 Chat
@@ -71,7 +104,11 @@ const Navigation = () => {
               <Button 
                 variant={location.pathname === "/contact" ? "default" : "ghost"}
                 size="sm"
-                className="gap-2"
+                className={`gap-2 ${
+                  isEngineeringPage && location.pathname !== "/contact" 
+                    ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10' 
+                    : ''
+                }`}
               >
                 <Mail className="w-4 h-4" />
                 Contact
