@@ -98,8 +98,8 @@ const Engineering = () => {
                 : 'opacity-0 translate-y-20'
             }`}
           >
-            <div className="grid lg:grid-cols-2 gap-16 items-start">
-              <div className="space-y-8 sticky top-24">
+            <div className="grid lg:grid-cols-2 gap-16 items-start relative">
+              <div className="space-y-8 sticky top-24 z-10">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-[#00FF9F]/10 rounded-lg border border-[#00FF9F]/20">
                     <Home className="w-6 h-6 text-[#00FF9F]" />
@@ -146,9 +146,9 @@ const Engineering = () => {
                     <ul className="space-y-2 text-gray-400">
                       {[
                         "Structural foundation using engineering principles",
-                        "Advanced weatherproofing and insulation",
-                        "Full carpentry and construction implementation",
-                        "Sustainable design for long-term durability"
+                        "Wall framing and structural support",
+                        "Roof framing and truss assembly",
+                        "Advanced weatherproofing and insulation"
                       ].map((item, i) => (
                         <li key={i} className="flex items-start gap-3 group">
                           <span className="text-[#00FF9F] mt-1 group-hover:scale-110 transition-transform">→</span>
@@ -161,7 +161,7 @@ const Engineering = () => {
               </div>
 
               {/* Interactive Image Grid */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4 relative z-0">
                 {miniHouseImages.map((image, index) => (
                   <div
                     key={index}
