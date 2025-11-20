@@ -16,7 +16,6 @@ const Engineering = () => {
   
   const miniHouseReveal = useScrollReveal();
   const rubeGoldbergReveal = useScrollReveal();
-  const footerReveal = useScrollReveal();
 
   const miniHouseImages = [
     { src: miniHouse1, caption: "Foundation and frame construction" },
@@ -279,48 +278,6 @@ const Engineering = () => {
                 </div>
               </div>
             </div>
-          </section>
-
-          {/* Terminal-style Footer Section */}
-          <section 
-            ref={footerReveal.ref}
-            className={`transition-all duration-1000 delay-300 ${
-              footerReveal.isVisible 
-                ? 'opacity-100 translate-y-0' 
-                : 'opacity-0 translate-y-20'
-            }`}
-          >
-            <Card className="bg-[#0D0D0D] border-[#00FF9F]/20 backdrop-blur-sm p-8 relative overflow-hidden z-10">
-              <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-[#00FF9F]/5 to-transparent" />
-              
-              <div className="font-mono text-sm space-y-2">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-3 h-3 rounded-full bg-red-500" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                  <div className="w-3 h-3 rounded-full bg-green-500" />
-                  <span className="ml-2 text-gray-500">ethan@builder:~$</span>
-                </div>
-                
-                <div className="space-y-1 text-gray-400">
-                  <p><span className="text-[#00FF9F]">$</span> cat philosophy.txt</p>
-                  <p className="pl-4 text-gray-300">
-                    Engineering isn't just about building things—it's about solving problems
-                  </p>
-                  <p className="pl-4 text-gray-300">
-                    that matter. Every project is an opportunity to create something that
-                  </p>
-                  <p className="pl-4 text-gray-300">
-                    makes a difference, whether it's a shelter, a machine, or a solution.
-                  </p>
-                  <p className="mt-4"><span className="text-[#00D9FF]">$</span> echo "Let's build something amazing together"</p>
-                  <p className="pl-4 text-[#00D9FF]">Let's build something amazing together</p>
-                  <p className="mt-4 flex items-center gap-2">
-                    <span className="text-[#00FF9F]">$</span>
-                    <span className="animate-pulse">_</span>
-                  </p>
-                </div>
-              </div>
-            </Card>
           </section>
         </div>
       </main>
