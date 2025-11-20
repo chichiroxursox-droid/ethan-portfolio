@@ -1,7 +1,6 @@
 import Navigation from "@/components/Navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TerminalHacker } from "@/components/games/TerminalHacker";
-import { RubeGoldbergBuilder } from "@/components/games/RubeGoldbergBuilder";
 import { MiniHouseDefense } from "@/components/games/MiniHouseDefense";
 
 const Games = () => {
@@ -24,17 +23,14 @@ const Games = () => {
               </span>
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl font-light">
-              Three interactive games to pass the time
+              Two interactive games to pass the time
             </p>
           </div>
 
           <Tabs defaultValue="terminal" className="w-full">
-            <TabsList className="grid w-full max-w-md grid-cols-3 bg-[#111111] border border-gray-800">
+            <TabsList className="grid w-full max-w-md grid-cols-2 bg-[#111111] border border-gray-800">
               <TabsTrigger value="terminal" className="data-[state=active]:bg-[#00FF9F]/10 data-[state=active]:text-[#00FF9F]">
                 Terminal Hacker
-              </TabsTrigger>
-              <TabsTrigger value="rube" className="data-[state=active]:bg-[#00FF9F]/10 data-[state=active]:text-[#00FF9F]">
-                Rube Goldberg
               </TabsTrigger>
               <TabsTrigger value="defense" className="data-[state=active]:bg-[#00FF9F]/10 data-[state=active]:text-[#00FF9F]">
                 House Defense
@@ -43,10 +39,6 @@ const Games = () => {
 
             <TabsContent value="terminal" className="mt-8">
               <TerminalHacker />
-            </TabsContent>
-
-            <TabsContent value="rube" className="mt-8">
-              <RubeGoldbergBuilder />
             </TabsContent>
 
             <TabsContent value="defense" className="mt-8">
