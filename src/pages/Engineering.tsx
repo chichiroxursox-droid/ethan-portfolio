@@ -26,83 +26,108 @@ import goatHouse13 from "@/assets/goat-house-13.png";
 import goatHouse14 from "@/assets/goat-house-14.png";
 import goatHouse15 from "@/assets/goat-house-15.png";
 import goatHouse16 from "@/assets/goat-house-16.png";
-
 const Engineering = () => {
   useSectionTheme();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  
   const miniHouseReveal = useScrollReveal();
   const goatHousesReveal = useScrollReveal();
   const rubeGoldbergReveal = useScrollReveal();
-
-  const miniHouseImages = [
-    { src: miniHouse1, caption: "Foundation and frame construction" },
-    { src: miniHouse2, caption: "Platform stage development" },
-    { src: miniHouse4, caption: "Wall framing progress" },
-    { src: miniHouse3, caption: "Roof framing assembly" },
-    { src: miniHouse5, caption: "Completed exterior structure" },
-    { src: miniHouse6, caption: "Finished house with roofing" },
-  ];
-
-  const goatHouseImages = [
-    { src: goatHouse2, caption: "Initial planning and measurements" },
-    { src: goatHouse3, caption: "Foundation preparation" },
-    { src: goatHouse4, caption: "Base construction phase" },
-    { src: goatHouse1, caption: "Frame assembly beginning" },
-    { src: goatHouse5, caption: "Wall structure development" },
-    { src: goatHouse6, caption: "Roof framing progress" },
-    { src: goatHouse7, caption: "Team collaboration on structure" },
-    { src: goatHouse8, caption: "Exterior finishing work" },
-    { src: goatHouse9, caption: "Final assembly stages" },
-    { src: goatHouse10, caption: "Detail work and refinements" },
-    { src: goatHouse11, caption: "Second house foundation" },
-    { src: goatHouse12, caption: "Parallel construction work" },
-    { src: goatHouse13, caption: "Third house framing" },
-    { src: goatHouse14, caption: "Roofing installation" },
-    { src: goatHouse15, caption: "Near completion phase" },
-    { src: goatHouse16, caption: "All three goat houses completed" },
-  ];
-
-  return (
-    <div className="min-h-screen bg-[#0A0A0A] font-inter transition-all duration-500">
+  const miniHouseImages = [{
+    src: miniHouse1,
+    caption: "Foundation and frame construction"
+  }, {
+    src: miniHouse2,
+    caption: "Platform stage development"
+  }, {
+    src: miniHouse4,
+    caption: "Wall framing progress"
+  }, {
+    src: miniHouse3,
+    caption: "Roof framing assembly"
+  }, {
+    src: miniHouse5,
+    caption: "Completed exterior structure"
+  }, {
+    src: miniHouse6,
+    caption: "Finished house with roofing"
+  }];
+  const goatHouseImages = [{
+    src: goatHouse2,
+    caption: "Initial planning and measurements"
+  }, {
+    src: goatHouse3,
+    caption: "Foundation preparation"
+  }, {
+    src: goatHouse4,
+    caption: "Base construction phase"
+  }, {
+    src: goatHouse1,
+    caption: "Frame assembly beginning"
+  }, {
+    src: goatHouse5,
+    caption: "Wall structure development"
+  }, {
+    src: goatHouse6,
+    caption: "Roof framing progress"
+  }, {
+    src: goatHouse7,
+    caption: "Team collaboration on structure"
+  }, {
+    src: goatHouse8,
+    caption: "Exterior finishing work"
+  }, {
+    src: goatHouse9,
+    caption: "Final assembly stages"
+  }, {
+    src: goatHouse10,
+    caption: "Detail work and refinements"
+  }, {
+    src: goatHouse11,
+    caption: "Second house foundation"
+  }, {
+    src: goatHouse12,
+    caption: "Parallel construction work"
+  }, {
+    src: goatHouse13,
+    caption: "Third house framing"
+  }, {
+    src: goatHouse14,
+    caption: "Roofing installation"
+  }, {
+    src: goatHouse15,
+    caption: "Near completion phase"
+  }, {
+    src: goatHouse16,
+    caption: "All three goat houses completed"
+  }];
+  return <div className="min-h-screen bg-[#0A0A0A] font-inter transition-all duration-500">
       <Navigation />
       
       {/* Lightbox Modal */}
-      {selectedImage && (
-        <div 
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 animate-fade-in backdrop-blur-sm"
-          onClick={() => setSelectedImage(null)}
-        >
-          <button 
-            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10"
-            onClick={() => setSelectedImage(null)}
-          >
+      {selectedImage && <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 animate-fade-in backdrop-blur-sm" onClick={() => setSelectedImage(null)}>
+          <button className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10" onClick={() => setSelectedImage(null)}>
             <X className="w-8 h-8" />
           </button>
-          <img 
-            src={selectedImage} 
-            alt="Full size view" 
-            className="max-w-full max-h-[90vh] object-contain animate-scale-in"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      )}
+          <img src={selectedImage} alt="Full size view" className="max-w-full max-h-[90vh] object-contain animate-scale-in" onClick={e => e.stopPropagation()} />
+        </div>}
       
       <main className="container mx-auto px-6 pt-32 pb-24 relative">
         {/* Animated Grid Background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
           <div className="absolute inset-0" style={{
-            backgroundImage: `
+          backgroundImage: `
               linear-gradient(to right, rgba(0, 255, 159, 0.1) 1px, transparent 1px),
               linear-gradient(to bottom, rgba(0, 255, 159, 0.1) 1px, transparent 1px)
             `,
-            backgroundSize: '50px 50px',
-            maskImage: 'radial-gradient(ellipse 80% 50% at 50% 0%, black 40%, transparent 100%)',
-            WebkitMaskImage: 'radial-gradient(ellipse 80% 50% at 50% 0%, black 40%, transparent 100%)'
-          }} />
+          backgroundSize: '50px 50px',
+          maskImage: 'radial-gradient(ellipse 80% 50% at 50% 0%, black 40%, transparent 100%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 80% 50% at 50% 0%, black 40%, transparent 100%)'
+        }} />
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00FF9F]/20 rounded-full blur-[100px] animate-pulse" />
-          <div className="absolute top-20 right-1/4 w-96 h-96 bg-[#00D9FF]/20 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute top-20 right-1/4 w-96 h-96 bg-[#00D9FF]/20 rounded-full blur-[100px] animate-pulse" style={{
+          animationDelay: '1s'
+        }} />
         </div>
 
         {/* Hero Section */}
@@ -127,14 +152,7 @@ const Engineering = () => {
 
         <div className="max-w-7xl mx-auto space-y-32">
           {/* Mini House Project */}
-          <section 
-            ref={miniHouseReveal.ref}
-            className={`transition-all duration-1000 ${
-              miniHouseReveal.isVisible 
-                ? 'opacity-100 translate-y-0' 
-                : 'opacity-0 translate-y-20'
-            }`}
-          >
+          <section ref={miniHouseReveal.ref} className={`transition-all duration-1000 ${miniHouseReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
             <div className="grid lg:grid-cols-2 gap-16 items-start">
               <div className="space-y-8 lg:sticky lg:top-24 z-20 bg-[#0A0A0A] p-6 rounded-lg">
                 <div className="flex items-center gap-3">
@@ -181,17 +199,10 @@ const Engineering = () => {
                       Key Features
                     </h4>
                     <ul className="space-y-2 text-gray-400">
-                      {[
-                        "Structural foundation using engineering principles",
-                        "Wall framing and structural support",
-                        "Roof framing and truss assembly",
-                        "Advanced weatherproofing and insulation"
-                      ].map((item, i) => (
-                        <li key={i} className="flex items-start gap-3 group">
+                      {["Structural foundation using engineering principles", "Wall framing and structural support", "Roof framing and truss assembly", "Advanced weatherproofing and insulation"].map((item, i) => <li key={i} className="flex items-start gap-3 group">
                           <span className="text-[#00FF9F] mt-1 group-hover:scale-110 transition-transform">→</span>
                           <span className="group-hover:text-white transition-colors">{item}</span>
-                        </li>
-                      ))}
+                        </li>)}
                     </ul>
                   </div>
                 </div>
@@ -199,46 +210,21 @@ const Engineering = () => {
 
               {/* Interactive Image Grid */}
               <div className="grid grid-cols-2 gap-4">
-                {miniHouseImages.map((image, index) => (
-                  <div
-                    key={index}
-                    className="relative aspect-square cursor-pointer group overflow-hidden rounded-lg"
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    onMouseLeave={() => setHoveredIndex(null)}
-                    onClick={() => setSelectedImage(image.src)}
-                  >
-                    <img
-                      src={image.src}
-                      alt={image.caption}
-                      className={`w-full h-full object-cover transition-all duration-500 ${
-                        hoveredIndex === index ? 'scale-110' : 'scale-100'
-                      }`}
-                    />
-                    <div className={`absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-300 ${
-                      hoveredIndex === index ? 'opacity-100' : 'opacity-0'
-                    }`}>
+                {miniHouseImages.map((image, index) => <div key={index} className="relative aspect-square cursor-pointer group overflow-hidden rounded-lg" onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)} onClick={() => setSelectedImage(image.src)}>
+                    <img src={image.src} alt={image.caption} className={`w-full h-full object-cover transition-all duration-500 ${hoveredIndex === index ? 'scale-110' : 'scale-100'}`} />
+                    <div className={`absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-300 ${hoveredIndex === index ? 'opacity-100' : 'opacity-0'}`}>
                       <div className="absolute bottom-0 left-0 right-0 p-4">
                         <p className="text-white font-mono text-xs">{image.caption}</p>
                       </div>
                     </div>
-                    <div className={`absolute inset-0 border-2 border-[#00FF9F] transition-opacity duration-300 ${
-                      hoveredIndex === index ? 'opacity-100' : 'opacity-0'
-                    }`} />
-                  </div>
-                ))}
+                    <div className={`absolute inset-0 border-2 border-[#00FF9F] transition-opacity duration-300 ${hoveredIndex === index ? 'opacity-100' : 'opacity-0'}`} />
+                  </div>)}
               </div>
             </div>
           </section>
 
           {/* Goat Houses Project */}
-          <section 
-            ref={goatHousesReveal.ref}
-            className={`transition-all duration-1000 ${
-              goatHousesReveal.isVisible 
-                ? 'opacity-100 translate-y-0' 
-                : 'opacity-0 translate-y-20'
-            }`}
-          >
+          <section ref={goatHousesReveal.ref} className={`transition-all duration-1000 ${goatHousesReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
             <div className="grid lg:grid-cols-2 gap-16 items-start">
               <div className="space-y-8 lg:sticky lg:top-24 z-20 bg-[#0A0A0A] p-6 rounded-lg">
                 <div className="flex items-center gap-3">
@@ -285,17 +271,10 @@ const Engineering = () => {
                       Skills Applied
                     </h4>
                     <ul className="space-y-2 text-gray-400">
-                      {[
-                        "Team leadership and collaboration",
-                        "Construction planning and execution",
-                        "Material selection and management",
-                        "Hands-on carpentry and assembly"
-                      ].map((item, i) => (
-                        <li key={i} className="flex items-start gap-3 group">
+                      {["Team leadership and collaboration", "Construction planning and execution", "Material selection and management", "Hands-on carpentry and assembly"].map((item, i) => <li key={i} className="flex items-start gap-3 group">
                           <span className="text-[#FFB800] mt-1 group-hover:scale-110 transition-transform">→</span>
                           <span className="group-hover:text-white transition-colors">{item}</span>
-                        </li>
-                      ))}
+                        </li>)}
                     </ul>
                   </div>
                 </div>
@@ -303,46 +282,13 @@ const Engineering = () => {
 
               {/* Interactive Image Grid - 4 columns */}
               <div className="grid grid-cols-4 gap-3">
-                {goatHouseImages.map((image, index) => (
-                  <div
-                    key={index}
-                    className="relative aspect-square cursor-pointer group overflow-hidden rounded-lg"
-                    onMouseEnter={() => setHoveredIndex(index + 100)}
-                    onMouseLeave={() => setHoveredIndex(null)}
-                    onClick={() => setSelectedImage(image.src)}
-                  >
-                    <img
-                      src={image.src}
-                      alt={image.caption}
-                      className={`w-full h-full object-cover transition-all duration-500 ${
-                        hoveredIndex === index + 100 ? 'scale-110' : 'scale-100'
-                      }`}
-                    />
-                    <div className={`absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-300 ${
-                      hoveredIndex === index + 100 ? 'opacity-100' : 'opacity-0'
-                    }`}>
-                      <div className="absolute bottom-0 left-0 right-0 p-2">
-                        <p className="text-white font-mono text-[10px] leading-tight">{image.caption}</p>
-                      </div>
-                    </div>
-                    <div className={`absolute inset-0 border-2 border-[#FFB800] transition-opacity duration-300 ${
-                      hoveredIndex === index + 100 ? 'opacity-100' : 'opacity-0'
-                    }`} />
-                  </div>
-                ))}
+                {goatHouseImages.map((image, index) => {})}
               </div>
             </div>
           </section>
 
           {/* Rube Goldberg Project */}
-          <section
-            ref={rubeGoldbergReveal.ref}
-            className={`transition-all duration-1000 delay-200 ${
-              rubeGoldbergReveal.isVisible 
-                ? 'opacity-100 translate-y-0' 
-                : 'opacity-0 translate-y-20'
-            }`}
-          >
+          <section ref={rubeGoldbergReveal.ref} className={`transition-all duration-1000 delay-200 ${rubeGoldbergReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
             <div className="grid lg:grid-cols-2 gap-16 items-start">
               <div className="space-y-8 lg:sticky lg:top-24 z-20 bg-[#0A0A0A] p-6 rounded-lg">
                 <div className="flex items-center gap-3">
@@ -385,17 +331,10 @@ const Engineering = () => {
                       Engineering Principles
                     </h4>
                     <ul className="space-y-2 text-gray-400">
-                      {[
-                        "Energy transfer and momentum",
-                        "Precise timing and synchronization",
-                        "Mechanical chain reactions",
-                        "Problem-solving and iteration"
-                      ].map((item, i) => (
-                        <li key={i} className="flex items-start gap-3 group">
+                      {["Energy transfer and momentum", "Precise timing and synchronization", "Mechanical chain reactions", "Problem-solving and iteration"].map((item, i) => <li key={i} className="flex items-start gap-3 group">
                           <span className="text-[#00D9FF] mt-1 group-hover:scale-110 transition-transform">→</span>
                           <span className="group-hover:text-white transition-colors">{item}</span>
-                        </li>
-                      ))}
+                        </li>)}
                     </ul>
                   </div>
                 </div>
@@ -404,16 +343,7 @@ const Engineering = () => {
               {/* Video Embed */}
               <div className="relative">
                 <div className="aspect-video rounded-lg overflow-hidden border-2 border-[#00D9FF]/20 hover:border-[#00D9FF]/40 transition-colors">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src="https://www.youtube.com/embed/l9VnBqaSKGw?si=7qHm62m26NW4Ad3o"
-                    title="Rube Goldberg Machine Project"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full"
-                  />
+                  <iframe width="100%" height="100%" src="https://www.youtube.com/embed/l9VnBqaSKGw?si=7qHm62m26NW4Ad3o" title="Rube Goldberg Machine Project" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="w-full h-full" />
                 </div>
                 <div className="mt-4 text-sm text-gray-500 font-mono text-center">
                   Watch the full Rube Goldberg machine in action
@@ -423,8 +353,6 @@ const Engineering = () => {
           </section>
         </div>
       </main>
-    </div>
-  );
+    </div>;
 };
-
 export default Engineering;
