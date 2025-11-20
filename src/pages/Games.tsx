@@ -2,10 +2,13 @@ import Navigation from "@/components/Navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TerminalHacker } from "@/components/games/TerminalHacker";
 import { MiniHouseDefense } from "@/components/games/MiniHouseDefense";
+import { useSectionTheme } from "@/hooks/use-section-theme";
 
 const Games = () => {
+  useSectionTheme();
+  
   return (
-    <div className="min-h-screen bg-[#0A0A0A] font-inter">
+    <div className="min-h-screen bg-[#0A0A0A] font-inter transition-all duration-500">
       <Navigation />
       
       <main className="container mx-auto px-6 pt-32 pb-24">

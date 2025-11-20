@@ -43,6 +43,35 @@ All colors MUST be HSL.
     --gradient-hero: linear-gradient(180deg, hsl(174 60% 51% / 0.05) 0%, hsl(0 0% 100%) 100%);
     --shadow-glow: 0 0 40px hsl(174 60% 51% / 0.2);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Section-specific themes */
+    /* Engineering - Dark tech with neon accents */
+    --engineering-bg: 222 47% 11%;
+    --engineering-fg: 210 40% 98%;
+    --engineering-primary: 268 100% 70%;
+    --engineering-accent: 180 100% 50%;
+    --engineering-glow: 268 100% 70%;
+    
+    /* Athletics - Warm orange/red energy */
+    --athletics-bg: 0 0% 100%;
+    --athletics-fg: 222 47% 11%;
+    --athletics-primary: 25 95% 53%;
+    --athletics-accent: 0 84% 60%;
+    --athletics-glow: 25 95% 53%;
+    
+    /* Music/Chat - Deep purple creativity */
+    --music-bg: 0 0% 100%;
+    --music-fg: 222 47% 11%;
+    --music-primary: 271 76% 53%;
+    --music-accent: 291 64% 42%;
+    --music-glow: 271 76% 53%;
+    
+    /* Activism - Bold red impact */
+    --activism-bg: 0 0% 100%;
+    --activism-fg: 222 47% 11%;
+    --activism-primary: 0 84% 60%;
+    --activism-accent: 14 100% 57%;
+    --activism-glow: 0 84% 60%;
   }
 
   .dark {
@@ -78,6 +107,46 @@ All colors MUST be HSL.
     --gradient-primary: linear-gradient(135deg, hsl(174 60% 51%), hsl(174 70% 65%));
     --gradient-hero: linear-gradient(180deg, hsl(174 60% 51% / 0.1) 0%, hsl(222 47% 11%) 100%);
     --shadow-glow: 0 0 40px hsl(174 60% 51% / 0.3);
+
+    /* Dark mode section themes */
+    --engineering-bg: 222 47% 8%;
+    --engineering-fg: 210 40% 98%;
+    
+    --athletics-bg: 222 47% 11%;
+    --athletics-fg: 210 40% 98%;
+    
+    --music-bg: 222 47% 11%;
+    --music-fg: 210 40% 98%;
+    
+    --activism-bg: 222 47% 11%;
+    --activism-fg: 210 40% 98%;
+  }
+
+  /* Section theme classes */
+  .theme-engineering {
+    --background: var(--engineering-bg);
+    --foreground: var(--engineering-fg);
+    --primary: var(--engineering-primary);
+    --accent: var(--engineering-accent);
+    --shadow-glow: 0 0 40px hsl(var(--engineering-glow) / 0.3);
+  }
+
+  .theme-athletics {
+    --primary: var(--athletics-primary);
+    --accent: var(--athletics-accent);
+    --shadow-glow: 0 0 40px hsl(var(--athletics-glow) / 0.2);
+  }
+
+  .theme-music {
+    --primary: var(--music-primary);
+    --accent: var(--music-accent);
+    --shadow-glow: 0 0 40px hsl(var(--music-glow) / 0.2);
+  }
+
+  .theme-activism {
+    --primary: var(--activism-primary);
+    --accent: var(--activism-accent);
+    --shadow-glow: 0 0 40px hsl(var(--activism-glow) / 0.2);
   }
 }
 

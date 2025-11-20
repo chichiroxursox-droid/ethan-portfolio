@@ -52,6 +52,26 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        engineering: {
+          DEFAULT: "hsl(var(--engineering-primary))",
+          accent: "hsl(var(--engineering-accent))",
+          glow: "hsl(var(--engineering-glow))",
+        },
+        athletics: {
+          DEFAULT: "hsl(var(--athletics-primary))",
+          accent: "hsl(var(--athletics-accent))",
+          glow: "hsl(var(--athletics-glow))",
+        },
+        music: {
+          DEFAULT: "hsl(var(--music-primary))",
+          accent: "hsl(var(--music-accent))",
+          glow: "hsl(var(--music-glow))",
+        },
+        activism: {
+          DEFAULT: "hsl(var(--activism-primary))",
+          accent: "hsl(var(--activism-accent))",
+          glow: "hsl(var(--activism-glow))",
+        },
       },
       backgroundImage: {
         'gradient-primary': 'var(--gradient-primary)',
