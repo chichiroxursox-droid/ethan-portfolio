@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Home, Zap, Heart, Shield, Crosshair, Flame } from "lucide-react";
@@ -8,7 +8,17 @@ type Enemy = {
   x: number;
   y: number;
   health: number;
+  maxHealth: number;
   speed: number;
+  type: "basic" | "strong" | "fast" | "tank";
+};
+
+type Upgrade = {
+  id: string;
+  name: string;
+  cost: number;
+  description: string;
+  effect: () => void;
 };
 
 type Tower = {
@@ -59,17 +69,93 @@ export const MiniHouseDefense = () => {
   const [waveActive, setWaveActive] = useState(false);
   const [enemiesToSpawn, setEnemiesToSpawn] = useState(0);
   const [enemiesRemaining, setEnemiesRemaining] = useState(0);
+  const [showUpgrades, setShowUpgrades] = useState(false);
+  const [damageMultiplier, setDamageMultiplier] = useState(1);
+  const [hasShield, setHasShield] = useState(false);
+  const [speedBoost, setSpeedBoost] = useState(1);
+  const audioContext = useRef<AudioContext | null>(null);
 
   const HOUSE_X = 400;
   const HOUSE_Y = 200;
 
+  const playSound = (frequency: number, duration: number, type: 'sine' | 'square' | 'sawtooth' = 'sine') => {
+    if (!audioContext.current) {
+      audioContext.current = new AudioContext();
+    }
+    const oscillator = audioContext.current.createOscillator();
+    const gainNode = audioContext.current.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.current.destination);
+    
+    oscillator.frequency.value = frequency;
+    oscillator.type = type;
+    
+    gainNode.gain.setValueAtTime(0.1, audioContext.current.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.current.currentTime + duration);
+    
+    oscillator.start(audioContext.current.currentTime);
+    oscillator.stop(audioContext.current.currentTime + duration);
+  };
+
+  const getEnemyType = (waveNum: number): Enemy["type"] => {
+    if (waveNum < 3) return "basic";
+    if (waveNum < 5) return Math.random() > 0.5 ? "basic" : "fast";
+    if (waveNum < 8) return Math.random() > 0.7 ? "basic" : Math.random() > 0.5 ? "fast" : "strong";
+    return ["basic", "fast", "strong", "tank"][Math.floor(Math.random() * 4)] as Enemy["type"];
+  };
+
+  const getEnemyStats = (type: Enemy["type"], waveNum: number) => {
+    const baseHealth = 3 + Math.floor(waveNum / 2);
+    const baseSpeed = 1 + waveNum * 0.1;
+    
+    switch (type) {
+      case "fast":
+        return { health: baseHealth, speed: baseSpeed * 1.8, color: "#FFD700" };
+      case "strong":
+        return { health: baseHealth * 2, speed: baseSpeed * 0.7, color: "#FF4500" };
+      case "tank":
+        return { health: baseHealth * 3, speed: baseSpeed * 0.5, color: "#8B0000" };
+      default:
+        return { health: baseHealth, speed: baseSpeed, color: "#FF0000" };
+    }
+  };
+
+  const upgrades: Upgrade[] = [
+    {
+      id: "damage",
+      name: "Increase Damage",
+      cost: 100,
+      description: "+50% damage to all towers",
+      effect: () => setDamageMultiplier(m => m + 0.5)
+    },
+    {
+      id: "shield",
+      name: "House Shield",
+      cost: 150,
+      description: "Blocks next 3 hits",
+      effect: () => setHasShield(true)
+    },
+    {
+      id: "speed",
+      name: "Tower Speed",
+      cost: 75,
+      description: "Towers shoot 30% faster",
+      effect: () => setSpeedBoost(s => s + 0.3)
+    }
+  ];
+
   const spawnEnemy = useCallback(() => {
+    const enemyType = getEnemyType(wave);
+    const stats = getEnemyStats(enemyType, wave);
     const newEnemy: Enemy = {
       id: nextEnemyId,
       x: 50,
       y: 150 + Math.random() * 100,
-      health: 3 + Math.floor(wave / 2),
-      speed: 1 + wave * 0.1
+      health: stats.health,
+      maxHealth: stats.health,
+      speed: stats.speed,
+      type: enemyType
     };
     setEnemies(prev => [...prev, newEnemy]);
     setNextEnemyId(id => id + 1);
@@ -77,11 +163,13 @@ export const MiniHouseDefense = () => {
   }, [nextEnemyId, wave]);
 
   const startNextWave = () => {
+    playSound(600, 0.2, 'square');
     setWave(prev => prev + 1);
     const enemyCount = 5 + wave * 2;
     setEnemiesToSpawn(enemyCount);
     setEnemiesRemaining(enemyCount);
     setWaveActive(true);
+    setShowUpgrades(false);
     setMoney(m => m + 50);
   };
 
@@ -96,12 +184,18 @@ export const MiniHouseDefense = () => {
           x: enemy.x + enemy.speed
         })).filter(enemy => {
           if (enemy.x >= HOUSE_X - 20) {
-            setHouseHealth(h => Math.max(0, h - 10));
+            if (hasShield) {
+              setHasShield(false);
+              playSound(300, 0.2, 'square');
+            } else {
+              setHouseHealth(h => Math.max(0, h - 10));
+            }
             setEnemiesRemaining(r => Math.max(0, r - 1));
             return false;
           }
           if (enemy.health <= 0) {
             setEnemiesRemaining(r => Math.max(0, r - 1));
+            playSound(200, 0.1, 'sawtooth');
             return false;
           }
           return true;
@@ -116,6 +210,7 @@ export const MiniHouseDefense = () => {
         }
 
         const defense = DEFENSES.find(d => d.type === tower.type)!;
+        const adjustedCooldown = Math.floor(defense.cooldown / speedBoost);
         let nearest: Enemy | null = null;
         let minDist = defense.range;
         
@@ -137,8 +232,9 @@ export const MiniHouseDefense = () => {
             targetId: nearest!.id,
             type: tower.type
           }]);
+          playSound(600 + Math.random() * 200, 0.05);
           setNextProjectileId(id => id + 1);
-          return { ...tower, cooldown: defense.cooldown };
+          return { ...tower, cooldown: adjustedCooldown };
         }
 
         return tower;
@@ -157,12 +253,13 @@ export const MiniHouseDefense = () => {
 
           if (dist < 10) {
             const defense = DEFENSES.find(d => d.type === proj.type)!;
+            const actualDamage = defense.damage * damageMultiplier;
             setEnemies(e => e.map(enemy => 
               enemy.id === proj.targetId 
-                ? { ...enemy, health: enemy.health - defense.damage }
+                ? { ...enemy, health: enemy.health - actualDamage }
                 : enemy
             ));
-            if (target.health <= defense.damage) {
+            if (target.health <= actualDamage) {
               setMoney(m => m + 25);
             }
           } else {
@@ -195,6 +292,8 @@ export const MiniHouseDefense = () => {
   useEffect(() => {
     if (waveActive && enemiesRemaining === 0 && enemies.length === 0 && enemiesToSpawn === 0) {
       setWaveActive(false);
+      setShowUpgrades(true);
+      playSound(800, 0.3);
     }
   }, [waveActive, enemiesRemaining, enemies.length, enemiesToSpawn]);
 
@@ -216,6 +315,10 @@ export const MiniHouseDefense = () => {
     setWaveActive(false);
     setEnemiesToSpawn(0);
     setEnemiesRemaining(0);
+    setShowUpgrades(false);
+    setDamageMultiplier(1);
+    setHasShield(false);
+    setSpeedBoost(1);
   };
 
   const handleDragStart = (defenseType: "basic" | "sniper" | "flame") => {
@@ -260,6 +363,14 @@ export const MiniHouseDefense = () => {
     }
   };
 
+  const purchaseUpgrade = (upgrade: Upgrade) => {
+    if (money >= upgrade.cost) {
+      setMoney(m => m - upgrade.cost);
+      upgrade.effect();
+      playSound(900, 0.2);
+    }
+  };
+
   return (
     <Card className="bg-[#0D0D0D] border-[#00FF9F]/30 p-8">
       <div className="space-y-6">
@@ -267,12 +378,16 @@ export const MiniHouseDefense = () => {
           <div className="flex items-center gap-2 text-red-500">
             <Heart className="w-5 h-5" />
             <span>HOUSE: {houseHealth}%</span>
+            {hasShield && <Shield className="w-4 h-4 text-blue-400 animate-pulse" />}
           </div>
           <div className="text-[#00FF9F]">WAVE: {wave}</div>
           {waveActive && (
             <div className="text-orange-500">ENEMIES: {enemiesRemaining}</div>
           )}
           <div className="text-yellow-500">MONEY: ${money}</div>
+          {damageMultiplier > 1 && (
+            <div className="text-red-400">DMG: x{damageMultiplier.toFixed(1)}</div>
+          )}
         </div>
 
         <div className="grid grid-cols-3 gap-3">
@@ -325,22 +440,34 @@ export const MiniHouseDefense = () => {
           })}
 
           {/* Enemies */}
-          {enemies.map(enemy => (
-            <div
-              key={enemy.id}
-              className="absolute transition-all duration-100"
-              style={{ left: `${enemy.x}px`, top: `${enemy.y}px`, transform: 'translate(-50%, -50%)' }}
-            >
-              <div className="w-6 h-6 bg-red-500 rounded-full relative">
-                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-gray-700 rounded">
-                  <div 
-                    className="h-full bg-red-500 rounded transition-all"
-                    style={{ width: `${(enemy.health / (3 + Math.floor(wave / 2))) * 100}%` }}
-                  />
+          {enemies.map(enemy => {
+            const stats = getEnemyStats(enemy.type, wave);
+            return (
+              <div
+                key={enemy.id}
+                className="absolute transition-all duration-100"
+                style={{ left: `${enemy.x}px`, top: `${enemy.y}px`, transform: 'translate(-50%, -50%)' }}
+              >
+                <div 
+                  className="w-6 h-6 rounded-full relative"
+                  style={{ 
+                    backgroundColor: stats.color,
+                    transform: enemy.type === "tank" ? "scale(1.3)" : enemy.type === "fast" ? "scale(0.8)" : "scale(1)"
+                  }}
+                >
+                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-gray-700 rounded">
+                    <div 
+                      className="h-full rounded transition-all"
+                      style={{ 
+                        width: `${(enemy.health / enemy.maxHealth) * 100}%`,
+                        backgroundColor: stats.color
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
 
           {/* Projectiles */}
           {projectiles.map(proj => (
@@ -357,12 +484,37 @@ export const MiniHouseDefense = () => {
 
           {!waveActive && isPlaying && (
             <div className="absolute inset-0 bg-black/70 flex items-center justify-center">
-              <Button
-                onClick={startNextWave}
-                className="bg-[#00FF9F] hover:bg-[#00FF9F]/80 text-black font-bold text-lg px-8 py-4"
-              >
-                START WAVE {wave + 1}
-              </Button>
+              <div className="space-y-4">
+                {showUpgrades && wave > 0 && (
+                  <div className="bg-black/90 border border-[#00FF9F]/30 rounded p-4 mb-4 space-y-3">
+                    <div className="text-[#00FF9F] text-center font-bold mb-2">UPGRADES AVAILABLE</div>
+                    {upgrades.map(upgrade => (
+                      <button
+                        key={upgrade.id}
+                        onClick={() => purchaseUpgrade(upgrade)}
+                        disabled={money < upgrade.cost}
+                        className={`w-full text-left p-3 rounded border transition-all ${
+                          money >= upgrade.cost
+                            ? 'border-[#00FF9F]/50 hover:bg-[#00FF9F]/10 cursor-pointer'
+                            : 'border-gray-700 opacity-50 cursor-not-allowed'
+                        }`}
+                      >
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="text-white font-bold text-sm">{upgrade.name}</span>
+                          <span className="text-yellow-500 text-sm">${upgrade.cost}</span>
+                        </div>
+                        <div className="text-gray-400 text-xs">{upgrade.description}</div>
+                      </button>
+                    ))}
+                  </div>
+                )}
+                <Button
+                  onClick={startNextWave}
+                  className="bg-[#00FF9F] hover:bg-[#00FF9F]/80 text-black font-bold text-lg px-8 py-4 w-full"
+                >
+                  START WAVE {wave + 1}
+                </Button>
+              </div>
             </div>
           )}
         </div>
