@@ -29,6 +29,16 @@ type Tower = {
   type: "basic" | "sniper" | "flame";
 };
 
+type Particle = {
+  id: number;
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  color: string;
+  life: number;
+};
+
 type Projectile = {
   id: number;
   x: number;
@@ -59,12 +69,14 @@ export const MiniHouseDefense = () => {
   const [enemies, setEnemies] = useState<Enemy[]>([]);
   const [towers, setTowers] = useState<Tower[]>([]);
   const [projectiles, setProjectiles] = useState<Projectile[]>([]);
+  const [particles, setParticles] = useState<Particle[]>([]);
   const [houseHealth, setHouseHealth] = useState(100);
   const [wave, setWave] = useState(0);
-  const [money, setMoney] = useState(150);
+  const [money, setMoney] = useState(100);
   const [nextEnemyId, setNextEnemyId] = useState(1);
   const [nextTowerId, setNextTowerId] = useState(1);
   const [nextProjectileId, setNextProjectileId] = useState(1);
+  const [nextParticleId, setNextParticleId] = useState(1);
   const [draggedDefense, setDraggedDefense] = useState<"basic" | "sniper" | "flame" | null>(null);
   const [waveActive, setWaveActive] = useState(false);
   const [enemiesToSpawn, setEnemiesToSpawn] = useState(0);
@@ -73,6 +85,7 @@ export const MiniHouseDefense = () => {
   const [damageMultiplier, setDamageMultiplier] = useState(1);
   const [hasShield, setHasShield] = useState(false);
   const [speedBoost, setSpeedBoost] = useState(1);
+  const [screenShake, setScreenShake] = useState(0);
   const audioContext = useRef<AudioContext | null>(null);
 
   const HOUSE_X = 400;
@@ -106,19 +119,61 @@ export const MiniHouseDefense = () => {
   };
 
   const getEnemyStats = (type: Enemy["type"], waveNum: number) => {
-    const baseHealth = 3 + Math.floor(waveNum / 2);
-    const baseSpeed = 1 + waveNum * 0.1;
+    const baseHealth = 3 + Math.floor(waveNum * 0.8);
+    const baseSpeed = 1 + waveNum * 0.12;
     
     switch (type) {
       case "fast":
         return { health: baseHealth, speed: baseSpeed * 1.8, color: "#FFD700" };
       case "strong":
-        return { health: baseHealth * 2, speed: baseSpeed * 0.7, color: "#FF4500" };
+        return { health: baseHealth * 2.5, speed: baseSpeed * 0.7, color: "#FF4500" };
       case "tank":
-        return { health: baseHealth * 3, speed: baseSpeed * 0.5, color: "#8B0000" };
+        return { health: baseHealth * 4, speed: baseSpeed * 0.5, color: "#8B0000" };
       default:
         return { health: baseHealth, speed: baseSpeed, color: "#FF0000" };
     }
+  };
+
+  const createExplosion = (x: number, y: number, color: string) => {
+    const particleCount = 12;
+    const newParticles: Particle[] = [];
+    for (let i = 0; i < particleCount; i++) {
+      const angle = (Math.PI * 2 * i) / particleCount;
+      const speed = 2 + Math.random() * 2;
+      newParticles.push({
+        id: nextParticleId + i,
+        x,
+        y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        color,
+        life: 1
+      });
+    }
+    setParticles(prev => [...prev, ...newParticles]);
+    setNextParticleId(id => id + particleCount);
+  };
+
+  const createMuzzleFlash = (x: number, y: number) => {
+    const flashParticles: Particle[] = [];
+    for (let i = 0; i < 3; i++) {
+      flashParticles.push({
+        id: nextParticleId + i,
+        x,
+        y,
+        vx: (Math.random() - 0.5) * 2,
+        vy: (Math.random() - 0.5) * 2,
+        color: "#FFFF00",
+        life: 0.5
+      });
+    }
+    setParticles(prev => [...prev, ...flashParticles]);
+    setNextParticleId(id => id + 3);
+  };
+
+  const triggerScreenShake = () => {
+    setScreenShake(10);
+    setTimeout(() => setScreenShake(0), 200);
   };
 
   const upgrades: Upgrade[] = [
@@ -126,8 +181,8 @@ export const MiniHouseDefense = () => {
       id: "damage",
       name: "Increase Damage",
       cost: 100,
-      description: "+50% damage to all towers",
-      effect: () => setDamageMultiplier(m => m + 0.5)
+      description: "+5% damage to all towers",
+      effect: () => setDamageMultiplier(m => m + 0.05)
     },
     {
       id: "shield",
@@ -140,8 +195,8 @@ export const MiniHouseDefense = () => {
       id: "speed",
       name: "Tower Speed",
       cost: 75,
-      description: "Towers shoot 30% faster",
-      effect: () => setSpeedBoost(s => s + 0.3)
+      description: "Towers shoot 5% faster",
+      effect: () => setSpeedBoost(s => s + 0.05)
     }
   ];
 
@@ -162,21 +217,35 @@ export const MiniHouseDefense = () => {
     setEnemiesToSpawn(prev => prev - 1);
   }, [nextEnemyId, wave]);
 
+  const getBaseTowerCost = (type: "basic" | "sniper" | "flame") => {
+    const baseCosts = { basic: 50, sniper: 100, flame: 75 };
+    return baseCosts[type] + Math.floor(wave / 3) * 10;
+  };
+
   const startNextWave = () => {
     playSound(600, 0.2, 'square');
     setWave(prev => prev + 1);
-    const enemyCount = 5 + wave * 2;
+    const enemyCount = 6 + wave * 3;
     setEnemiesToSpawn(enemyCount);
     setEnemiesRemaining(enemyCount);
     setWaveActive(true);
     setShowUpgrades(false);
-    setMoney(m => m + 50);
+    setMoney(m => m + 40);
   };
 
   useEffect(() => {
     if (!isPlaying) return;
 
     const gameLoop = setInterval(() => {
+      // Update particles
+      setParticles(prev => prev.map(p => ({
+        ...p,
+        x: p.x + p.vx,
+        y: p.y + p.vy,
+        vy: p.vy + 0.1,
+        life: p.life - 0.02
+      })).filter(p => p.life > 0));
+
       // Move enemies
       setEnemies(prev => {
         const updated = prev.map(enemy => ({
@@ -189,11 +258,14 @@ export const MiniHouseDefense = () => {
               playSound(300, 0.2, 'square');
             } else {
               setHouseHealth(h => Math.max(0, h - 10));
+              triggerScreenShake();
             }
             setEnemiesRemaining(r => Math.max(0, r - 1));
             return false;
           }
           if (enemy.health <= 0) {
+            const stats = getEnemyStats(enemy.type, wave);
+            createExplosion(enemy.x, enemy.y, stats.color);
             setEnemiesRemaining(r => Math.max(0, r - 1));
             playSound(200, 0.1, 'sawtooth');
             return false;
@@ -232,6 +304,7 @@ export const MiniHouseDefense = () => {
             targetId: nearest!.id,
             type: tower.type
           }]);
+          createMuzzleFlash(tower.x, tower.y);
           playSound(600 + Math.random() * 200, 0.05);
           setNextProjectileId(id => id + 1);
           return { ...tower, cooldown: adjustedCooldown };
@@ -274,8 +347,8 @@ export const MiniHouseDefense = () => {
       });
     }, 1000 / 60);
 
-    return () => clearInterval(gameLoop);
-  }, [isPlaying, enemies, nextProjectileId, towers]);
+      return () => clearInterval(gameLoop);
+  }, [isPlaying, enemies, nextProjectileId, nextParticleId, towers, wave, hasShield, damageMultiplier]);
 
   useEffect(() => {
     if (!isPlaying || !waveActive || enemiesToSpawn <= 0) return;
@@ -284,7 +357,7 @@ export const MiniHouseDefense = () => {
       if (enemiesToSpawn > 0) {
         spawnEnemy();
       }
-    }, 2000 - Math.min(wave * 100, 1500));
+    }, 1500 - Math.min(wave * 80, 1200));
 
     return () => clearInterval(spawnInterval);
   }, [isPlaying, waveActive, enemiesToSpawn, wave, spawnEnemy]);
@@ -309,9 +382,10 @@ export const MiniHouseDefense = () => {
     setEnemies([]);
     setTowers([]);
     setProjectiles([]);
+    setParticles([]);
     setHouseHealth(100);
     setWave(0);
-    setMoney(150);
+    setMoney(100);
     setWaveActive(false);
     setEnemiesToSpawn(0);
     setEnemiesRemaining(0);
@@ -319,12 +393,27 @@ export const MiniHouseDefense = () => {
     setDamageMultiplier(1);
     setHasShield(false);
     setSpeedBoost(1);
+    setScreenShake(0);
   };
 
-  const handleDragStart = (defenseType: "basic" | "sniper" | "flame") => {
+  const handleDragStart = (e: React.DragEvent, defenseType: "basic" | "sniper" | "flame") => {
     const defense = DEFENSES.find(d => d.type === defenseType)!;
-    if (money >= defense.cost && isPlaying) {
+    const cost = getBaseTowerCost(defenseType);
+    if (money >= cost && isPlaying) {
       setDraggedDefense(defenseType);
+      
+      // Create custom drag image (just the icon)
+      const canvas = document.createElement('canvas');
+      canvas.width = 40;
+      canvas.height = 40;
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.fillStyle = defense.color;
+        ctx.beginPath();
+        ctx.arc(20, 20, 15, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      e.dataTransfer.setDragImage(canvas, 20, 20);
     }
   };
 
@@ -340,7 +429,7 @@ export const MiniHouseDefense = () => {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    const defense = DEFENSES.find(d => d.type === draggedDefense)!;
+    const cost = getBaseTowerCost(draggedDefense);
     
     const newTower: Tower = {
       id: nextTowerId,
@@ -350,7 +439,7 @@ export const MiniHouseDefense = () => {
       type: draggedDefense
     };
     setTowers(prev => [...prev, newTower]);
-    setMoney(money - defense.cost);
+    setMoney(money - cost);
     setNextTowerId(id => id + 1);
     setDraggedDefense(null);
   };
@@ -391,29 +480,33 @@ export const MiniHouseDefense = () => {
         </div>
 
         <div className="grid grid-cols-3 gap-3">
-          {DEFENSES.map(defense => (
-            <div
-              key={defense.type}
-              draggable={money >= defense.cost && isPlaying}
-              onDragStart={() => handleDragStart(defense.type)}
-              className={`bg-black border rounded p-3 text-center cursor-move transition-all ${
-                money >= defense.cost && isPlaying
-                  ? 'border-gray-700 hover:border-[#00FF9F]/50 hover:bg-[#00FF9F]/5'
-                  : 'border-gray-800 opacity-50 cursor-not-allowed'
-              }`}
-            >
-              <defense.icon className="w-6 h-6 mx-auto mb-2" style={{ color: defense.color }} />
-              <div className="text-white text-xs font-bold mb-1">{defense.name}</div>
-              <div className="text-yellow-500 text-xs">${defense.cost}</div>
-              <div className="text-gray-500 text-xs mt-1">
-                Dmg: {defense.damage} | Rng: {defense.range}
+          {DEFENSES.map(defense => {
+            const cost = getBaseTowerCost(defense.type);
+            return (
+              <div
+                key={defense.type}
+                draggable={money >= cost && isPlaying}
+                onDragStart={(e) => handleDragStart(e, defense.type)}
+                className={`bg-black border rounded p-3 text-center cursor-move transition-all ${
+                  money >= cost && isPlaying
+                    ? 'border-gray-700 hover:border-[#00FF9F]/50 hover:bg-[#00FF9F]/5'
+                    : 'border-gray-800 opacity-50 cursor-not-allowed'
+                }`}
+              >
+                <defense.icon className="w-6 h-6 mx-auto mb-2" style={{ color: defense.color }} />
+                <div className="text-white text-xs font-bold mb-1">{defense.name}</div>
+                <div className="text-yellow-500 text-xs">${cost}</div>
+                <div className="text-gray-500 text-xs mt-1">
+                  Dmg: {defense.damage} | Rng: {defense.range}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div
-          className="relative bg-black border border-[#00FF9F]/20 rounded h-[400px] overflow-hidden"
+          className="relative bg-black border border-[#00FF9F]/20 rounded h-[400px] overflow-hidden transition-transform"
+          style={{ transform: `translate(${Math.random() * screenShake - screenShake/2}px, ${Math.random() * screenShake - screenShake/2}px)` }}
           onDragOver={handleDragOver}
           onDrop={handleDrop}
         >
@@ -468,6 +561,20 @@ export const MiniHouseDefense = () => {
               </div>
             );
           })}
+
+          {/* Particles */}
+          {particles.map(particle => (
+            <div
+              key={particle.id}
+              className="absolute w-1.5 h-1.5 rounded-full"
+              style={{ 
+                left: `${particle.x}px`, 
+                top: `${particle.y}px`,
+                backgroundColor: particle.color,
+                opacity: particle.life
+              }}
+            />
+          ))}
 
           {/* Projectiles */}
           {projectiles.map(proj => (
