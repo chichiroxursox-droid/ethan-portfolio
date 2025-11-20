@@ -63,7 +63,7 @@ type DefenseType = {
 
 const DEFENSES: DefenseType[] = [
   { type: "basic", cost: 50, icon: Zap, color: "#00FF9F", name: "Basic Tower", range: 150, damage: 1, cooldown: 30 },
-  { type: "sniper", cost: 200, icon: Crosshair, color: "#FF0000", name: "Sniper Tower", range: 250, damage: 3, cooldown: 60 },
+  { type: "sniper", cost: 200, icon: Crosshair, color: "#FF0000", name: "Sniper Tower", range: 250, damage: 3, cooldown: 90 },
   { type: "flame", cost: 75, icon: Flame, color: "#FF6600", name: "Flame Tower", range: 100, damage: 2, cooldown: 20 }
 ];
 
@@ -234,7 +234,7 @@ export const MiniHouseDefense = () => {
   }, [nextEnemyId, wave]);
 
   const getBaseTowerCost = (type: "basic" | "sniper" | "flame") => {
-    const baseCosts = { basic: 50, sniper: 100, flame: 75 };
+    const baseCosts = { basic: 50, sniper: 200, flame: 75 };
     return baseCosts[type] + Math.floor(wave / 3) * 10;
   };
 
