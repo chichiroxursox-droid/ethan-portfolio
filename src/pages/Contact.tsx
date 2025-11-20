@@ -1,7 +1,5 @@
 import Navigation from "@/components/Navigation";
 import { ContactForm } from "@/components/ContactForm";
-import { Scene3D } from "@/components/3d/Scene3D";
-import { Microphone } from "@/components/3d/Microphone";
 import { useSectionTheme } from "@/hooks/use-section-theme";
 
 const Contact = () => {
@@ -12,12 +10,7 @@ const Contact = () => {
       <Navigation />
       <div className="container mx-auto px-6 pt-32 pb-20">
         <div className="max-w-2xl mx-auto">
-          <div className="text-center mb-12 relative">
-            <div className="absolute right-0 -top-10 w-48 h-48 opacity-50 pointer-events-none">
-              <Scene3D>
-                <Microphone />
-              </Scene3D>
-            </div>
+          <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
               Get in Touch
             </h1>

@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { supabase } from "@/integrations/supabase/client";
+import { Leaderboard } from "./Leaderboard";
 
 type Difficulty = "easy" | "medium" | "hard" | null;
 
@@ -73,6 +76,9 @@ export const TerminalHacker = () => {
   const [difficulty, setDifficulty] = useState<Difficulty>(null);
   const [streak, setStreak] = useState(0);
   const [logs, setLogs] = useState<string[]>([]);
+  const [showNameInput, setShowNameInput] = useState(false);
+  const [playerName, setPlayerName] = useState("");
+  const [scoreSubmitted, setScoreSubmitted] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const audioContext = useRef<AudioContext | null>(null);
 
@@ -138,6 +144,26 @@ export const TerminalHacker = () => {
   const endGame = () => {
     setIsPlaying(false);
     setLogs(prev => [...prev, `> BREACH ${score > 5 ? "SUCCESSFUL" : "FAILED"}`, `> FINAL SCORE: ${score}`]);
+    if (score > 0) {
+      setShowNameInput(true);
+    }
+  };
+
+  const submitScore = async () => {
+    if (!playerName.trim() || !difficulty) return;
+
+    try {
+      await supabase.from("game_leaderboards").insert({
+        game_name: "Terminal Hacker",
+        player_name: playerName.trim(),
+        score: score,
+        difficulty: difficulty
+      });
+      setScoreSubmitted(true);
+      setShowNameInput(false);
+    } catch (error) {
+      console.error("Error submitting score:", error);
+    }
   };
 
   const generateNewCommand = () => {
@@ -162,77 +188,107 @@ export const TerminalHacker = () => {
   };
 
   return (
-    <Card className="bg-[#0D0D0D] border-[#00FF9F]/30 p-8 font-mono">
-      <div className="space-y-6">
-        <div className="flex justify-between items-center">
-          <div className="text-[#00FF9F]">
-            <div className="text-sm opacity-70">SCORE</div>
-            <div className="text-3xl font-bold">{score}</div>
-          </div>
-          <div className="text-[#00D9FF]">
-            <div className="text-sm opacity-70">TIME</div>
-            <div className="text-3xl font-bold">{timeLeft}s</div>
-          </div>
-          <div className="text-white">
-            <div className="text-sm opacity-70">STREAK</div>
-            <div className="text-3xl font-bold">x{streak}</div>
-          </div>
-        </div>
-
-        <div className="bg-black border border-[#00FF9F]/20 rounded p-4 h-48 overflow-y-auto">
-          {logs.map((log, i) => (
-            <div key={i} className="text-[#00FF9F] text-sm mb-1 animate-fade-in">
-              {log}
-            </div>
-          ))}
-        </div>
-
-        {isPlaying ? (
-          <>
-            <div className="bg-black border border-[#00D9FF]/30 rounded p-4">
-              <div className="text-[#00D9FF] text-sm mb-2">TARGET COMMAND:</div>
-              <div className="text-white text-2xl tracking-wider">{currentCommand}</div>
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="lg:col-span-2">
+        <Card className="bg-[#0D0D0D] border-[#00FF9F]/30 p-8 font-mono">
+          <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <div className="text-[#00FF9F]">
+                <div className="text-sm opacity-70">SCORE</div>
+                <div className="text-3xl font-bold">{score}</div>
+              </div>
+              <div className="text-[#00D9FF]">
+                <div className="text-sm opacity-70">TIME</div>
+                <div className="text-3xl font-bold">{timeLeft}s</div>
+              </div>
+              <div className="text-white">
+                <div className="text-sm opacity-70">STREAK</div>
+                <div className="text-3xl font-bold">x{streak}</div>
+              </div>
             </div>
 
-            <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#00FF9F]">{'>'}</span>
-              <input
-                ref={inputRef}
-                type="text"
-                value={userInput}
-                onChange={handleInput}
-                className="w-full bg-black border border-[#00FF9F]/30 rounded p-4 pl-8 text-white text-xl tracking-wider uppercase focus:outline-none focus:border-[#00FF9F]"
-                placeholder="TYPE HERE..."
-                autoFocus
-              />
+            <div className="bg-black border border-[#00FF9F]/20 rounded p-4 h-48 overflow-y-auto">
+              {logs.map((log, i) => (
+                <div key={i} className="text-[#00FF9F] text-sm mb-1 animate-fade-in">
+                  {log}
+                </div>
+              ))}
             </div>
-          </>
-        ) : (
-          <div className="space-y-3">
-            <div className="text-[#00FF9F] text-center text-sm mb-4">
-              {score > 0 ? `LAST SCORE: ${score} | SELECT DIFFICULTY` : "SELECT DIFFICULTY LEVEL"}
-            </div>
-            <Button
-              onClick={() => startGame("easy")}
-              className="w-full bg-[#00FF9F] hover:bg-[#00FF9F]/80 text-black font-bold text-lg py-6"
-            >
-              EASY (45s)
-            </Button>
-            <Button
-              onClick={() => startGame("medium")}
-              className="w-full bg-[#00D9FF] hover:bg-[#00D9FF]/80 text-black font-bold text-lg py-6"
-            >
-              MEDIUM (30s)
-            </Button>
-            <Button
-              onClick={() => startGame("hard")}
-              className="w-full bg-red-500 hover:bg-red-500/80 text-white font-bold text-lg py-6"
-            >
-              HARD (20s)
-            </Button>
+
+            {isPlaying ? (
+              <>
+                <div className="bg-black border border-[#00D9FF]/30 rounded p-4">
+                  <div className="text-[#00D9FF] text-sm mb-2">TARGET COMMAND:</div>
+                  <div className="text-white text-2xl tracking-wider">{currentCommand}</div>
+                </div>
+
+                <div className="relative">
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#00FF9F]">{'>'}</span>
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={userInput}
+                    onChange={handleInput}
+                    className="w-full bg-black border border-[#00FF9F]/30 rounded p-4 pl-8 text-white text-xl tracking-wider uppercase focus:outline-none focus:border-[#00FF9F]"
+                    placeholder="TYPE HERE..."
+                    autoFocus
+                  />
+                </div>
+              </>
+            ) : (
+              <div className="space-y-3">
+                {showNameInput && !scoreSubmitted && score > 0 && (
+                  <div className="space-y-3 mb-4 p-4 bg-black border border-[#00FF9F]/30 rounded">
+                    <div className="text-[#00FF9F] text-center">
+                      <div className="text-lg font-bold mb-1">BREACH COMPLETE</div>
+                      <div className="text-sm">Score: {score} | Difficulty: {difficulty?.toUpperCase()}</div>
+                    </div>
+                    <Input
+                      value={playerName}
+                      onChange={(e) => setPlayerName(e.target.value)}
+                      onKeyDown={(e) => e.key === "Enter" && submitScore()}
+                      placeholder="Enter your name"
+                      className="bg-black border-[#00FF9F]/30 text-white"
+                      maxLength={20}
+                    />
+                    <Button
+                      onClick={submitScore}
+                      disabled={!playerName.trim()}
+                      className="w-full bg-[#00FF9F] hover:bg-[#00FF9F]/80 text-black font-bold"
+                    >
+                      SUBMIT SCORE
+                    </Button>
+                  </div>
+                )}
+                <div className="text-[#00FF9F] text-center text-sm mb-4">
+                  {score > 0 ? `LAST SCORE: ${score} | SELECT DIFFICULTY` : "SELECT DIFFICULTY LEVEL"}
+                </div>
+                <Button
+                  onClick={() => startGame("easy")}
+                  className="w-full bg-[#00FF9F] hover:bg-[#00FF9F]/80 text-black font-bold text-lg py-6"
+                >
+                  EASY (45s)
+                </Button>
+                <Button
+                  onClick={() => startGame("medium")}
+                  className="w-full bg-[#00D9FF] hover:bg-[#00D9FF]/80 text-black font-bold text-lg py-6"
+                >
+                  MEDIUM (30s)
+                </Button>
+                <Button
+                  onClick={() => startGame("hard")}
+                  className="w-full bg-red-500 hover:bg-red-500/80 text-white font-bold text-lg py-6"
+                >
+                  HARD (20s)
+                </Button>
+              </div>
+            )}
           </div>
-        )}
+        </Card>
       </div>
-    </Card>
+      <div className="lg:col-span-1">
+        <Leaderboard gameName="Terminal Hacker" currentScore={scoreSubmitted ? score : undefined} showDifficulty />
+      </div>
+    </div>
   );
 };

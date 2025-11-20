@@ -7,8 +7,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send, Bot, User } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Scene3D } from "@/components/3d/Scene3D";
-import { PianoKeys } from "@/components/3d/PianoKeys";
 import { useSectionTheme } from "@/hooks/use-section-theme";
 interface Message {
   role: "user" | "assistant";
@@ -74,12 +72,7 @@ const Chat = () => {
       
       <div className="pt-24 pb-8 px-6">
         <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-8 relative">
-            <div className="absolute left-1/2 -translate-x-1/2 -top-20 w-64 h-64 opacity-40 pointer-events-none">
-              <Scene3D>
-                <PianoKeys />
-              </Scene3D>
-            </div>
+          <div className="text-center mb-8">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Chat with EthanGPT</h1>
             <p className="text-muted-foreground text-lg">
               Ask me anything about Ethan's experiences, projects, and goals

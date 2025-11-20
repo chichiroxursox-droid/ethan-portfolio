@@ -38,6 +38,36 @@ export type Database = {
         }
         Relationships: []
       }
+      game_leaderboards: {
+        Row: {
+          created_at: string
+          difficulty: string | null
+          game_name: string
+          id: string
+          player_name: string
+          score: number
+          wave: number | null
+        }
+        Insert: {
+          created_at?: string
+          difficulty?: string | null
+          game_name: string
+          id?: string
+          player_name: string
+          score: number
+          wave?: number | null
+        }
+        Update: {
+          created_at?: string
+          difficulty?: string | null
+          game_name?: string
+          id?: string
+          player_name?: string
+          score?: number
+          wave?: number | null
+        }
+        Relationships: []
+      }
       messages: {
         Row: {
           content: string

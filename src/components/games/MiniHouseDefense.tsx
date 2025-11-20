@@ -1,7 +1,10 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { Home, Zap, Heart, Shield, Crosshair, Flame } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { Leaderboard } from "./Leaderboard";
 
 type Enemy = {
   id: number;
@@ -60,7 +63,7 @@ type DefenseType = {
 
 const DEFENSES: DefenseType[] = [
   { type: "basic", cost: 50, icon: Zap, color: "#00FF9F", name: "Basic Tower", range: 150, damage: 1, cooldown: 30 },
-  { type: "sniper", cost: 100, icon: Crosshair, color: "#FF0000", name: "Sniper Tower", range: 250, damage: 3, cooldown: 60 },
+  { type: "sniper", cost: 200, icon: Crosshair, color: "#FF0000", name: "Sniper Tower", range: 250, damage: 3, cooldown: 60 },
   { type: "flame", cost: 75, icon: Flame, color: "#FF6600", name: "Flame Tower", range: 100, damage: 2, cooldown: 20 }
 ];
 
@@ -86,6 +89,11 @@ export const MiniHouseDefense = () => {
   const [hasShield, setHasShield] = useState(false);
   const [speedBoost, setSpeedBoost] = useState(1);
   const [screenShake, setScreenShake] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
+  const [showNameInput, setShowNameInput] = useState(false);
+  const [playerName, setPlayerName] = useState("");
+  const [finalScore, setFinalScore] = useState(0);
+  const [scoreSubmitted, setScoreSubmitted] = useState(false);
   const audioContext = useRef<AudioContext | null>(null);
 
   const HOUSE_X = 400;
@@ -111,7 +119,10 @@ export const MiniHouseDefense = () => {
     oscillator.stop(audioContext.current.currentTime + duration);
   };
 
+  const isBossWave = (waveNum: number) => waveNum > 0 && waveNum % 5 === 0;
+
   const getEnemyType = (waveNum: number): Enemy["type"] => {
+    if (isBossWave(waveNum)) return "tank";
     if (waveNum < 3) return "basic";
     if (waveNum < 5) return Math.random() > 0.5 ? "basic" : "fast";
     if (waveNum < 8) return Math.random() > 0.7 ? "basic" : Math.random() > 0.5 ? "fast" : "strong";
@@ -121,6 +132,7 @@ export const MiniHouseDefense = () => {
   const getEnemyStats = (type: Enemy["type"], waveNum: number) => {
     const baseHealth = 3 + Math.floor(waveNum * 0.8);
     const baseSpeed = 1 + waveNum * 0.12;
+    const isBoss = isBossWave(waveNum);
     
     switch (type) {
       case "fast":
@@ -128,7 +140,11 @@ export const MiniHouseDefense = () => {
       case "strong":
         return { health: baseHealth * 2.5, speed: baseSpeed * 0.7, color: "#FF4500" };
       case "tank":
-        return { health: baseHealth * 4, speed: baseSpeed * 0.5, color: "#8B0000" };
+        return { 
+          health: isBoss ? baseHealth * 8 : baseHealth * 4, 
+          speed: baseSpeed * 0.5, 
+          color: isBoss ? "#FF00FF" : "#8B0000" 
+        };
       default:
         return { health: baseHealth, speed: baseSpeed, color: "#FF0000" };
     }
@@ -224,13 +240,14 @@ export const MiniHouseDefense = () => {
 
   const startNextWave = () => {
     playSound(600, 0.2, 'square');
-    setWave(prev => prev + 1);
-    const enemyCount = 6 + wave * 3;
+    const nextWave = wave + 1;
+    setWave(nextWave);
+    const enemyCount = isBossWave(nextWave) ? 1 : 6 + wave * 3;
     setEnemiesToSpawn(enemyCount);
     setEnemiesRemaining(enemyCount);
     setWaveActive(true);
     setShowUpgrades(false);
-    setMoney(m => m + 40);
+    setMoney(m => m + (isBossWave(nextWave) ? 100 : 40));
   };
 
   useEffect(() => {
@@ -374,8 +391,28 @@ export const MiniHouseDefense = () => {
     if (houseHealth <= 0 && isPlaying) {
       setIsPlaying(false);
       setWaveActive(false);
+      setGameOver(true);
+      setFinalScore(wave * 100 + money);
+      setShowNameInput(true);
     }
-  }, [houseHealth, isPlaying]);
+  }, [houseHealth, isPlaying, wave, money]);
+
+  const submitScore = async () => {
+    if (!playerName.trim()) return;
+
+    try {
+      await supabase.from("game_leaderboards").insert({
+        game_name: "Mini House Defense",
+        player_name: playerName.trim(),
+        score: finalScore,
+        wave: wave
+      });
+      setScoreSubmitted(true);
+      setShowNameInput(false);
+    } catch (error) {
+      console.error("Error submitting score:", error);
+    }
+  };
 
   const startGame = () => {
     setIsPlaying(true);
@@ -394,6 +431,10 @@ export const MiniHouseDefense = () => {
     setHasShield(false);
     setSpeedBoost(1);
     setScreenShake(0);
+    setGameOver(false);
+    setShowNameInput(false);
+    setPlayerName("");
+    setScoreSubmitted(false);
   };
 
   const handleDragStart = (e: React.DragEvent, defenseType: "basic" | "sniper" | "flame") => {
@@ -461,7 +502,9 @@ export const MiniHouseDefense = () => {
   };
 
   return (
-    <Card className="bg-[#0D0D0D] border-[#00FF9F]/30 p-8">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="lg:col-span-2">
+        <Card className="bg-[#0D0D0D] border-[#00FF9F]/30 p-8">
       <div className="space-y-6">
         <div className="flex justify-between items-center text-sm font-mono flex-wrap gap-4">
           <div className="flex items-center gap-2 text-red-500">
@@ -627,18 +670,51 @@ export const MiniHouseDefense = () => {
         </div>
 
         {!isPlaying ? (
-          <Button
-            onClick={startGame}
-            className="w-full bg-[#00FF9F] hover:bg-[#00FF9F]/80 text-black font-bold"
-          >
-            {houseHealth <= 0 ? `GAME OVER - WAVE ${wave}` : "START DEFENSE"}
-          </Button>
+          <>
+            {showNameInput && !scoreSubmitted && (
+              <div className="space-y-3 mb-4 p-4 bg-black/50 border border-[#00FF9F]/30 rounded">
+                <div className="text-[#00FF9F] font-mono text-center">
+                  <div className="text-lg font-bold mb-1">GAME OVER!</div>
+                  <div className="text-sm">Wave: {wave} | Score: {finalScore}</div>
+                </div>
+                <Input
+                  value={playerName}
+                  onChange={(e) => setPlayerName(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && submitScore()}
+                  placeholder="Enter your name"
+                  className="bg-black border-[#00FF9F]/30 text-white font-mono"
+                  maxLength={20}
+                />
+                <Button
+                  onClick={submitScore}
+                  disabled={!playerName.trim()}
+                  className="w-full bg-[#00FF9F] hover:bg-[#00FF9F]/80 text-black font-bold"
+                >
+                  SUBMIT SCORE
+                </Button>
+              </div>
+            )}
+            <Button
+              onClick={startGame}
+              className="w-full bg-[#00FF9F] hover:bg-[#00FF9F]/80 text-black font-bold"
+            >
+              {gameOver ? "PLAY AGAIN" : "START DEFENSE"}
+            </Button>
+          </>
         ) : (
           <div className="text-gray-500 text-sm text-center font-mono">
+            {isBossWave(wave) && waveActive && (
+              <span className="text-[#FF00FF] font-bold animate-pulse mr-2">⚠️ BOSS WAVE ⚠️</span>
+            )}
             Drag defenses onto the field to protect the house!
           </div>
         )}
+        </div>
+      </Card>
       </div>
-    </Card>
+      <div className="lg:col-span-1">
+        <Leaderboard gameName="Mini House Defense" currentScore={scoreSubmitted ? finalScore : undefined} showWave />
+      </div>
+    </div>
   );
 };
