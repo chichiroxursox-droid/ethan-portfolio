@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
 import { MessageSquare, User, Mail, Wrench, Trophy, Gamepad2 } from "lucide-react";
+import { Theme } from "./ui/theme";
 
 const Navigation = () => {
   const location = useLocation();
@@ -132,6 +133,7 @@ const Navigation = () => {
                 Contact
               </Button>
             </Link>
+            <Theme variant="switch" size="sm" className="ml-2" />
           </div>
         </div>
       </div>
