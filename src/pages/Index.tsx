@@ -7,10 +7,12 @@ import { GraduationCap, Award, Briefcase, Code, MessageSquare, MapPin, Mail, Pho
 import educationProtest from "@/assets/education-protest.png";
 import unSpeaking from "@/assets/un-speaking.png";
 import { useSectionTheme } from "@/hooks/use-section-theme";
+import AnimatedShaderBackground from "@/components/ui/animated-shader-background";
 const Index = () => {
   useSectionTheme();
   
   return <div className="min-h-screen bg-gradient-hero transition-all duration-500">
+      <AnimatedShaderBackground />
       <Navigation />
       
       {/* Hero Section */}
