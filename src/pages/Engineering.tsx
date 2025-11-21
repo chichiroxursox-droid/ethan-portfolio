@@ -1,6 +1,6 @@
 import Navigation from "@/components/Navigation";
 import { Card } from "@/components/ui/card";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Home, Youtube, X } from "lucide-react";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { useSectionTheme } from "@/hooks/use-section-theme";
@@ -26,10 +26,19 @@ import goatHouse13 from "@/assets/goat-house-13.png";
 import goatHouse14 from "@/assets/goat-house-14.png";
 import goatHouse15 from "@/assets/goat-house-15.png";
 import goatHouse16 from "@/assets/goat-house-16.png";
+import goatProcess1 from "@/assets/goat-process-1.jpeg";
+import goatProcess2 from "@/assets/goat-process-2.png";
+import goatProcess3 from "@/assets/goat-process-3.png";
+import goatProcess4 from "@/assets/goat-process-4.png";
+import goatProcess5 from "@/assets/goat-process-5.png";
+import goatProcess6 from "@/assets/goat-process-6.png";
+import goatProcess7 from "@/assets/goat-process-7.png";
+
 const Engineering = () => {
   useSectionTheme();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const miniHouseReveal = useScrollReveal();
   const goatHousesReveal = useScrollReveal();
   const rubeGoldbergReveal = useScrollReveal();
@@ -101,6 +110,23 @@ const Engineering = () => {
     src: goatHouse16,
     caption: "All three goat houses completed"
   }];
+
+  const processSlides = [
+    goatProcess1,
+    goatProcess2,
+    goatProcess3,
+    goatProcess4,
+    goatProcess5,
+    goatProcess6,
+    goatProcess7
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % processSlides.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [processSlides.length]);
   return <div className="min-h-screen bg-[#0A0A0A] font-inter transition-all duration-500">
       <Navigation />
       
@@ -282,7 +308,75 @@ const Engineering = () => {
 
               {/* Interactive Image Grid - 4 columns */}
               <div className="grid grid-cols-4 gap-3">
-                {goatHouseImages.map((image, index) => {})}
+                {goatHouseImages.map((image, index) => (
+                  <div 
+                    key={index} 
+                    className="relative aspect-square cursor-pointer group overflow-hidden rounded-lg"
+                    onMouseEnter={() => setHoveredIndex(index + 100)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    onClick={() => setSelectedImage(image.src)}
+                  >
+                    <img 
+                      src={image.src} 
+                      alt={image.caption}
+                      className={`w-full h-full object-cover transition-all duration-500 ${
+                        hoveredIndex === index + 100 ? 'scale-110' : 'scale-100'
+                      }`}
+                    />
+                    <div className={`absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-300 ${
+                      hoveredIndex === index + 100 ? 'opacity-100' : 'opacity-0'
+                    }`}>
+                      <div className="absolute bottom-0 left-0 right-0 p-4">
+                        <p className="text-white font-mono text-xs">{image.caption}</p>
+                      </div>
+                    </div>
+                    <div className={`absolute inset-0 border-2 border-[#FFB800] transition-opacity duration-300 ${
+                      hoveredIndex === index + 100 ? 'opacity-100' : 'opacity-0'
+                    }`} />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Process Slideshow */}
+            <div className="mt-16 space-y-6">
+              <div className="flex items-center gap-3">
+                <h3 className="text-2xl font-bold text-white font-mono">
+                  BUILD_PROCESS.SLIDESHOW
+                </h3>
+              </div>
+              
+              <div className="relative aspect-video rounded-lg overflow-hidden border-2 border-[#FFB800]/20">
+                {processSlides.map((slide, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-opacity duration-1000 ${
+                      index === currentSlide ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  >
+                    <img 
+                      src={slide} 
+                      alt={`Build process step ${index + 1}`}
+                      className="w-full h-full object-contain bg-black"
+                    />
+                  </div>
+                ))}
+                
+                {/* Progress Indicators */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                  {processSlides.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentSlide(index)}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        index === currentSlide 
+                          ? 'bg-[#FFB800] w-6' 
+                          : 'bg-white/30 hover:bg-white/50'
+                      }`}
+                      aria-label={`Go to slide ${index + 1}`}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </section>
