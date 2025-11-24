@@ -16,7 +16,7 @@ const Index = () => {
   return <div className="min-h-screen relative">
       <div className="fixed inset-0 -z-10">
         <AuroraBackground className="h-full" showRadialGradient={false}>
-          <div className="absolute inset-0 bg-gradient-hero opacity-60" />
+          <div className="absolute inset-0 bg-gradient-hero opacity-30" />
         </AuroraBackground>
       </div>
       <AnimatedShaderBackground />
