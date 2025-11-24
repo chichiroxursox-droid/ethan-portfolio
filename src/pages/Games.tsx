@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TerminalHacker } from "@/components/games/TerminalHacker";
 import { MiniHouseDefense } from "@/components/games/MiniHouseDefense";
 import { useSectionTheme } from "@/hooks/use-section-theme";
+import { TextShimmer } from "@/components/ui/text-shimmer";
 
 const Games = () => {
   useSectionTheme();
@@ -19,11 +20,22 @@ const Games = () => {
                 Mini Games
               </span>
             </div>
-            <h1 className="text-6xl md:text-7xl font-bold text-white leading-tight">
-              Just for<br />
-              <span className="bg-gradient-to-r from-[#00FF9F] to-[#00D9FF] bg-clip-text text-transparent">
+            <h1 className="text-6xl md:text-7xl font-bold leading-tight">
+              <TextShimmer 
+                as="span" 
+                className="text-white"
+                duration={3}
+              >
+                Just for
+              </TextShimmer>
+              <br />
+              <TextShimmer 
+                as="span"
+                className="bg-gradient-to-r from-[#00FF9F] to-[#00D9FF]"
+                duration={3}
+              >
                 Fun
-              </span>
+              </TextShimmer>
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl font-light">
               Two interactive games to pass the time

@@ -5,6 +5,7 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Legend } from "recharts";
 import basketballShot from "@/assets/basketball-shot.png";
 import { useSectionTheme } from "@/hooks/use-section-theme";
+import { TextShimmer } from "@/components/ui/text-shimmer";
 
 const Athletics = () => {
   useSectionTheme();
@@ -43,7 +44,11 @@ const Athletics = () => {
       <main className="container mx-auto px-6 pt-24 pb-16">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Athletics</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              <TextShimmer as="span" duration={3}>
+                Athletics
+              </TextShimmer>
+            </h1>
             <p className="text-lg text-muted-foreground">
               Competing with passion on and off the court
             </p>
