@@ -297,7 +297,15 @@ const Engineering = () => {
 
               {/* Interactive Image Grid - 4 columns */}
               <div className="grid grid-cols-4 gap-3">
-                {goatHouseImages.map((image, index) => {})}
+                {goatHouseImages.map((image, index) => (
+                  <div key={index} className="aspect-square rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300">
+                    <img 
+                      src={image.src} 
+                      alt={`Goat house ${index + 1}`} 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
 
