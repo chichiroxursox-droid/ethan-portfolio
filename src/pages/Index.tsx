@@ -9,6 +9,7 @@ import unSpeaking from "@/assets/un-speaking.png";
 import { useSectionTheme } from "@/hooks/use-section-theme";
 import AnimatedShaderBackground from "@/components/ui/animated-shader-background";
 import { AnimatedHero } from "@/components/ui/animated-hero";
+import { TextShimmer } from "@/components/ui/text-shimmer";
 const Index = () => {
   useSectionTheme();
   
@@ -66,7 +67,9 @@ const Index = () => {
           <Card className="p-8 md:p-12 bg-card/50 backdrop-blur">
             <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
               <Users className="w-8 h-8 text-primary" />
-              About Me
+              <TextShimmer as="span" duration={3}>
+                About Me
+              </TextShimmer>
             </h2>
             
             {/* Images Grid */}
@@ -131,7 +134,9 @@ const Index = () => {
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
             <GraduationCap className="w-8 h-8 text-primary" />
-            Education
+            <TextShimmer as="span" duration={3}>
+              Education
+            </TextShimmer>
           </h2>
           
           <Card className="p-8">
@@ -174,7 +179,9 @@ const Index = () => {
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
             <Briefcase className="w-8 h-8 text-primary" />
-            Experience
+            <TextShimmer as="span" duration={3}>
+              Experience
+            </TextShimmer>
           </h2>
           
           <div className="space-y-6">
@@ -247,7 +254,9 @@ const Index = () => {
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
             <Code className="w-8 h-8 text-primary" />
-            Skills & Interests
+            <TextShimmer as="span" duration={3}>
+              Skills & Interests
+            </TextShimmer>
           </h2>
           
           <Card className="p-8">
