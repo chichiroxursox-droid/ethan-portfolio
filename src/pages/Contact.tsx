@@ -16,7 +16,7 @@ const Contact = () => {
               <TextShimmer 
                 as="span" 
                 className="bg-gradient-primary"
-                duration={3}
+                duration={1.5}
               >
                 Get in Touch
               </TextShimmer>
