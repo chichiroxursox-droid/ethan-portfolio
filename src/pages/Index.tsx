@@ -8,6 +8,7 @@ import educationProtest from "@/assets/education-protest.png";
 import unSpeaking from "@/assets/un-speaking.png";
 import { useSectionTheme } from "@/hooks/use-section-theme";
 import AnimatedShaderBackground from "@/components/ui/animated-shader-background";
+import { AnimatedHero } from "@/components/ui/animated-hero";
 const Index = () => {
   useSectionTheme();
   
@@ -19,11 +20,15 @@ const Index = () => {
       <section className="pt-32 pb-20 px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <div className="inline-block">
-              <Badge variant="secondary" className="mb-4 text-sm">
-                Student Leader • Athlete • Innovator
-              </Badge>
-            </div>
+            <AnimatedHero 
+              titles={[
+                "Student Leader",
+                "Athlete",
+                "Innovator",
+                "Engineer",
+                "Activist"
+              ]} 
+            />
             
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
               Ethan Hauger
