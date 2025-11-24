@@ -9,10 +9,16 @@ import unSpeaking from "@/assets/un-speaking.png";
 import { useSectionTheme } from "@/hooks/use-section-theme";
 import AnimatedShaderBackground from "@/components/ui/animated-shader-background";
 import { AnimatedHero } from "@/components/ui/animated-hero";
+import { AuroraBackground } from "@/components/ui/aurora-background";
 const Index = () => {
   useSectionTheme();
   
-  return <div className="min-h-screen bg-gradient-hero transition-all duration-500">
+  return <div className="min-h-screen relative">
+      <div className="fixed inset-0 -z-10">
+        <AuroraBackground className="h-full" showRadialGradient={false}>
+          <div className="absolute inset-0 bg-gradient-hero opacity-60" />
+        </AuroraBackground>
+      </div>
       <AnimatedShaderBackground />
       <Navigation />
       
