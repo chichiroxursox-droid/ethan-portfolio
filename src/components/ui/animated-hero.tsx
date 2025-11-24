@@ -15,17 +15,17 @@ function AnimatedHero({ titles }: AnimatedHeroProps) {
       } else {
         setTitleNumber(titleNumber + 1);
       }
-    }, 2000);
+    }, titleNumber === 0 ? 3000 : 2000); // Show "Ethan Hauger" longer
     return () => clearTimeout(timeoutId);
   }, [titleNumber, titles]);
 
   return (
-    <div className="mb-6">
-      <div className="relative flex justify-center overflow-hidden text-center h-8 md:h-10">
+    <div className="w-full">
+      <div className="relative flex justify-center overflow-hidden text-center" style={{ minHeight: '120px' }}>
         {titles.map((title, index) => (
-          <motion.span
+          <motion.h1
             key={index}
-            className="absolute text-lg md:text-xl font-semibold text-primary"
+            className="absolute text-5xl md:text-7xl font-bold tracking-tight"
             initial={{ opacity: 0, y: -100 }}
             transition={{ type: "spring", stiffness: 50 }}
             animate={
@@ -41,7 +41,7 @@ function AnimatedHero({ titles }: AnimatedHeroProps) {
             }
           >
             {title}
-          </motion.span>
+          </motion.h1>
         ))}
       </div>
     </div>

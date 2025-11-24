@@ -22,6 +22,7 @@ const Index = () => {
           <div className="text-center space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
             <AnimatedHero 
               titles={[
+                "Ethan Hauger",
                 "Student Leader",
                 "Athlete",
                 "Innovator",
@@ -29,10 +30,6 @@ const Index = () => {
                 "Activist"
               ]} 
             />
-            
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-              Ethan Hauger
-            </h1>
             
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto md:text-xl"> Current 12th grader at Science Leadership Academy, dedicated to making a difference through leadership, service, and innovation.</p>
             
