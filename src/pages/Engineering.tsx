@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Home, Youtube, X } from "lucide-react";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { useSectionTheme } from "@/hooks/use-section-theme";
+import { SparklesCore } from "@/components/ui/sparkles";
 import miniHouse1 from "@/assets/mini-house-1.jpg";
 import miniHouse2 from "@/assets/mini-house-2.jpg";
 import miniHouse3 from "@/assets/mini-house-3.jpg";
@@ -153,12 +154,26 @@ const Engineering = () => {
                 Engineering Projects
               </span>
             </div>
-            <h1 className="text-6xl md:text-7xl font-bold text-white leading-tight">
-              Building the<br />
-              <span className="bg-gradient-to-r from-[#00FF9F] to-[#00D9FF] bg-clip-text text-transparent">
-                Future
-              </span>
-            </h1>
+            <div className="relative">
+              <h1 className="text-6xl md:text-7xl font-bold text-white leading-tight relative z-20">
+                Building the<br />
+                <span className="bg-gradient-to-r from-[#00FF9F] to-[#00D9FF] bg-clip-text text-transparent">
+                  Future
+                </span>
+              </h1>
+              <div className="absolute inset-0 w-full h-full z-10">
+                <SparklesCore
+                  id="engineeringSparkles"
+                  background="transparent"
+                  minSize={0.6}
+                  maxSize={1.4}
+                  particleDensity={80}
+                  className="w-full h-full"
+                  particleColor="#00FF9F"
+                  speed={0.5}
+                />
+              </div>
+            </div>
             <p className="text-xl text-gray-400 max-w-2xl font-light">
               Combining technical precision with creative problem-solving to create meaningful impact
             </p>
@@ -295,18 +310,6 @@ const Engineering = () => {
                 </div>
               </div>
 
-              {/* Interactive Image Grid - 4 columns */}
-              <div className="grid grid-cols-4 gap-3">
-                {goatHouseImages.map((image, index) => (
-                  <div key={index} className="aspect-square rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300">
-                    <img 
-                      src={image.src} 
-                      alt={`Goat house ${index + 1}`} 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
             </div>
 
             {/* Process Slideshow */}

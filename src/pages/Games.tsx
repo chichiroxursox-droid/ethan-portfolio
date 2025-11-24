@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TerminalHacker } from "@/components/games/TerminalHacker";
 import { MiniHouseDefense } from "@/components/games/MiniHouseDefense";
 import { useSectionTheme } from "@/hooks/use-section-theme";
+import { SparklesCore } from "@/components/ui/sparkles";
 
 const Games = () => {
   useSectionTheme();
@@ -19,12 +20,26 @@ const Games = () => {
                 Mini Games
               </span>
             </div>
-            <h1 className="text-6xl md:text-7xl font-bold text-white leading-tight">
-              Just for<br />
-              <span className="bg-gradient-to-r from-[#00FF9F] to-[#00D9FF] bg-clip-text text-transparent">
-                Fun
-              </span>
-            </h1>
+            <div className="relative">
+              <h1 className="text-6xl md:text-7xl font-bold text-white leading-tight relative z-20">
+                Just for<br />
+                <span className="bg-gradient-to-r from-[#00FF9F] to-[#00D9FF] bg-clip-text text-transparent">
+                  Fun
+                </span>
+              </h1>
+              <div className="absolute inset-0 w-full h-full z-10">
+                <SparklesCore
+                  id="gamesSparkles"
+                  background="transparent"
+                  minSize={0.6}
+                  maxSize={1.4}
+                  particleDensity={80}
+                  className="w-full h-full"
+                  particleColor="#00D9FF"
+                  speed={0.5}
+                />
+              </div>
+            </div>
             <p className="text-xl text-gray-400 max-w-2xl font-light">
               Two interactive games to pass the time
             </p>
