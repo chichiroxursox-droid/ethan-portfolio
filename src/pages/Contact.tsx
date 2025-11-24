@@ -2,12 +2,14 @@ import Navigation from "@/components/Navigation";
 import { ContactForm } from "@/components/ContactForm";
 import { useSectionTheme } from "@/hooks/use-section-theme";
 import { TextShimmer } from "@/components/ui/text-shimmer";
+import { ShaderAnimation } from "@/components/ui/shader-animation";
 
 const Contact = () => {
   useSectionTheme();
   
   return (
-    <div className="min-h-screen bg-background transition-all duration-500">
+    <div className="min-h-screen bg-background transition-all duration-500 relative">
+      <ShaderAnimation />
       <Navigation />
       <div className="container mx-auto px-6 pt-32 pb-20">
         <div className="max-w-2xl mx-auto">
