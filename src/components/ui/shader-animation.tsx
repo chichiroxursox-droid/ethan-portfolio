@@ -133,10 +133,10 @@ export function ShaderAnimation() {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 w-full h-full -z-10 opacity-20"
+      className="w-full h-full pointer-events-none"
       style={{
-        background: "#000",
-        overflow: "hidden",
+        opacity: 0.3,
+        mixBlendMode: 'screen'
       }}
     />
   )
