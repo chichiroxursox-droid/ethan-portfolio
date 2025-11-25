@@ -46,6 +46,7 @@ export type Database = {
           id: string
           player_name: string
           score: number
+          user_id: string | null
           wave: number | null
         }
         Insert: {
@@ -55,6 +56,7 @@ export type Database = {
           id?: string
           player_name: string
           score: number
+          user_id?: string | null
           wave?: number | null
         }
         Update: {
@@ -64,9 +66,18 @@ export type Database = {
           id?: string
           player_name?: string
           score?: number
+          user_id?: string | null
           wave?: number | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "game_leaderboards_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       messages: {
         Row: {
@@ -99,6 +110,39 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          email: string | null
+          guest_id: string | null
+          id: string
+          is_guest: boolean | null
+          updated_at: string | null
+          username: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string | null
+          email?: string | null
+          guest_id?: string | null
+          id: string
+          is_guest?: boolean | null
+          updated_at?: string | null
+          username?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string | null
+          email?: string | null
+          guest_id?: string | null
+          id?: string
+          is_guest?: boolean | null
+          updated_at?: string | null
+          username?: string | null
+        }
+        Relationships: []
       }
     }
     Views: {
