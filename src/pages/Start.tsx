@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { BackgroundPaths } from "@/components/ui/background-paths";
@@ -7,6 +7,7 @@ interface Particle {
   id: number;
   x: number;
   y: number;
+  speed: number;
 }
 
 const Start = () => {
@@ -14,23 +15,42 @@ const Start = () => {
   const [fadeOut, setFadeOut] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [particles, setParticles] = useState<Particle[]>([]);
+  const lastPosition = useRef({ x: 0, y: 0, time: Date.now() });
   const name = "Ethan Hauger";
+
+  // Calculate color based on speed (0-1000 pixels/second)
+  const getColorFromSpeed = (speed: number) => {
+    const normalizedSpeed = Math.min(speed / 1000, 1);
+    const hue = 180 + normalizedSpeed * 100; // Cyan to purple
+    return `hsl(${hue}, 70%, 60%)`;
+  };
 
   useEffect(() => {
     let particleId = 0;
     
     const handleMouseMove = (e: MouseEvent) => {
+      const now = Date.now();
+      const timeDiff = (now - lastPosition.current.time) / 1000;
+      const distance = Math.sqrt(
+        Math.pow(e.clientX - lastPosition.current.x, 2) +
+        Math.pow(e.clientY - lastPosition.current.y, 2)
+      );
+      const speed = timeDiff > 0 ? distance / timeDiff : 0;
+      
       const newParticle: Particle = {
         id: particleId++,
         x: e.clientX,
         y: e.clientY,
+        speed,
       };
       
-      setParticles((prev) => [...prev, newParticle].slice(-15));
+      setParticles((prev) => [...prev, newParticle].slice(-20));
+      
+      lastPosition.current = { x: e.clientX, y: e.clientY, time: now };
       
       setTimeout(() => {
         setParticles((prev) => prev.filter((p) => p.id !== newParticle.id));
-      }, 1000);
+      }, 1500);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -54,15 +74,42 @@ const Start = () => {
     >
       <BackgroundPaths />
 
+      {/* Particle Trail Lines */}
+      <svg className="absolute inset-0 pointer-events-none" style={{ zIndex: 5 }}>
+        {particles.map((particle, index) => {
+          if (index === 0) return null;
+          const prevParticle = particles[index - 1];
+          return (
+            <motion.line
+              key={`line-${particle.id}`}
+              x1={prevParticle.x}
+              y1={prevParticle.y}
+              x2={particle.x}
+              y2={particle.y}
+              stroke={getColorFromSpeed(particle.speed)}
+              strokeWidth="2"
+              initial={{ opacity: 0.8 }}
+              animate={{ opacity: 0 }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
+            />
+          );
+        })}
+      </svg>
+
       {/* Cursor Particles */}
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute w-2 h-2 rounded-full bg-white/30 pointer-events-none"
-          initial={{ x: particle.x, y: particle.y, opacity: 0.6, scale: 1 }}
+          className="absolute w-3 h-3 rounded-full pointer-events-none"
+          initial={{ x: particle.x - 6, y: particle.y - 6, opacity: 0.9, scale: 1 }}
           animate={{ opacity: 0, scale: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          style={{ left: 0, top: 0 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          style={{ 
+            left: 0, 
+            top: 0,
+            backgroundColor: getColorFromSpeed(particle.speed),
+            boxShadow: `0 0 10px ${getColorFromSpeed(particle.speed)}`,
+          }}
         />
       ))}
 
