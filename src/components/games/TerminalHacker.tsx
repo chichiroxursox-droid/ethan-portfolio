@@ -4,6 +4,8 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { Leaderboard } from "./Leaderboard";
+import { AuthDialog } from "./AuthDialog";
+import { useAuth } from "@/contexts/AuthContext";
 
 type Difficulty = "easy" | "medium" | "hard" | null;
 
@@ -68,6 +70,7 @@ const COMMANDS = [
 ];
 
 export const TerminalHacker = () => {
+  const { user, profile } = useAuth();
   const [currentCommand, setCurrentCommand] = useState("");
   const [userInput, setUserInput] = useState("");
   const [score, setScore] = useState(0);
@@ -76,8 +79,7 @@ export const TerminalHacker = () => {
   const [difficulty, setDifficulty] = useState<Difficulty>(null);
   const [streak, setStreak] = useState(0);
   const [logs, setLogs] = useState<string[]>([]);
-  const [showNameInput, setShowNameInput] = useState(false);
-  const [playerName, setPlayerName] = useState("");
+  const [showAuthDialog, setShowAuthDialog] = useState(false);
   const [scoreSubmitted, setScoreSubmitted] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const audioContext = useRef<AudioContext | null>(null);
@@ -144,26 +146,34 @@ export const TerminalHacker = () => {
   const endGame = () => {
     setIsPlaying(false);
     setLogs(prev => [...prev, `> BREACH ${score > 5 ? "SUCCESSFUL" : "FAILED"}`, `> FINAL SCORE: ${score}`]);
-    if (score > 0) {
-      setShowNameInput(true);
+    if (score > 0 && !user) {
+      setShowAuthDialog(true);
+    } else if (score > 0 && user) {
+      submitScore();
     }
   };
 
   const submitScore = async () => {
-    if (!playerName.trim() || !difficulty) return;
+    if (!user || !profile || !difficulty) return;
 
     try {
       await supabase.from("game_leaderboards").insert({
         game_name: "Terminal Hacker",
-        player_name: playerName.trim(),
+        player_name: profile.username || profile.email || "Anonymous",
         score: score,
-        difficulty: difficulty
+        difficulty: difficulty,
+        user_id: user.id,
+        guest_id: profile.guest_id,
       });
       setScoreSubmitted(true);
-      setShowNameInput(false);
     } catch (error) {
       console.error("Error submitting score:", error);
     }
+  };
+
+  const handleAuthSuccess = () => {
+    setShowAuthDialog(false);
+    submitScore();
   };
 
   const generateNewCommand = () => {
@@ -237,29 +247,6 @@ export const TerminalHacker = () => {
               </>
             ) : (
               <div className="space-y-3">
-                {showNameInput && !scoreSubmitted && score > 0 && (
-                  <div className="space-y-3 mb-4 p-4 bg-black border border-[#00FF9F]/30 rounded">
-                    <div className="text-[#00FF9F] text-center">
-                      <div className="text-lg font-bold mb-1">BREACH COMPLETE</div>
-                      <div className="text-sm">Score: {score} | Difficulty: {difficulty?.toUpperCase()}</div>
-                    </div>
-                    <Input
-                      value={playerName}
-                      onChange={(e) => setPlayerName(e.target.value)}
-                      onKeyDown={(e) => e.key === "Enter" && submitScore()}
-                      placeholder="Enter your name"
-                      className="bg-black border-[#00FF9F]/30 text-white"
-                      maxLength={20}
-                    />
-                    <Button
-                      onClick={submitScore}
-                      disabled={!playerName.trim()}
-                      className="w-full bg-[#00FF9F] hover:bg-[#00FF9F]/80 text-black font-bold"
-                    >
-                      SUBMIT SCORE
-                    </Button>
-                  </div>
-                )}
                 <div className="text-[#00FF9F] text-center text-sm mb-4">
                   {score > 0 ? `LAST SCORE: ${score} | SELECT DIFFICULTY` : "SELECT DIFFICULTY LEVEL"}
                 </div>
@@ -289,6 +276,14 @@ export const TerminalHacker = () => {
       <div className="lg:col-span-1">
         <Leaderboard gameName="Terminal Hacker" currentScore={scoreSubmitted ? score : undefined} showDifficulty />
       </div>
+
+      <AuthDialog
+        open={showAuthDialog}
+        onClose={() => setShowAuthDialog(false)}
+        onSuccess={handleAuthSuccess}
+        score={score}
+        gameTitle="Terminal Hacker"
+      />
     </div>
   );
 };
