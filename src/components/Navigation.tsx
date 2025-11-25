@@ -144,7 +144,7 @@ const Navigation = () => {
             </Link>
             <Theme variant="switch" size="sm" className="ml-2" />
             
-            {user ? (
+            {user && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
