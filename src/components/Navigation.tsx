@@ -171,17 +171,6 @@ const Navigation = () => {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-            ) : (
-              <Link to="/auth">
-                <Button
-                  variant="default"
-                  size="sm"
-                  className="gap-2 bg-gradient-to-r from-[#00FF9F] to-[#00D9FF] text-black hover:opacity-90"
-                >
-                  <User className="w-4 h-4" />
-                  Sign In
-                </Button>
-              </Link>
             )}
           </div>
         </div>
