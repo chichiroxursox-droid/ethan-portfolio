@@ -18,7 +18,6 @@ type AuthContextType = {
 type Profile = {
   id: string;
   username: string | null;
-  email: string | null;
   is_guest: boolean;
   guest_id: string | null;
 };

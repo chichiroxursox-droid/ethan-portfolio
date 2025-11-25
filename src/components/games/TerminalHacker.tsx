@@ -159,7 +159,7 @@ export const TerminalHacker = () => {
     try {
       await supabase.from("game_leaderboards").insert({
         game_name: "Terminal Hacker",
-        player_name: profile.username || profile.email || "Anonymous",
+        player_name: profile.username || "Anonymous",
         score: score,
         difficulty: difficulty,
         user_id: user.id,

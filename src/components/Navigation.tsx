@@ -162,7 +162,7 @@ const Navigation = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48">
                   <DropdownMenuItem disabled className="text-xs text-muted-foreground">
-                    {profile?.is_guest ? "Guest Account" : profile?.email}
+                    {profile?.is_guest ? "Guest Account" : profile?.username || "User"}
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={() => signOut()} className="text-red-500">
