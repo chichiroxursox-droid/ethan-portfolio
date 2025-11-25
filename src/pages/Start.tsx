@@ -11,7 +11,7 @@ const Start = () => {
   const handleClick = () => {
     setFadeOut(true);
     setTimeout(() => {
-      navigate("/");
+      navigate("/home");
     }, 300);
   };
 

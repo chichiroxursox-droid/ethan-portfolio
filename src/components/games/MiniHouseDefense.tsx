@@ -409,7 +409,7 @@ export const MiniHouseDefense = () => {
     try {
       await supabase.from("game_leaderboards").insert({
         game_name: "Mini House Defense",
-        player_name: profile.username || profile.email || "Anonymous",
+        player_name: profile.username || "Anonymous",
         score: finalScore,
         wave: wave,
         user_id: user.id,
