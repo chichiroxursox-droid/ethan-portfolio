@@ -43,6 +43,7 @@ export type Database = {
           created_at: string
           difficulty: string | null
           game_name: string
+          guest_id: string | null
           id: string
           player_name: string
           score: number
@@ -53,6 +54,7 @@ export type Database = {
           created_at?: string
           difficulty?: string | null
           game_name: string
+          guest_id?: string | null
           id?: string
           player_name: string
           score: number
@@ -63,6 +65,7 @@ export type Database = {
           created_at?: string
           difficulty?: string | null
           game_name?: string
+          guest_id?: string | null
           id?: string
           player_name?: string
           score?: number

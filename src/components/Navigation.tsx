@@ -1,10 +1,19 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
-import { MessageSquare, User, Mail, Wrench, Trophy, Gamepad2 } from "lucide-react";
+import { MessageSquare, User, Mail, Wrench, Trophy, Gamepad2, LogOut } from "lucide-react";
 import { Theme } from "./ui/theme";
+import { useAuth } from "@/contexts/AuthContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuSeparator,
+} from "./ui/dropdown-menu";
 
 const Navigation = () => {
   const location = useLocation();
+  const { user, profile, signOut } = useAuth();
   const isEngineeringPage = location.pathname === "/engineering";
   const isAthleticsPage = location.pathname === "/athletics";
   const isMusicPage = location.pathname === "/chat";
@@ -134,6 +143,46 @@ const Navigation = () => {
               </Button>
             </Link>
             <Theme variant="switch" size="sm" className="ml-2" />
+            
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className={`gap-2 ${
+                      isEngineeringPage
+                        ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10'
+                        : ''
+                    }`}
+                  >
+                    <User className="w-4 h-4" />
+                    {profile?.username || "Account"}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  <DropdownMenuItem disabled className="text-xs text-muted-foreground">
+                    {profile?.is_guest ? "Guest Account" : profile?.email}
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => signOut()} className="text-red-500">
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link to="/auth">
+                <Button
+                  variant="default"
+                  size="sm"
+                  className="gap-2 bg-gradient-to-r from-[#00FF9F] to-[#00D9FF] text-black hover:opacity-90"
+                >
+                  <User className="w-4 h-4" />
+                  Sign In
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       </div>

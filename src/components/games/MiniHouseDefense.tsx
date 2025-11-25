@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Home, Zap, Heart, Shield, Crosshair, Flame } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Leaderboard } from "./Leaderboard";
+import { AuthDialog } from "./AuthDialog";
+import { useAuth } from "@/contexts/AuthContext";
 
 type Enemy = {
   id: number;
@@ -68,6 +70,7 @@ const DEFENSES: DefenseType[] = [
 ];
 
 export const MiniHouseDefense = () => {
+  const { user, profile } = useAuth();
   const [isPlaying, setIsPlaying] = useState(false);
   const [enemies, setEnemies] = useState<Enemy[]>([]);
   const [towers, setTowers] = useState<Tower[]>([]);
@@ -90,8 +93,7 @@ export const MiniHouseDefense = () => {
   const [speedBoost, setSpeedBoost] = useState(1);
   const [screenShake, setScreenShake] = useState(0);
   const [gameOver, setGameOver] = useState(false);
-  const [showNameInput, setShowNameInput] = useState(false);
-  const [playerName, setPlayerName] = useState("");
+  const [showAuthDialog, setShowAuthDialog] = useState(false);
   const [finalScore, setFinalScore] = useState(0);
   const [scoreSubmitted, setScoreSubmitted] = useState(false);
   const audioContext = useRef<AudioContext | null>(null);
@@ -393,25 +395,35 @@ export const MiniHouseDefense = () => {
       setWaveActive(false);
       setGameOver(true);
       setFinalScore(wave * 100 + money);
-      setShowNameInput(true);
+      if (!user) {
+        setShowAuthDialog(true);
+      } else {
+        submitScore();
+      }
     }
-  }, [houseHealth, isPlaying, wave, money]);
+  }, [houseHealth, isPlaying, wave, money, user]);
 
   const submitScore = async () => {
-    if (!playerName.trim()) return;
+    if (!user || !profile) return;
 
     try {
       await supabase.from("game_leaderboards").insert({
         game_name: "Mini House Defense",
-        player_name: playerName.trim(),
+        player_name: profile.username || profile.email || "Anonymous",
         score: finalScore,
-        wave: wave
+        wave: wave,
+        user_id: user.id,
+        guest_id: profile.guest_id,
       });
       setScoreSubmitted(true);
-      setShowNameInput(false);
     } catch (error) {
       console.error("Error submitting score:", error);
     }
+  };
+
+  const handleAuthSuccess = () => {
+    setShowAuthDialog(false);
+    submitScore();
   };
 
   const startGame = () => {
@@ -432,8 +444,7 @@ export const MiniHouseDefense = () => {
     setSpeedBoost(1);
     setScreenShake(0);
     setGameOver(false);
-    setShowNameInput(false);
-    setPlayerName("");
+    setShowAuthDialog(false);
     setScoreSubmitted(false);
   };
 
@@ -671,29 +682,6 @@ export const MiniHouseDefense = () => {
 
         {!isPlaying ? (
           <>
-            {showNameInput && !scoreSubmitted && (
-              <div className="space-y-3 mb-4 p-4 bg-black/50 border border-[#00FF9F]/30 rounded">
-                <div className="text-[#00FF9F] font-mono text-center">
-                  <div className="text-lg font-bold mb-1">GAME OVER!</div>
-                  <div className="text-sm">Wave: {wave} | Score: {finalScore}</div>
-                </div>
-                <Input
-                  value={playerName}
-                  onChange={(e) => setPlayerName(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && submitScore()}
-                  placeholder="Enter your name"
-                  className="bg-black border-[#00FF9F]/30 text-white font-mono"
-                  maxLength={20}
-                />
-                <Button
-                  onClick={submitScore}
-                  disabled={!playerName.trim()}
-                  className="w-full bg-[#00FF9F] hover:bg-[#00FF9F]/80 text-black font-bold"
-                >
-                  SUBMIT SCORE
-                </Button>
-              </div>
-            )}
             <Button
               onClick={startGame}
               className="w-full bg-[#00FF9F] hover:bg-[#00FF9F]/80 text-black font-bold"
@@ -715,6 +703,14 @@ export const MiniHouseDefense = () => {
       <div className="lg:col-span-1">
         <Leaderboard gameName="Mini House Defense" currentScore={scoreSubmitted ? finalScore : undefined} showWave />
       </div>
+
+      <AuthDialog
+        open={showAuthDialog}
+        onClose={() => setShowAuthDialog(false)}
+        onSuccess={handleAuthSuccess}
+        score={finalScore}
+        gameTitle="Mini House Defense"
+      />
     </div>
   );
 };

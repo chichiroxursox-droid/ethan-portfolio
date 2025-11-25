@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card } from "@/components/ui/card";
-import { Trophy } from "lucide-react";
+import { Trophy, User } from "lucide-react";
 
 type LeaderboardEntry = {
   id: string;
@@ -10,6 +10,11 @@ type LeaderboardEntry = {
   difficulty?: string;
   wave?: number;
   created_at: string;
+  user_id?: string;
+  profiles?: {
+    username: string | null;
+    is_guest: boolean;
+  };
 };
 
 type LeaderboardProps = {
@@ -31,7 +36,13 @@ export const Leaderboard = ({ gameName, currentScore, showDifficulty, showWave }
     try {
       const { data, error } = await supabase
         .from("game_leaderboards")
-        .select("*")
+        .select(`
+          *,
+          profiles:user_id (
+            username,
+            is_guest
+          )
+        `)
         .eq("game_name", gameName)
         .order("score", { ascending: false })
         .limit(10);
@@ -81,7 +92,14 @@ export const Leaderboard = ({ gameName, currentScore, showDifficulty, showWave }
                 >
                   {index + 1}
                 </span>
-                <span className="text-white truncate max-w-[150px]">{entry.player_name}</span>
+                <div className="flex items-center gap-2">
+                  {entry.profiles?.is_guest && (
+                    <User className="w-3 h-3 text-gray-500" />
+                  )}
+                  <span className="text-white truncate max-w-[150px]">
+                    {entry.profiles?.username || entry.player_name}
+                  </span>
+                </div>
               </div>
               <div className="flex items-center gap-4">
                 {showDifficulty && entry.difficulty && (
