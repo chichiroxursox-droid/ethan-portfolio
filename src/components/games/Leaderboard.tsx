@@ -102,9 +102,6 @@ export const Leaderboard = ({ gameName, currentScore, showDifficulty, showWave }
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                {showDifficulty && entry.difficulty && (
-                  <span className="text-[#00D9FF] text-xs uppercase">{entry.difficulty}</span>
-                )}
                 {showWave && entry.wave && (
                   <span className="text-orange-500 text-xs">W{entry.wave}</span>
                 )}
