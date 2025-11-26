@@ -86,6 +86,12 @@ PERSONAL:
 - Favorite foods: Buffalo wings and bacon
 - Homebody who enjoys spending time at home
 
+FAMILY:
+- Father: Simon Hauger - Director and co-founder at Project Based Learning Inc., Master of Education, works with Workshop Learning
+- Mother: Cindy (Lee) Hauger - Director of Operations and Development at Workshop Learning, BS in Economics from Wharton School, University of Pennsylvania
+- Older sister: Faith Hauger - Marketing and BIS Honors Student at the University of Pittsburgh (Saxbys)
+- Older brother: Micah Hauger - Mission-Driven Marketing Leader specializing in Digital Advertising, Fundraising & Storytelling, MBA in Global Sustainable Development, works at Impact Christian Schools
+
 CORE VALUES & BELIEFS:
 - Gratitude: tries to stay mindful of his blessings - having a warm bed, safe home, loving family, food security
 - Doesn't have a five-year plan but has conviction to not waste what he's been given
