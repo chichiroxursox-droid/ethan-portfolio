@@ -351,6 +351,9 @@ export const MiniHouseDefense = () => {
         let minDist = defense.range;
         
         enemies.forEach(enemy => {
+          // Only target alive enemies
+          if (enemy.health <= 0) return;
+          
           const dx = enemy.x - tower.x;
           const dy = enemy.y - tower.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
@@ -415,14 +418,25 @@ export const MiniHouseDefense = () => {
           if (hit) {
             const defense = DEFENSES.find(d => d.type === proj.type)!;
             const actualDamage = defense.damage * damageMultiplier;
+            
+            // Track if enemy was killed for money reward
+            let enemyKilled = false;
+            
             setEnemies(e =>
-              e.map(enemy =>
-                enemy.id === proj.targetId
-                  ? { ...enemy, health: enemy.health - actualDamage }
-                  : enemy
-              )
+              e.map(enemy => {
+                if (enemy.id === proj.targetId) {
+                  const newHealth = enemy.health - actualDamage;
+                  if (enemy.health > 0 && newHealth <= 0) {
+                    enemyKilled = true;
+                  }
+                  return { ...enemy, health: newHealth };
+                }
+                return enemy;
+              })
             );
-            if (target.health <= actualDamage) {
+            
+            // Only award money if enemy was just killed
+            if (enemyKilled) {
               setMoney(m => m + 25);
             }
           } else {
@@ -438,7 +452,7 @@ export const MiniHouseDefense = () => {
     }, 1000 / 60);
 
       return () => clearInterval(gameLoop);
-  }, [isPlaying, enemies, nextProjectileId, nextParticleId, towers, wave, hasShield, damageMultiplier]);
+  }, [isPlaying, enemies, nextProjectileId, nextParticleId, towers, wave, hasShield, damageMultiplier, speedBoost]);
 
   useEffect(() => {
     if (!isPlaying || !waveActive || enemiesToSpawn <= 0) return;
@@ -474,8 +488,17 @@ export const MiniHouseDefense = () => {
     }
   }, [houseHealth, isPlaying, wave, money, user]);
 
-  const submitScore = async () => {
-    if (!user || !profile) return;
+  const submitScore = async (retryCount = 0) => {
+    // Wait for user and profile to be available after auth
+    if (!user || !profile) {
+      if (retryCount < 10) {
+        // Retry after a short delay to allow auth context to update
+        setTimeout(() => submitScore(retryCount + 1), 300);
+        return;
+      }
+      console.error("Failed to submit score: user or profile not available");
+      return;
+    }
 
     try {
       await supabase.from("game_leaderboards").insert({
@@ -494,7 +517,8 @@ export const MiniHouseDefense = () => {
 
   const handleAuthSuccess = () => {
     setShowAuthDialog(false);
-    submitScore();
+    // Submit score after auth dialog closes
+    setTimeout(() => submitScore(), 100);
   };
 
   const startGame = () => {
