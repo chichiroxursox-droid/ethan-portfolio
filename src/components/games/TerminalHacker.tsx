@@ -195,7 +195,12 @@ export const TerminalHacker = () => {
 
             <div className="bg-black border border-[#00FF9F]/20 rounded p-4 h-48 overflow-y-auto">
               {logs.map((log, i) => (
-                <div key={i} className="text-[#00FF9F] text-sm mb-1 animate-fade-in">
+                <div 
+                  key={i} 
+                  className={`text-sm mb-1 animate-fade-in ${
+                    log.includes('FAILED') ? 'text-red-500' : 'text-[#00FF9F]'
+                  }`}
+                >
                   {log}
                 </div>
               ))}
