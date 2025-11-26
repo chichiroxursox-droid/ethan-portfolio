@@ -7,35 +7,6 @@ import { Leaderboard } from "./Leaderboard";
 import { AuthDialog } from "./AuthDialog";
 import { useAuth } from "@/contexts/AuthContext";
 
-type Difficulty = "easy" | "medium" | "hard" | null;
-
-const EASY_COMMANDS = [
-  "INITIALIZE_MAINFRAME",
-  "DECRYPT_DATABASE",
-  "BYPASS_FIREWALL",
-  "ACCESS_GRANTED",
-  "OVERRIDE_SECURITY",
-  "CRACK_ENCRYPTION",
-  "PENETRATE_NETWORK",
-  "EXPLOIT_VULNERABILITY",
-  "GAIN_ROOT_ACCESS",
-  "DISABLE_PROTOCOLS"
-];
-
-const MEDIUM_COMMANDS = [
-  ...EASY_COMMANDS,
-  "HIJACK_SESSION",
-  "TRACE_PACKETS",
-  "SPOOF_ADDRESS",
-  "INJECT_PAYLOAD",
-  "ESCALATE_PRIVILEGES",
-  "BACKDOOR_ACCESS",
-  "BRUTE_FORCE_ATTACK",
-  "SQL_INJECTION",
-  "ZERO_DAY_EXPLOIT",
-  "ROOTKIT_INSTALL"
-];
-
 const COMMANDS = [
   "INITIALIZE_MAINFRAME",
   "DECRYPT_DATABASE",
@@ -74,33 +45,15 @@ export const TerminalHacker = () => {
   const [currentCommand, setCurrentCommand] = useState("");
   const [userInput, setUserInput] = useState("");
   const [score, setScore] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(30);
+  const [timeLeft, setTimeLeft] = useState(20);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [difficulty, setDifficulty] = useState<Difficulty>(null);
   const [streak, setStreak] = useState(0);
   const [logs, setLogs] = useState<string[]>([]);
   const [showAuthDialog, setShowAuthDialog] = useState(false);
   const [scoreSubmitted, setScoreSubmitted] = useState(false);
+  const [pendingScore, setPendingScore] = useState<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const audioContext = useRef<AudioContext | null>(null);
-
-  const getTimeForDifficulty = (diff: Difficulty) => {
-    switch (diff) {
-      case "easy": return 45;
-      case "medium": return 30;
-      case "hard": return 20;
-      default: return 30;
-    }
-  };
-
-  const getCommandsForDifficulty = (diff: Difficulty) => {
-    switch (diff) {
-      case "easy": return EASY_COMMANDS;
-      case "medium": return MEDIUM_COMMANDS;
-      case "hard": return COMMANDS;
-      default: return COMMANDS;
-    }
-  };
 
   const playSound = (frequency: number, duration: number) => {
     if (!audioContext.current) {
@@ -131,14 +84,23 @@ export const TerminalHacker = () => {
     }
   }, [timeLeft, isPlaying]);
 
-  const startGame = (diff: Difficulty) => {
-    setDifficulty(diff);
+  // Submit pending score when user authenticates
+  useEffect(() => {
+    if (user && profile && pendingScore !== null) {
+      submitScore();
+      setPendingScore(null);
+    }
+  }, [user, profile, pendingScore]);
+
+  const startGame = () => {
     setIsPlaying(true);
     setScore(0);
     setStreak(0);
-    setTimeLeft(getTimeForDifficulty(diff));
+    setTimeLeft(20);
     setUserInput("");
-    setLogs(["> SYSTEM INITIATED", `> DIFFICULTY: ${diff?.toUpperCase()}`, "> ATTEMPTING BREACH..."]);
+    setScoreSubmitted(false);
+    setPendingScore(null);
+    setLogs(["> SYSTEM INITIATED", "> DIFFICULTY: HARD", "> ATTEMPTING BREACH..."]);
     generateNewCommand();
     inputRef.current?.focus();
   };
@@ -147,6 +109,7 @@ export const TerminalHacker = () => {
     setIsPlaying(false);
     setLogs(prev => [...prev, `> BREACH ${score > 5 ? "SUCCESSFUL" : "FAILED"}`, `> FINAL SCORE: ${score}`]);
     if (score > 0 && !user) {
+      setPendingScore(score);
       setShowAuthDialog(true);
     } else if (score > 0 && user) {
       submitScore();
@@ -154,14 +117,16 @@ export const TerminalHacker = () => {
   };
 
   const submitScore = async () => {
-    if (!user || !profile || !difficulty) return;
+    if (!user || !profile) return;
+
+    const scoreToSubmit = pendingScore || score;
 
     try {
       await supabase.from("game_leaderboards").insert({
         game_name: "Terminal Hacker",
         player_name: profile.username || "Anonymous",
-        score: score,
-        difficulty: difficulty,
+        score: scoreToSubmit,
+        difficulty: "hard",
         user_id: user.id,
         guest_id: profile.guest_id,
       });
@@ -173,12 +138,11 @@ export const TerminalHacker = () => {
 
   const handleAuthSuccess = () => {
     setShowAuthDialog(false);
-    submitScore();
+    // Score will be submitted via useEffect when user/profile updates
   };
 
   const generateNewCommand = () => {
-    const commandPool = getCommandsForDifficulty(difficulty);
-    const newCommand = commandPool[Math.floor(Math.random() * commandPool.length)];
+    const newCommand = COMMANDS[Math.floor(Math.random() * COMMANDS.length)];
     setCurrentCommand(newCommand);
   };
 
@@ -248,25 +212,13 @@ export const TerminalHacker = () => {
             ) : (
               <div className="space-y-3">
                 <div className="text-[#00FF9F] text-center text-sm mb-4">
-                  {score > 0 ? `LAST SCORE: ${score} | SELECT DIFFICULTY` : "SELECT DIFFICULTY LEVEL"}
+                  {score > 0 ? `LAST SCORE: ${score}` : "READY TO START"}
                 </div>
                 <Button
-                  onClick={() => startGame("easy")}
-                  className="w-full bg-[#00FF9F] hover:bg-[#00FF9F]/80 text-black font-bold text-lg py-6"
+                  onClick={startGame}
+                  className="w-full bg-gradient-to-r from-[#00FF9F] to-[#00D9FF] hover:opacity-90 text-black font-bold text-lg py-6"
                 >
-                  EASY (45s)
-                </Button>
-                <Button
-                  onClick={() => startGame("medium")}
-                  className="w-full bg-[#00D9FF] hover:bg-[#00D9FF]/80 text-black font-bold text-lg py-6"
-                >
-                  MEDIUM (30s)
-                </Button>
-                <Button
-                  onClick={() => startGame("hard")}
-                  className="w-full bg-red-500 hover:bg-red-500/80 text-white font-bold text-lg py-6"
-                >
-                  HARD (20s)
+                  START GAME (20s)
                 </Button>
               </div>
             )}
@@ -281,7 +233,7 @@ export const TerminalHacker = () => {
         open={showAuthDialog}
         onClose={() => setShowAuthDialog(false)}
         onSuccess={handleAuthSuccess}
-        score={score}
+        score={pendingScore || score}
         gameTitle="Terminal Hacker"
       />
     </div>
