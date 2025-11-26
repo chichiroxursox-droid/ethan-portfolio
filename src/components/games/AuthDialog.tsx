@@ -10,7 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useAuth } from "@/contexts/AuthContext";
-import { Loader2, Mail } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 type AuthDialogProps = {
   open: boolean;
@@ -113,16 +113,6 @@ export const AuthDialog = ({ open, onClose, onSuccess, score, gameTitle }: AuthD
               className="w-full bg-[#00D9FF] hover:bg-[#00D9FF]/80 text-black font-bold"
             >
               Create Account
-            </Button>
-
-            <Button
-              onClick={handleGoogleSignIn}
-              variant="outline"
-              className="w-full bg-white hover:bg-gray-100 text-black"
-              disabled={loading}
-            >
-              <Mail className="mr-2 h-4 w-4" />
-              Google
             </Button>
 
             <div className="relative my-4">
