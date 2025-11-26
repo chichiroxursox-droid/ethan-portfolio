@@ -133,7 +133,7 @@ export const MiniHouseDefense = () => {
 
   const getEnemyStats = (type: Enemy["type"], waveNum: number) => {
     const baseHealth = 3 + Math.floor(waveNum * 0.8);
-    const baseSpeed = 1 + waveNum * 0.12;
+    const baseSpeed = (1 + waveNum * 0.12) * 1.5; // Increased by 50%
     const isBoss = isBossWave(waveNum);
     
     switch (type) {
@@ -221,13 +221,14 @@ export const MiniHouseDefense = () => {
   const spawnEnemy = useCallback(() => {
     const enemyType = getEnemyType(wave);
     const stats = getEnemyStats(enemyType, wave);
+    const fromLeft = Math.random() > 0.5;
     const newEnemy: Enemy = {
       id: nextEnemyId,
-      x: 50,
+      x: fromLeft ? 50 : 750,
       y: 150 + Math.random() * 100,
       health: stats.health,
       maxHealth: stats.health,
-      speed: stats.speed,
+      speed: fromLeft ? stats.speed : -stats.speed, // Negative speed for right-to-left
       type: enemyType
     };
     setEnemies(prev => [...prev, newEnemy]);
@@ -271,7 +272,9 @@ export const MiniHouseDefense = () => {
           ...enemy,
           x: enemy.x + enemy.speed
         })).filter(enemy => {
-          if (enemy.x >= HOUSE_X - 20) {
+          // Check if enemy reached house from either direction
+          const distToHouse = Math.abs(enemy.x - HOUSE_X);
+          if (distToHouse < 20) {
             if (hasShield) {
               setHasShield(false);
               playSound(300, 0.2, 'square');
@@ -332,19 +335,33 @@ export const MiniHouseDefense = () => {
         return tower;
       }));
 
-      // Move projectiles
+      // Move projectiles with predictive targeting
       setProjectiles(prev => {
         const updated: Projectile[] = [];
         prev.forEach(proj => {
           const target = enemies.find(e => e.id === proj.targetId);
           if (!target) return;
 
+          // Predict target position based on velocity
+          const projectileSpeed = 15;
           const dx = target.x - proj.x;
           const dy = target.y - proj.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
+          
+          // Estimate time to reach target
+          const timeToReach = dist / projectileSpeed;
+          
+          // Predict where target will be
+          const predictedX = target.x + (target.speed * timeToReach);
+          const predictedY = target.y;
+          
+          // Aim for predicted position
+          const predictedDx = predictedX - proj.x;
+          const predictedDy = predictedY - proj.y;
+          const predictedDist = Math.sqrt(predictedDx * predictedDx + predictedDy * predictedDy);
 
-          // Increased collision radius to account for projectile speed
-          if (dist < 15) {
+          // Check for hit with larger collision radius
+          if (dist < 20) {
             const defense = DEFENSES.find(d => d.type === proj.type)!;
             const actualDamage = defense.damage * damageMultiplier;
             setEnemies(e => e.map(enemy => 
@@ -356,10 +373,9 @@ export const MiniHouseDefense = () => {
               setMoney(m => m + 25);
             }
           } else {
-            // Calculate projectile speed - faster projectiles for better tracking
-            const projectileSpeed = 12;
-            const moveX = (dx / dist) * projectileSpeed;
-            const moveY = (dy / dist) * projectileSpeed;
+            // Move toward predicted position
+            const moveX = (predictedDx / predictedDist) * projectileSpeed;
+            const moveY = (predictedDy / predictedDist) * projectileSpeed;
             
             updated.push({
               ...proj,
