@@ -343,7 +343,8 @@ export const MiniHouseDefense = () => {
           const dy = target.y - proj.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 10) {
+          // Increased collision radius to account for projectile speed
+          if (dist < 15) {
             const defense = DEFENSES.find(d => d.type === proj.type)!;
             const actualDamage = defense.damage * damageMultiplier;
             setEnemies(e => e.map(enemy => 
@@ -355,10 +356,15 @@ export const MiniHouseDefense = () => {
               setMoney(m => m + 25);
             }
           } else {
+            // Calculate projectile speed - faster projectiles for better tracking
+            const projectileSpeed = 12;
+            const moveX = (dx / dist) * projectileSpeed;
+            const moveY = (dy / dist) * projectileSpeed;
+            
             updated.push({
               ...proj,
-              x: proj.x + (dx / dist) * 8,
-              y: proj.y + (dy / dist) * 8
+              x: proj.x + moveX,
+              y: proj.y + moveY
             });
           }
         });
