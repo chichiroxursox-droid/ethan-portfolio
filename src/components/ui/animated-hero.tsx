@@ -15,7 +15,7 @@ function AnimatedHero({ titles }: AnimatedHeroProps) {
       } else {
         setTitleNumber(titleNumber + 1);
       }
-    }, titleNumber === 0 ? 2500 : 2000); // Show "Ethan Hauger" slightly longer
+    }, titleNumber === 0 ? 1500 : 2000); // Show "Ethan Hauger" slightly longer but slightly faster transition to next title
     return () => clearTimeout(timeoutId);
   }, [titleNumber, titles]);
 

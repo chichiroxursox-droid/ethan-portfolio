@@ -56,12 +56,12 @@ const Navigation = () => {
           </Link>
           
           <div className="flex gap-2 flex-wrap">
-            <Link to="/">
+            <Link to="/home#about">
               <Button 
-                variant={location.pathname === "/" ? "default" : "ghost"}
+                variant={location.pathname === "/home" ? "default" : "ghost"}
                 size="sm"
                 className={`gap-2 ${
-                  isEngineeringPage && location.pathname !== "/" 
+                  isEngineeringPage && location.pathname !== "/home" 
                     ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10' 
                     : ''
                 }`}
