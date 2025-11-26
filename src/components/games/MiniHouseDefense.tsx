@@ -69,6 +69,47 @@ const DEFENSES: DefenseType[] = [
   { type: "flame", cost: 75, icon: Flame, color: "#FF6600", name: "Flame Tower", range: 100, damage: 2, cooldown: 20 }
 ];
 
+const ENEMY_BASE_RADIUS = 12;
+const PROJECTILE_RADIUS = 4;
+
+const getEnemyRadius = (enemy: Enemy) => {
+  let scale = 1;
+  if (enemy.type === "tank") scale = 1.3;
+  else if (enemy.type === "fast") scale = 0.8;
+  return ENEMY_BASE_RADIUS * scale;
+};
+
+const segmentCircleIntersection = (
+  x1: number,
+  y1: number,
+  x2: number,
+  y2: number,
+  cx: number,
+  cy: number,
+  r: number
+): boolean => {
+  const dx = x2 - x1;
+  const dy = y2 - y1;
+  const fx = x1 - cx;
+  const fy = y1 - cy;
+
+  const a = dx * dx + dy * dy;
+  if (a === 0) {
+    // No movement this frame
+    return fx * fx + fy * fy <= r * r;
+  }
+
+  // Project point onto segment and clamp to [0,1]
+  const t = -((fx * dx + fy * dy) / a);
+  const tClamped = Math.max(0, Math.min(1, t));
+
+  const closestX = x1 + dx * tClamped;
+  const closestY = y1 + dy * tClamped;
+
+  const distSq = (closestX - cx) * (closestX - cx) + (closestY - cy) * (closestY - cy);
+  return distSq <= r * r;
+};
+
 export const MiniHouseDefense = () => {
   const { user, profile } = useAuth();
   const [isPlaying, setIsPlaying] = useState(false);
@@ -250,7 +291,8 @@ export const MiniHouseDefense = () => {
     setEnemiesRemaining(enemyCount);
     setWaveActive(true);
     setShowUpgrades(false);
-    setMoney(m => m + (isBossWave(nextWave) ? 100 : 40));
+    // No bonus money on wave start
+    // setMoney(m => m + (isBossWave(nextWave) ? 100 : 40));
   };
 
   useEffect(() => {
@@ -335,52 +377,59 @@ export const MiniHouseDefense = () => {
         return tower;
       }));
 
-      // Move projectiles with predictive targeting
+      // Move projectiles with true radius-based collision and swept tests
       setProjectiles(prev => {
         const updated: Projectile[] = [];
         prev.forEach(proj => {
           const target = enemies.find(e => e.id === proj.targetId);
           if (!target) return;
 
-          // Predict target position based on velocity
-          const projectileSpeed = 15;
-          const dx = target.x - proj.x;
-          const dy = target.y - proj.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          
-          // Estimate time to reach target
-          const timeToReach = dist / projectileSpeed;
-          
-          // Predict where target will be
-          const predictedX = target.x + (target.speed * timeToReach);
-          const predictedY = target.y;
-          
-          // Aim for predicted position
-          const predictedDx = predictedX - proj.x;
-          const predictedDy = predictedY - proj.y;
-          const predictedDist = Math.sqrt(predictedDx * predictedDx + predictedDy * predictedDy);
+          const enemyRadius = getEnemyRadius(target);
+          const totalRadius = enemyRadius + PROJECTILE_RADIUS;
 
-          // Check for hit with larger collision radius
-          if (dist < 20) {
+          const startX = proj.x;
+          const startY = proj.y;
+
+          // Direction towards current target center
+          const dx = target.x - startX;
+          const dy = target.y - startY;
+          const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+
+          const projectileSpeed = 10;
+          const moveX = (dx / dist) * projectileSpeed;
+          const moveY = (dy / dist) * projectileSpeed;
+
+          const endX = startX + moveX;
+          const endY = startY + moveY;
+
+          const hit = segmentCircleIntersection(
+            startX,
+            startY,
+            endX,
+            endY,
+            target.x,
+            target.y,
+            totalRadius
+          );
+
+          if (hit) {
             const defense = DEFENSES.find(d => d.type === proj.type)!;
             const actualDamage = defense.damage * damageMultiplier;
-            setEnemies(e => e.map(enemy => 
-              enemy.id === proj.targetId 
-                ? { ...enemy, health: enemy.health - actualDamage }
-                : enemy
-            ));
+            setEnemies(e =>
+              e.map(enemy =>
+                enemy.id === proj.targetId
+                  ? { ...enemy, health: enemy.health - actualDamage }
+                  : enemy
+              )
+            );
             if (target.health <= actualDamage) {
               setMoney(m => m + 25);
             }
           } else {
-            // Move toward predicted position
-            const moveX = (predictedDx / predictedDist) * projectileSpeed;
-            const moveY = (predictedDy / predictedDist) * projectileSpeed;
-            
             updated.push({
               ...proj,
-              x: proj.x + moveX,
-              y: proj.y + moveY
+              x: endX,
+              y: endY,
             });
           }
         });
