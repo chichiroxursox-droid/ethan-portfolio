@@ -309,19 +309,6 @@ const Engineering = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Interactive Image Grid */}
-              <div className="grid grid-cols-2 gap-4">
-                {goatHouseImages.map((image, index) => <div key={index} className="relative aspect-square cursor-pointer group overflow-hidden rounded-lg" onMouseEnter={() => setHoveredIndex(index + 100)} onMouseLeave={() => setHoveredIndex(null)} onClick={() => setSelectedImage(image.src)}>
-                    <img src={image.src} alt={image.caption} className={`w-full h-full object-cover transition-all duration-500 ${hoveredIndex === index + 100 ? 'scale-110' : 'scale-100'}`} />
-                    <div className={`absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-300 ${hoveredIndex === index + 100 ? 'opacity-100' : 'opacity-0'}`}>
-                      <div className="absolute bottom-0 left-0 right-0 p-4">
-                        <p className="text-white font-mono text-xs">{image.caption}</p>
-                      </div>
-                    </div>
-                    <div className={`absolute inset-0 border-2 border-[#FFB800] transition-opacity duration-300 ${hoveredIndex === index + 100 ? 'opacity-100' : 'opacity-0'}`} />
-                  </div>)}
-              </div>
             </div>
 
             {/* Process Slideshow */}
