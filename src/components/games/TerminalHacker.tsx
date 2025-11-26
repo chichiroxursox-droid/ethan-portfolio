@@ -161,6 +161,18 @@ export const TerminalHacker = () => {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && userInput && userInput !== currentCommand) {
+      // Wrong input on Enter
+      const newScore = Math.max(0, score - 5);
+      setScore(newScore);
+      setStreak(0);
+      setLogs(prev => [...prev.slice(-5), `> ${userInput} - FAILED -5 (STREAK RESET)`]);
+      playSound(200, 0.2);
+      setUserInput("");
+    }
+  };
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <div className="lg:col-span-2">
@@ -203,6 +215,7 @@ export const TerminalHacker = () => {
                     type="text"
                     value={userInput}
                     onChange={handleInput}
+                    onKeyDown={handleKeyDown}
                     className="w-full bg-black border border-[#00FF9F]/30 rounded p-4 pl-8 text-white text-xl tracking-wider uppercase focus:outline-none focus:border-[#00FF9F]"
                     placeholder="TYPE HERE..."
                     autoFocus
