@@ -103,6 +103,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const signUp = async (email: string, password: string, username: string) => {
+    // Check if username already exists
+    const { data: existingProfile } = await supabase
+      .from("profiles")
+      .select("username")
+      .eq("username", username)
+      .single();
+    
+    if (existingProfile) {
+      toast({
+        title: "Error",
+        description: "Username already taken. Please choose a different one.",
+        variant: "destructive",
+      });
+      return { error: { message: "Username already taken" } };
+    }
+
     const { error } = await supabase.auth.signUp({
       email,
       password,
@@ -151,6 +167,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const signInAsGuest = async (username: string) => {
+    // Check if username already exists
+    const { data: existingProfile } = await supabase
+      .from("profiles")
+      .select("username")
+      .eq("username", username)
+      .single();
+    
+    if (existingProfile) {
+      toast({
+        title: "Error",
+        description: "Username already taken. Please choose a different one.",
+        variant: "destructive",
+      });
+      return { error: { message: "Username already taken" } };
+    }
+
     const guestId = `guest_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
     
     // Create anonymous user with Supabase

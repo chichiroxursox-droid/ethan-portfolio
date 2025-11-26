@@ -196,7 +196,10 @@ export const AuthDialog = ({ open, onClose, onSuccess, score, gameTitle }: AuthD
                 className="bg-black border-[#00FF9F]/20 text-white"
                 required
                 disabled={loading}
+                minLength={3}
                 maxLength={20}
+                pattern="[a-zA-Z0-9_]+"
+                title="Username must be 3-20 characters and can only contain letters, numbers, and underscores"
               />
             </div>
 
@@ -262,7 +265,10 @@ export const AuthDialog = ({ open, onClose, onSuccess, score, gameTitle }: AuthD
                 placeholder="Guest Player"
                 required
                 disabled={loading}
+                minLength={3}
                 maxLength={20}
+                pattern="[a-zA-Z0-9_]+"
+                title="Username must be 3-20 characters and can only contain letters, numbers, and underscores"
               />
             </div>
 
