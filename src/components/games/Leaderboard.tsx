@@ -30,7 +30,7 @@ export const Leaderboard = ({ gameName, currentScore, showDifficulty, showWave }
 
   useEffect(() => {
     fetchLeaderboard();
-  }, [gameName]);
+  }, [gameName, currentScore]);
 
   const fetchLeaderboard = async () => {
     try {
