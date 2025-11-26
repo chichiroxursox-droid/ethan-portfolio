@@ -69,8 +69,8 @@ const DEFENSES: DefenseType[] = [
   { type: "flame", cost: 75, icon: Flame, color: "#FF6600", name: "Flame Tower", range: 100, damage: 2, cooldown: 20 }
 ];
 
-const ENEMY_BASE_RADIUS = 12;
-const PROJECTILE_RADIUS = 4;
+const ENEMY_BASE_RADIUS = 6;
+const PROJECTILE_RADIUS = 2;
 
 const getEnemyRadius = (enemy: Enemy) => {
   let scale = 1;
