@@ -13,6 +13,7 @@ const Athletics = () => {
     { season: "2022-23 (Fr. Var)", team: "Varsity", ppg: 1.8, rpg: 1.2, apg: 0.0 },
     { season: "2023-24 (So.)", team: "Varsity", ppg: 5.4, rpg: 0.8, apg: 0.8 },
     { season: "2024-25 (Jr.)", team: "Varsity", ppg: 8.3, rpg: 0.0, apg: 0.0 },
+    { season: "2025-26 (Sr.)*", team: "Varsity", ppg: 14.0, rpg: 0.0, apg: 0.0 },
   ];
 
   const teamComparisonData = [
@@ -172,6 +173,14 @@ const Athletics = () => {
                     </TableHeader>
                     <TableBody>
                       <TableRow>
+                        <TableCell className="font-medium">2025-26 (Sr.)*</TableCell>
+                        <TableCell className="text-center">Varsity</TableCell>
+                        <TableCell className="text-center">8</TableCell>
+                        <TableCell className="text-center font-semibold">14.0</TableCell>
+                        <TableCell className="text-center">-</TableCell>
+                        <TableCell className="text-center">-</TableCell>
+                      </TableRow>
+                      <TableRow>
                         <TableCell className="font-medium">2024-25 (Jr.)</TableCell>
                         <TableCell className="text-center">Varsity</TableCell>
                         <TableCell className="text-center">6</TableCell>
@@ -190,10 +199,15 @@ const Athletics = () => {
                       <TableRow className="bg-muted/50">
                         <TableCell className="font-bold">Varsity Total</TableCell>
                         <TableCell className="text-center">-</TableCell>
-                        <TableCell className="text-center font-bold">28</TableCell>
-                        <TableCell className="text-center font-bold">6.3</TableCell>
-                        <TableCell className="text-center">0.6</TableCell>
-                        <TableCell className="text-center">0.6</TableCell>
+                        <TableCell className="text-center font-bold">36</TableCell>
+                        <TableCell className="text-center font-bold">8.1</TableCell>
+                        <TableCell className="text-center">-</TableCell>
+                        <TableCell className="text-center">-</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell colSpan={6} className="text-xs text-muted-foreground italic pt-4">
+                          * Season in progress
+                        </TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
