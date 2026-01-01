@@ -79,11 +79,11 @@ const Athletics = () => {
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="p-4 bg-muted rounded-lg text-center">
-                    <p className="text-3xl font-bold text-foreground">185+</p>
+                    <p className="text-3xl font-bold text-foreground">295+</p>
                     <p className="text-sm text-muted-foreground">Total Career Points</p>
                   </div>
                   <div className="p-4 bg-muted rounded-lg text-center">
-                    <p className="text-3xl font-bold text-foreground">37</p>
+                    <p className="text-3xl font-bold text-foreground">45</p>
                     <p className="text-sm text-muted-foreground">Games Played</p>
                   </div>
                 </div>
