@@ -175,7 +175,7 @@ const Engineering = () => {
               </div>
             </div>
             <p className="text-xl text-gray-400 max-w-2xl font-light">
-              Combining technical precision with creative problem-solving to create meaningful impact
+              These are some projects I've worked on. I like building things with my hands and solving problems—figuring out how to turn an idea into something real.
             </p>
           </div>
         </div>
@@ -196,8 +196,7 @@ const Engineering = () => {
                 
                 <div className="space-y-4">
                   <p className="text-gray-400 text-lg leading-relaxed">
-                    Engineered a 16' x 16' sustainable shelter designed to survive hypothetical apocalypse scenarios. 
-                    This project merged structural engineering principles with hands-on construction expertise.
+                    For this project, I helped design and build a 16' x 16' shelter. The premise was survival in an apocalypse scenario, but really it was an excuse to learn construction from the ground up—foundation, framing, roofing, all of it.
                   </p>
                   
                   <div className="bg-[#111111] border border-gray-800 rounded-lg p-6 space-y-4">
@@ -268,8 +267,7 @@ const Engineering = () => {
                 
                 <div className="space-y-4">
                   <p className="text-gray-400 text-lg leading-relaxed">
-                    Built three complete goat houses as part of a summer engineering program. 
-                    Led hands-on construction with a team of engineering students, from foundation to final assembly.
+                    Yes, there's a farm in Philadelphia. During a summer engineering program, I worked with a team to build three complete goat houses. It was 90-degree heat, manual labor, and a lot of sweat—but seeing the finished structures made it worth it.
                   </p>
                   
                   <div className="bg-[#111111] border border-gray-800 rounded-lg p-6 space-y-4">
@@ -347,8 +345,7 @@ const Engineering = () => {
                 
                 <div className="space-y-4">
                   <p className="text-gray-400 text-lg leading-relaxed">
-                    Collaborated on a complex Rube Goldberg machine project in 10th grade. 
-                    My team contributed the very first section, setting the chain reaction in motion.
+                    In 10th grade, my team and I built a Rube Goldberg machine. We were responsible for the very first section—the part that kicks off the whole chain reaction. It was a fun exercise in precision and teamwork.
                   </p>
                   
                   <div className="bg-[#111111] border border-gray-800 rounded-lg p-6 space-y-4">

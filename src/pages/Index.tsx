@@ -10,10 +10,12 @@ import { useSectionTheme } from "@/hooks/use-section-theme";
 import AnimatedShaderBackground from "@/components/ui/animated-shader-background";
 import { AnimatedHero } from "@/components/ui/animated-hero";
 import { AuroraBackground } from "@/components/ui/aurora-background";
+
 const Index = () => {
   useSectionTheme();
   
-  return <div className="min-h-screen relative">
+  return (
+    <div className="min-h-screen relative">
       <div className="fixed inset-0 -z-10">
         <AuroraBackground className="h-full" showRadialGradient={false}>
           <div className="absolute inset-0 bg-gradient-hero opacity-30" />
@@ -37,7 +39,9 @@ const Index = () => {
               ]} 
             />
             
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto md:text-xl"> Current 12th grader at Science Leadership Academy, dedicated to making a difference through leadership, service, and innovation.</p>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto md:text-xl">
+              I'm a 12th grader at Science Leadership Academy figuring out how to use my gifts to help people. Still learning, still growing.
+            </p>
             
             <div className="flex flex-wrap justify-center gap-4 pt-4">
               <div className="flex items-center gap-2 text-muted-foreground">
@@ -101,31 +105,22 @@ const Index = () => {
             
             <div className="space-y-4 text-lg text-muted-foreground">
               <p>
-                I'm a student-athlete and current 12th grader at SLA@Beeber with a passion for leadership and service. As captain of my varsity basketball team and NHS treasurer, I strive to inspire and support those around me.
+                I'm a student-athlete at SLA@Beeber. I captain the varsity basketball team and serve as NHS treasurer, but honestly, I'm still figuring out what I want to do with my life. What I do know is that I want to use whatever gifts I have to help others.
               </p>
               <p>
-                One of my proudest achievements was presenting on gun violence at the United Nations with my classmates, advocating for safer communities. Through projects like the Microphone for Peace—a 3D-printed microphone made from{" "}
+                One experience that shaped me was speaking at the United Nations on gun violence with my classmates. Being in a room full of world leaders, I felt out of place at first. But then I remembered something I'd seen in Kensington: two people reviving a man who had overdosed with Narcan. In that moment, I realized that making a difference doesn't require being powerful—it requires showing up. Through our club, we created the{" "}
                 <a 
                   href="https://reforge-phl-vision.lovable.app" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-primary hover:underline font-medium"
                 >
-                  humanium metal
+                  Microphone for Peace
                 </a>
-                {" "}(recycled illegal firearms)—I've learned that making a difference doesn't require being powerful; it requires showing up and being willing to use whatever gifts you have. Visit our{" "}
-                <a 
-                  href="https://reforge-phl-vision.lovable.app" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline font-medium"
-                >
-                  Reforge PHL Vision website
-                </a>
-                {" "}to learn more about this project.
+                , a 3D-printed microphone made from recycled illegal firearms. It's now used by activists in Philadelphia.
               </p>
               <p>
-                When I'm not studying or playing basketball, I enjoy reading, working out, playing piano, playing video games, and spending time with my pitbull-mix, Honey. I'm a follower of Christianity and strive to reflect my faith in everything I do.
+                Outside of school, I'm kind of a homebody (I can't help it). I like reading, playing piano, video games, working out, and hanging out with my pitbull-mix, Honey. I'm also a Christian, and my faith grounds me, humbles me, and gives me strength. I try to see people the way Jesus would—as gifts.
               </p>
             </div>
           </Card>
@@ -164,10 +159,12 @@ const Index = () => {
               <div className="pt-6">
                 <h4 className="font-semibold mb-3">Activities & Leadership</h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {["NHS Treasurer", "Varsity Basketball Captain", "Humanium Co-leader", "Book Club Member", "Track & Cross-Country"].map(activity => <div key={activity} className="flex items-center gap-2">
+                  {["NHS Treasurer", "Varsity Basketball Captain", "Humanium Co-leader", "Book Club Member", "Track & Cross-Country"].map(activity => (
+                    <div key={activity} className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-primary" />
                       <span>{activity}</span>
-                    </div>)}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -193,16 +190,7 @@ const Index = () => {
                 <Badge variant="outline">June 2024</Badge>
               </div>
               <p className="text-muted-foreground">
-                Presented a speech at the United Nations with classmates, speaking out against illegal firearms and gun violence. Led the creation of the Microphone for Peace, a 3D-printed microphone made from{" "}
-                <a 
-                  href="https://reforge-phl-vision.lovable.app" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline font-medium"
-                >
-                  humanium metal
-                </a>
-                {" "}(recycled illegal firearms).
+                I had never been given such an important opportunity, and I had never been so nervous. But being in that room showed me that change doesn't require power—it requires presence, persistence, and purpose. Together with my classmates, we helped create the Microphone for Peace, now used by activists in Philadelphia and beyond.
               </p>
             </Card>
 
@@ -215,7 +203,7 @@ const Index = () => {
                 <Badge variant="outline">May 2024 - Present</Badge>
               </div>
               <p className="text-muted-foreground">
-                Elected NHS Officer, managing chapter finances and organizing community service events including the school's first student vs. staff basketball game.
+                I handle the chapter's finances and help organize community service events. One of my favorite things we did was put together the school's first student vs. staff basketball game—it was a blast.
               </p>
             </Card>
 
@@ -228,7 +216,7 @@ const Index = () => {
                 <Badge variant="outline">April 2024 - Present</Badge>
               </div>
               <p className="text-muted-foreground">
-                Launched self-run basketball coaching business. Created marketing materials, marketed locally, and currently coaching 7 beginner clients.
+                I started my own basketball coaching business for beginners. I made the flyers, went door-to-door, and now I coach 7 clients. It's taught me that patient encouragement can unlock potential kids didn't know they had.
               </p>
             </Card>
 
@@ -241,7 +229,7 @@ const Index = () => {
                 <Badge variant="outline">Summers 2023-2025</Badge>
               </div>
               <p className="text-muted-foreground">
-                Tutored younger students in math, participated in University of Pennsylvania research program, and worked with engineering teacher to design, construct, and install goat houses.
+                Math Corps had me tutoring younger students. Penn RSSA was a research program at the University of Pennsylvania. And C2L? That's where I spent a summer building goat houses with my engineering teacher—yes, there's a farm in Philadelphia, and yes, it was 90-degree heat.
               </p>
             </Card>
           </div>
@@ -261,21 +249,27 @@ const Index = () => {
               <div>
                 <h3 className="font-semibold mb-3 text-lg">Athletics</h3>
                 <div className="flex flex-wrap gap-2">
-                  {["Varsity Basketball", "Track", "Cross-Country"].map(skill => <Badge key={skill} variant="secondary">{skill}</Badge>)}
+                  {["Varsity Basketball", "Track", "Cross-Country"].map(skill => (
+                    <Badge key={skill} variant="secondary">{skill}</Badge>
+                  ))}
                 </div>
               </div>
 
               <div>
                 <h3 className="font-semibold mb-3 text-lg">Technical Skills</h3>
                 <div className="flex flex-wrap gap-2">
-                  {["Fusion 360", "Adobe Illustrator", "DaVinci Resolve", "3D Printing", "Laser Cutting"].map(skill => <Badge key={skill} variant="secondary">{skill}</Badge>)}
+                  {["Fusion 360", "Adobe Illustrator", "DaVinci Resolve", "3D Printing", "Laser Cutting"].map(skill => (
+                    <Badge key={skill} variant="secondary">{skill}</Badge>
+                  ))}
                 </div>
               </div>
 
               <div>
                 <h3 className="font-semibold mb-3 text-lg">Creative & Leadership</h3>
                 <div className="flex flex-wrap gap-2">
-                  {["Piano", "Chess", "Public Speaking", "Team Leadership", "Problem-Solving", "Collaboration"].map(skill => <Badge key={skill} variant="secondary">{skill}</Badge>)}
+                  {["Piano", "Chess", "Public Speaking", "Team Leadership", "Problem-Solving", "Collaboration"].map(skill => (
+                    <Badge key={skill} variant="secondary">{skill}</Badge>
+                  ))}
                 </div>
               </div>
             </div>
@@ -287,9 +281,9 @@ const Index = () => {
       <section className="py-20 px-6">
         <div className="container mx-auto max-w-4xl text-center">
           <Card className="p-12 bg-gradient-primary text-primary-foreground">
-            <h2 className="text-3xl font-bold mb-4">Want to know more?</h2>
+            <h2 className="text-3xl font-bold mb-4">Got questions?</h2>
             <p className="text-lg mb-8 opacity-90">
-              Chat with my AI assistant to learn more about my experiences, projects, and goals.
+              I built an AI version of myself (EthanGPT) that can answer questions about me. Feel free to ask it anything.
             </p>
             <Link to="/chat">
               <Button size="lg" variant="secondary" className="gap-2">
@@ -301,7 +295,6 @@ const Index = () => {
         </div>
       </section>
 
-
       {/* Footer */}
       <footer className="py-8 px-6 border-t border-border">
         <div className="container mx-auto max-w-6xl text-center space-y-4">
@@ -311,6 +304,8 @@ const Index = () => {
           <p className="text-muted-foreground">© 2025 Ethan Hauger. All rights reserved.</p>
         </div>
       </footer>
-    </div>;
+    </div>
+  );
 };
+
 export default Index;

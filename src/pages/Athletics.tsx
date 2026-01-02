@@ -46,7 +46,7 @@ const Athletics = () => {
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Athletics</h1>
             <p className="text-lg text-muted-foreground">
-              Competing with passion on and off the court
+              I'm not a naturally gifted athlete, but I love basketball. I love seeing improvement over time and watching hard work pay off.
             </p>
           </div>
 
