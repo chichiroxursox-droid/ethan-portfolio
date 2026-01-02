@@ -196,7 +196,7 @@ const Engineering = () => {
                 
                 <div className="space-y-4">
                   <p className="text-gray-400 text-lg leading-relaxed">
-                    For this project, I helped design and build a 16' x 16' shelter. The premise was survival in an apocalypse scenario, but really it was an excuse to learn construction from the ground up—foundation, framing, roofing, all of it.
+                    For this project, I helped design and build a 16' x 16' shelter. The premise was survival in an apocalypse scenario, but really it was an excuse to learn construction from the ground up: foundation, framing, roofing, all of it.
                   </p>
                   
                   <div className="bg-[#111111] border border-gray-800 rounded-lg p-6 space-y-4">
@@ -267,7 +267,7 @@ const Engineering = () => {
                 
                 <div className="space-y-4">
                   <p className="text-gray-400 text-lg leading-relaxed">
-                    Yes, there's a farm in Philadelphia. During a summer engineering program, I worked with a team to build three complete goat houses. It was 90-degree heat, manual labor, and a lot of sweat—but seeing the finished structures made it worth it.
+                    Yes, there's a farm in Philadelphia. During a summer engineering program, I worked with a team to build three complete goat houses. It was 90-degree heat, manual labor, and a lot of sweat, but seeing the finished structures made it worth it.
                   </p>
                   
                   <div className="bg-[#111111] border border-gray-800 rounded-lg p-6 space-y-4">
@@ -345,7 +345,7 @@ const Engineering = () => {
                 
                 <div className="space-y-4">
                   <p className="text-gray-400 text-lg leading-relaxed">
-                    In 10th grade, my team and I built a Rube Goldberg machine. We were responsible for the very first section—the part that kicks off the whole chain reaction. It was a fun exercise in precision and teamwork.
+                    In 10th grade, my team and I built a Rube Goldberg machine. We were responsible for the very first section, the part that kicks off the whole chain reaction. It was a fun exercise in precision and teamwork.
                   </p>
                   
                   <div className="bg-[#111111] border border-gray-800 rounded-lg p-6 space-y-4">

@@ -16,7 +16,7 @@ const Chat = () => {
   useSectionTheme();
   const [messages, setMessages] = useState<Message[]>([{
     role: "assistant",
-    content: "Hey! I'm EthanGPT—basically an AI version of Ethan. I can answer questions about his experiences, interests, projects, or anything else. What do you want to know?"
+    content: "Hey! I'm EthanGPT, basically an AI version of Ethan. I can answer questions about his experiences, interests, projects, or anything else. What do you want to know?"
   }]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
