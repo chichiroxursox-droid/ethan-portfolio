@@ -299,7 +299,7 @@ const Index = () => {
       <footer className="py-8 px-6 border-t border-border">
         <div className="container mx-auto max-w-6xl text-center space-y-4">
           <p className="text-sm text-muted-foreground/70 italic max-w-2xl mx-auto">
-            This website was less about showcasing myself and more about learning how to use AI tools and vibe coding to create something meaningful and cool.
+            This website was less about showcasing myself and more about learning how to use AI tools and vibe coding to create something meaningful and cool. Expect this site to be continuously updated as I learn more!
           </p>
           <p className="text-muted-foreground">© 2025 Ethan Hauger. All rights reserved.</p>
         </div>
