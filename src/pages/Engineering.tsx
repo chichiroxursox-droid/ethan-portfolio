@@ -175,7 +175,7 @@ const Engineering = () => {
               </div>
             </div>
             <p className="text-xl text-gray-400 max-w-2xl font-light">
-              These are some projects I've worked on. I like building things with my hands and solving problems—figuring out how to turn an idea into something real.
+              These are some projects I've worked on in my engineering class. I like figuring out how to turn an idea into something real.
             </p>
           </div>
         </div>
