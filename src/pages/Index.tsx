@@ -110,7 +110,7 @@ const Index = () => {
               <p>
                 One of my proudest achievements was presenting on gun violence at the United Nations with my classmates, advocating for safer communities. Through projects like the Microphone for Peace, a 3D-printed microphone made from{" "}
                 <a 
-                  href="https://reforge-phl-vision.lovable.app" 
+                  href="https://reforgeproject.lovable.app/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-primary hover:underline font-medium"
