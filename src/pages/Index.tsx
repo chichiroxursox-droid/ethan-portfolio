@@ -40,7 +40,7 @@ const Index = () => {
             />
             
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto md:text-xl">
-              I'm a 12th grader at Science Leadership Academy figuring out how to use my gifts to help people. Still learning, still growing.
+              Current 12th grader at Science Leadership Academy, dedicated to making a difference through leadership, service, and innovation.
             </p>
             
             <div className="flex flex-wrap justify-center gap-4 pt-4">
@@ -105,22 +105,22 @@ const Index = () => {
             
             <div className="space-y-4 text-lg text-muted-foreground">
               <p>
-                I'm a student-athlete at SLA@Beeber. I captain the varsity basketball team and serve as NHS treasurer, but honestly, I'm still figuring out what I want to do with my life. What I do know is that I want to use whatever gifts I have to help others.
+                I'm a student-athlete and current 12th grader at SLA@Beeber with a passion for leadership and service. As captain of my varsity basketball team and NHS treasurer, I strive to inspire and support those around me.
               </p>
               <p>
-                One experience that shaped me was speaking at the United Nations on gun violence with my classmates. Being in a room full of world leaders, I felt out of place at first. But then I remembered something I'd seen in Kensington: two people reviving a man who had overdosed with Narcan. In that moment, I realized that making a difference doesn't require being powerful—it requires showing up. Through our club, we created the{" "}
+                One of my proudest achievements was presenting on gun violence at the United Nations with my classmates, advocating for safer communities. Through projects like the Microphone for Peace, a 3D-printed microphone made from{" "}
                 <a 
                   href="https://reforge-phl-vision.lovable.app" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-primary hover:underline font-medium"
                 >
-                  Microphone for Peace
+                  humanium metal
                 </a>
-                , a 3D-printed microphone made from recycled illegal firearms. It's now used by activists in Philadelphia.
+                {" "}(recycled illegal firearms), I've learned that making a difference doesn't require being powerful; it requires showing up and being willing to use whatever gifts you have.
               </p>
               <p>
-                Outside of school, I'm kind of a homebody (I can't help it). I like reading, playing piano, video games, working out, and hanging out with my pitbull-mix, Honey. I'm also a Christian, and my faith grounds me, humbles me, and gives me strength. I try to see people the way Jesus would—as gifts.
+                When I'm not studying or playing basketball, I enjoy reading, working out, playing piano, playing video games, and spending time with my pitbull-mix, Honey. I'm a follower of Christianity and strive to reflect my faith in everything I do.
               </p>
             </div>
           </Card>
