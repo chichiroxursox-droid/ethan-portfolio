@@ -22,7 +22,7 @@ const Contact = () => {
                 </TextShimmer>
               </h1>
               <p className="text-lg text-muted-foreground">
-                Have a question or want to work together? Send me a message and I'll get back to you as soon as possible.
+                Got a question, idea, or just want to say hi? Feel free to reach out—I'd love to hear from you.
               </p>
             </div>
             <ContactForm />

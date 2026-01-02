@@ -16,7 +16,7 @@ const Chat = () => {
   useSectionTheme();
   const [messages, setMessages] = useState<Message[]>([{
     role: "assistant",
-    content: "Hi! I'm EthanGPT, Ethan's personal AI assistant. I can answer any questions you have about Ethan's experiences, projects, skills, or goals. What would you like to know?"
+    content: "Hey! I'm EthanGPT—basically an AI version of Ethan. I can answer questions about his experiences, interests, projects, or anything else. What do you want to know?"
   }]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -75,7 +75,7 @@ const Chat = () => {
           <div className="text-center mb-8">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Chat with EthanGPT</h1>
             <p className="text-muted-foreground text-lg">
-              Ask me anything about Ethan's experiences, projects, and goals
+              I trained an AI on information about me. Ask it whatever you want.
             </p>
           </div>
 
