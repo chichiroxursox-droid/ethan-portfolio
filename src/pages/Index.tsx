@@ -190,7 +190,7 @@ const Index = () => {
                 <Badge variant="outline">June 2024</Badge>
               </div>
               <p className="text-muted-foreground">
-                I had never been given such an important opportunity, and I had never been so nervous. But being in that room showed me that change doesn't require power—it requires presence, persistence, and purpose. Together with my classmates, we helped create the Microphone for Peace, now used by activists in Philadelphia and beyond.
+                Presented a speech at the United Nations with classmates, speaking out against illegal firearms and gun violence. Led the creation of the Microphone for Peace, a 3D-printed microphone made from humanium metal (recycled illegal firearms).
               </p>
             </Card>
 
@@ -203,7 +203,7 @@ const Index = () => {
                 <Badge variant="outline">May 2024 - Present</Badge>
               </div>
               <p className="text-muted-foreground">
-                I handle the chapter's finances and help organize community service events. One of my favorite things we did was put together the school's first student vs. staff basketball game—it was a blast.
+                Elected NHS Officer, managing chapter finances and organizing community service events including the school's first student vs. staff basketball game.
               </p>
             </Card>
 
@@ -216,7 +216,7 @@ const Index = () => {
                 <Badge variant="outline">April 2024 - Present</Badge>
               </div>
               <p className="text-muted-foreground">
-                I started my own basketball coaching business for beginners. I made the flyers, went door-to-door, and now I coach 7 clients. It's taught me that patient encouragement can unlock potential kids didn't know they had.
+                Launched self-run basketball coaching business. Created marketing materials, marketed locally, and currently coaching 7 beginner clients.
               </p>
             </Card>
 
@@ -229,7 +229,7 @@ const Index = () => {
                 <Badge variant="outline">Summers 2023-2025</Badge>
               </div>
               <p className="text-muted-foreground">
-                Math Corps had me tutoring younger students. Penn RSSA was a research program at the University of Pennsylvania. And C2L? That's where I spent a summer building goat houses with my engineering teacher—yes, there's a farm in Philadelphia, and yes, it was 90-degree heat.
+                Tutored younger students in math, participated in University of Pennsylvania research program, and worked with engineering teacher to design, construct, and install goat houses.
               </p>
             </Card>
           </div>
