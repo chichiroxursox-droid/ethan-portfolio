@@ -45,9 +45,6 @@ const Athletics = () => {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Athletics</h1>
-            <p className="text-lg text-muted-foreground">
-              I'm not a naturally gifted athlete, but I love basketball. I love seeing improvement over time and watching hard work pay off.
-            </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
