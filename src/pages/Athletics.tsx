@@ -13,7 +13,7 @@ const Athletics = () => {
     { season: "2022-23 (Fr. Var)", team: "Varsity", ppg: 1.8, rpg: 1.2, apg: 0.0 },
     { season: "2023-24 (So.)", team: "Varsity", ppg: 5.4, rpg: 0.8, apg: 0.8 },
     { season: "2024-25 (Jr.)", team: "Varsity", ppg: 8.3, rpg: 0.0, apg: 0.0 },
-    { season: "2025-26 (Sr.)*", team: "Varsity", ppg: 14.0, rpg: 0.0, apg: 0.0 },
+    { season: "2025-26 (Sr.)", team: "Varsity", ppg: 16.0, rpg: 0.0, apg: 0.0 },
   ];
 
   const teamComparisonData = [
@@ -69,18 +69,18 @@ const Athletics = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="p-4 bg-primary/10 rounded-lg border-l-4 border-primary">
-                  <h4 className="font-bold text-lg mb-1">Best Game Performance</h4>
-                  <p className="text-2xl font-bold text-primary">21 Points • 8 Assists</p>
+                  <h4 className="font-bold text-lg mb-1">Career High</h4>
+                  <p className="text-2xl font-bold text-primary">29 Points • 5 Assists</p>
                   <p className="text-sm text-muted-foreground mt-1">School Team</p>
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="p-4 bg-muted rounded-lg text-center">
-                    <p className="text-3xl font-bold text-foreground">295+</p>
+                    <p className="text-3xl font-bold text-foreground">400+</p>
                     <p className="text-sm text-muted-foreground">Total Career Points</p>
                   </div>
                   <div className="p-4 bg-muted rounded-lg text-center">
-                    <p className="text-3xl font-bold text-foreground">45</p>
+                    <p className="text-3xl font-bold text-foreground">55</p>
                     <p className="text-sm text-muted-foreground">Games Played</p>
                   </div>
                 </div>
@@ -170,10 +170,10 @@ const Athletics = () => {
                     </TableHeader>
                     <TableBody>
                       <TableRow>
-                        <TableCell className="font-medium">2025-26 (Sr.)*</TableCell>
+                        <TableCell className="font-medium">2025-26 (Sr.)</TableCell>
                         <TableCell className="text-center">Varsity</TableCell>
-                        <TableCell className="text-center">8</TableCell>
-                        <TableCell className="text-center font-semibold">14.0</TableCell>
+                        <TableCell className="text-center">14</TableCell>
+                        <TableCell className="text-center font-semibold">16.0</TableCell>
                         <TableCell className="text-center">-</TableCell>
                         <TableCell className="text-center">-</TableCell>
                       </TableRow>
@@ -196,15 +196,10 @@ const Athletics = () => {
                       <TableRow className="bg-muted/50">
                         <TableCell className="font-bold">Varsity Total</TableCell>
                         <TableCell className="text-center">-</TableCell>
-                        <TableCell className="text-center font-bold">36</TableCell>
-                        <TableCell className="text-center font-bold">8.1</TableCell>
+                        <TableCell className="text-center font-bold">42</TableCell>
+                        <TableCell className="text-center font-bold">9.5</TableCell>
                         <TableCell className="text-center">-</TableCell>
                         <TableCell className="text-center">-</TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell colSpan={6} className="text-xs text-muted-foreground italic pt-4">
-                          * Season in progress
-                        </TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
