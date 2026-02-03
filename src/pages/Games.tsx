@@ -46,6 +46,45 @@ const Games = () => {
           <div className="mt-8">
             <TerminalHacker />
           </div>
+
+          {/* Humanium Game Section */}
+          <div className="mt-16 space-y-4">
+            <div className="inline-block">
+              <span className="font-mono text-xs tracking-wider text-[#FFD700] uppercase bg-[#FFD700]/10 px-3 py-1 rounded-full border border-[#FFD700]/20">
+                Humanium Metal
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-white">
+              The Humanium<br />
+              <span className="bg-gradient-to-r from-[#FFD700] to-[#FFA500] bg-clip-text text-transparent">
+                Game
+              </span>
+            </h2>
+            <p className="text-xl text-gray-400 max-w-2xl font-light">
+              An interactive experience exploring the Humanium Metal initiative — turning weapons into peace.
+            </p>
+            
+            <div className="mt-8 rounded-xl overflow-hidden border border-white/10 bg-black/50">
+              <iframe
+                src="https://icampwcu.org/games/Humanium/"
+                title="Humanium Game"
+                className="w-full aspect-video"
+                allow="fullscreen"
+                style={{ minHeight: '600px' }}
+              />
+            </div>
+            <p className="text-sm text-gray-500 mt-2">
+              Built with Construct 3 • Part of the{' '}
+              <a 
+                href="https://reforgeproject.lovable.app/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-[#FFD700] hover:underline"
+              >
+                Humanium Metal Project
+              </a>
+            </p>
+          </div>
         </div>
       </main>
     </div>
