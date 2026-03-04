@@ -155,7 +155,7 @@ const AIProjects = () => {
             return (
               <div
                 key={project.name}
-                className="group relative bg-white/[0.03] border border-[#8B5CF6]/20 rounded-2xl p-6 hover:border-[#8B5CF6]/50 hover:bg-white/[0.06] transition-all duration-300 hover:-translate-y-1"
+                className="group relative bg-white/[0.03] border border-[#8B5CF6]/20 rounded-2xl p-6 hover:border-[#8B5CF6]/50 hover:bg-white/[0.06] transition-[transform,border-color,background-color] duration-300 hover:-translate-y-1"
               >
                 {/* Top row: icon + status */}
                 <div className="flex items-start justify-between mb-4">
