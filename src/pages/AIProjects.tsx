@@ -75,10 +75,8 @@ const AIProjects = () => {
                 linear-gradient(to bottom, rgba(139, 92, 246, 0.08) 1px, transparent 1px)
               `,
               backgroundSize: "50px 50px",
-              maskImage:
-                "radial-gradient(ellipse 80% 50% at 50% 0%, black 40%, transparent 100%)",
-              WebkitMaskImage:
-                "radial-gradient(ellipse 80% 50% at 50% 0%, black 40%, transparent 100%)",
+              maskImage: "radial-gradient(ellipse 80% 50% at 50% 0%, black 40%, transparent 100%)",
+              WebkitMaskImage: "radial-gradient(ellipse 80% 50% at 50% 0%, black 40%, transparent 100%)",
             }}
           />
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#8B5CF6]/15 rounded-full blur-[120px] animate-pulse" />
@@ -92,9 +90,7 @@ const AIProjects = () => {
         <div
           ref={heroReveal.ref}
           className={`max-w-4xl mx-auto mb-20 text-center relative z-10 transition-all duration-700 ${
-            heroReveal.isVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-8"
+            heroReveal.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
           {/* Sparkles */}
@@ -127,17 +123,14 @@ const AIProjects = () => {
 
           {/* Tagline */}
           <p className="text-lg text-gray-400 max-w-xl mx-auto mb-8 leading-relaxed">
-            Real products, real code — built by a high school senior using
-            Claude Code.
+            Real products, real code — built by a high school senior using Claude Code.
           </p>
 
           {/* Narrative intro */}
           <p className="text-base text-gray-500 max-w-2xl mx-auto leading-relaxed">
-            I'm a senior at SLA Beeber who's been using Claude Code as a
-            development partner to ship real products. Since late 2025, I've
-            launched a full-stack web app, co-founded an AI startup, built a
-            Python automation bot, and created educational AI content — all
-            using Claude Code.
+            I'm a senior at SLA Beeber who's been using Claude Code as a development partner to ship real products.
+            Since late 2025, I've launched a full-stack web app, co-founded an AI startup, built a Python automation
+            bot, and created educational AI content — all using Claude Code.
           </p>
         </div>
 
@@ -145,9 +138,7 @@ const AIProjects = () => {
         <div
           ref={cardsReveal.ref}
           className={`max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10 transition-all duration-700 delay-150 ${
-            cardsReveal.isVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-8"
+            cardsReveal.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
           {projects.map((project) => {
@@ -164,34 +155,22 @@ const AIProjects = () => {
                   >
                     <Icon className="w-5 h-5 text-white" />
                   </div>
-                  <span
-                    className={`text-xs font-medium px-2.5 py-1 rounded-full border ${project.statusColor}`}
-                  >
+                  <span className={`text-xs font-medium px-2.5 py-1 rounded-full border ${project.statusColor}`}>
                     {project.status}
                   </span>
                 </div>
 
                 {/* Name + brand */}
                 <div className="mb-1">
-                  <h3 className="text-xl font-bold text-white">
-                    {project.name}
-                  </h3>
-                  {project.brand && (
-                    <p className="text-sm text-[#A78BFA] font-mono">
-                      {project.brand}
-                    </p>
-                  )}
+                  <h3 className="text-xl font-bold text-white">{project.name}</h3>
+                  {project.brand && <p className="text-sm text-[#A78BFA] font-mono">{project.brand}</p>}
                 </div>
 
                 {/* Tagline */}
-                <p className="text-sm text-gray-400 mb-3 font-medium">
-                  {project.tagline}
-                </p>
+                <p className="text-sm text-gray-400 mb-3 font-medium">{project.tagline}</p>
 
                 {/* Description */}
-                <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                  {project.description}
-                </p>
+                <p className="text-sm text-gray-500 leading-relaxed mb-4">{project.description}</p>
 
                 {/* Tech stack chips */}
                 <div className="flex flex-wrap gap-2">
@@ -211,7 +190,7 @@ const AIProjects = () => {
 
         {/* Footer note */}
         <p className="text-center text-gray-600 text-xs font-mono mt-16 relative z-10">
-          This portfolio was also built with Claude Code.
+          This page of the portfolio was also built with Claude Code.
         </p>
       </main>
     </div>
