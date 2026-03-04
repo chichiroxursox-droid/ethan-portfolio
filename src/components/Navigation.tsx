@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
-import { MessageSquare, User, Mail, Wrench, Trophy, Gamepad2, LogOut } from "lucide-react";
+import { MessageSquare, User, Mail, Wrench, Trophy, Gamepad2, LogOut, Brain } from "lucide-react";
 import { Theme } from "./ui/theme";
 import { useAuth } from "@/contexts/AuthContext";
 import {
@@ -18,7 +18,8 @@ const Navigation = () => {
   const isAthleticsPage = location.pathname === "/athletics";
   const isMusicPage = location.pathname === "/chat";
   const isActivismPage = location.pathname === "/contact";
-  
+  const isAIPage = location.pathname === "/ai-projects";
+
   const getNavStyle = () => {
     if (isEngineeringPage) {
       return 'bg-[#0A0A0A]/80 backdrop-blur-md border-[#00FF9F]/20';
@@ -28,6 +29,8 @@ const Navigation = () => {
       return 'bg-background/80 backdrop-blur-md border-music/30';
     } else if (isActivismPage) {
       return 'bg-background/80 backdrop-blur-md border-activism/30';
+    } else if (isAIPage) {
+      return 'bg-[#0A0820]/80 backdrop-blur-md border-[#8B5CF6]/20';
     }
     return 'bg-background/80 backdrop-blur-md border-border';
   };
@@ -40,6 +43,8 @@ const Navigation = () => {
             <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg transition-all duration-500 ${
               isEngineeringPage
                 ? 'bg-gradient-to-r from-[#00FF9F] to-[#00D9FF] text-black'
+                : isAIPage
+                ? 'bg-gradient-to-r from-[#8B5CF6] to-[#C084FC] text-white'
                 : isAthleticsPage
                 ? 'bg-gradient-to-r from-athletics to-athletics-accent text-white'
                 : isMusicPage
@@ -51,7 +56,7 @@ const Navigation = () => {
               EH
             </div>
             <span className={`font-semibold text-lg transition-all duration-500 ${
-              isEngineeringPage ? 'text-white font-mono' : ''
+              isEngineeringPage ? 'text-white font-mono' : isAIPage ? 'text-white' : ''
             }`}>Ethan Hauger</span>
           </Link>
           
@@ -84,6 +89,24 @@ const Navigation = () => {
               >
                 <Wrench className="w-4 h-4" />
                 Engineering
+              </Button>
+            </Link>
+            <Link to="/ai-projects">
+              <Button
+                variant={location.pathname === "/ai-projects" ? "default" : "ghost"}
+                size="sm"
+                className={`gap-2 ${
+                  isAIPage && location.pathname === "/ai-projects"
+                    ? 'bg-gradient-to-r from-[#8B5CF6] to-[#C084FC] text-white hover:opacity-90'
+                    : isAIPage
+                    ? 'text-gray-300 hover:text-white hover:bg-[#8B5CF6]/10'
+                    : isEngineeringPage
+                    ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10'
+                    : ''
+                }`}
+              >
+                <Brain className="w-4 h-4" />
+                AI
               </Button>
             </Link>
             <Link to="/athletics">
