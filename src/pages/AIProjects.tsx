@@ -7,7 +7,7 @@ import { Brain, Bot, Globe, Mic, Video } from "lucide-react";
 const projects = [
   {
     name: "CULTIVaITE",
-    brand: "fAIthful.ly",
+    brand: null,
     tagline: "AI-powered communications for small nonprofits",
     description:
       "Co-founded an AI startup to help churches, Christian schools, and rescue missions automate repetitive communications — newsletters, donor emails, social posts, and board updates. Currently piloting with a real client.",
@@ -116,7 +116,7 @@ const AIProjects = () => {
           {/* Title */}
           <h1 className="text-6xl md:text-7xl font-bold leading-tight mb-6">
             <span className="text-white">Building</span>{" "}
-            <span className="bg-gradient-to-r from-[#8B5CF6] via-[#A78BFA] to-[#C084FC] bg-clip-text text-transparent">
+            <span className="text-[#C084FC]">
               with AI
             </span>
           </h1>
