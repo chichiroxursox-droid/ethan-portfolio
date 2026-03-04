@@ -100,8 +100,6 @@ const Navigation = () => {
                 className={`gap-2 ${
                   isAIPage
                     ? 'bg-gradient-to-r from-[#8B5CF6] to-[#C084FC] text-white hover:opacity-90'
-                    : isAIPage
-                    ? 'text-gray-300 hover:text-white hover:bg-[#8B5CF6]/10'
                     : isEngineeringPage
                     ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10'
                     : ''
