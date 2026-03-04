@@ -66,8 +66,10 @@ const Navigation = () => {
                 variant={location.pathname === "/home" ? "default" : "ghost"}
                 size="sm"
                 className={`gap-2 ${
-                  isEngineeringPage && location.pathname !== "/home" 
-                    ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10' 
+                  isEngineeringPage && location.pathname !== "/home"
+                    ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10'
+                    : isAIPage && location.pathname !== "/ai-projects"
+                    ? 'text-gray-300 hover:text-white hover:bg-[#8B5CF6]/10'
                     : ''
                 }`}
               >
@@ -96,7 +98,7 @@ const Navigation = () => {
                 variant={location.pathname === "/ai-projects" ? "default" : "ghost"}
                 size="sm"
                 className={`gap-2 ${
-                  isAIPage && location.pathname === "/ai-projects"
+                  isAIPage
                     ? 'bg-gradient-to-r from-[#8B5CF6] to-[#C084FC] text-white hover:opacity-90'
                     : isAIPage
                     ? 'text-gray-300 hover:text-white hover:bg-[#8B5CF6]/10'
@@ -114,8 +116,10 @@ const Navigation = () => {
                 variant={location.pathname === "/athletics" ? "default" : "ghost"}
                 size="sm"
                 className={`gap-2 ${
-                  isEngineeringPage && location.pathname !== "/athletics" 
-                    ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10' 
+                  isEngineeringPage && location.pathname !== "/athletics"
+                    ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10'
+                    : isAIPage && location.pathname !== "/ai-projects"
+                    ? 'text-gray-300 hover:text-white hover:bg-[#8B5CF6]/10'
                     : ''
                 }`}
               >
@@ -128,8 +132,10 @@ const Navigation = () => {
                 variant={location.pathname === "/games" ? "default" : "ghost"}
                 size="sm"
                 className={`gap-2 ${
-                  isEngineeringPage && location.pathname !== "/games" 
-                    ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10' 
+                  isEngineeringPage && location.pathname !== "/games"
+                    ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10'
+                    : isAIPage && location.pathname !== "/ai-projects"
+                    ? 'text-gray-300 hover:text-white hover:bg-[#8B5CF6]/10'
                     : ''
                 }`}
               >
@@ -142,8 +148,10 @@ const Navigation = () => {
                 variant={location.pathname === "/chat" ? "default" : "ghost"}
                 size="sm"
                 className={`gap-2 ${
-                  isEngineeringPage && location.pathname !== "/chat" 
-                    ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10' 
+                  isEngineeringPage && location.pathname !== "/chat"
+                    ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10'
+                    : isAIPage && location.pathname !== "/ai-projects"
+                    ? 'text-gray-300 hover:text-white hover:bg-[#8B5CF6]/10'
                     : ''
                 }`}
               >
@@ -156,8 +164,10 @@ const Navigation = () => {
                 variant={location.pathname === "/contact" ? "default" : "ghost"}
                 size="sm"
                 className={`gap-2 ${
-                  isEngineeringPage && location.pathname !== "/contact" 
-                    ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10' 
+                  isEngineeringPage && location.pathname !== "/contact"
+                    ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10'
+                    : isAIPage && location.pathname !== "/ai-projects"
+                    ? 'text-gray-300 hover:text-white hover:bg-[#8B5CF6]/10'
                     : ''
                 }`}
               >
