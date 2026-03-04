@@ -8,7 +8,7 @@ export const useSectionTheme = () => {
     const body = document.body;
     
     // Remove all theme classes
-    body.classList.remove('theme-engineering', 'theme-athletics', 'theme-music', 'theme-activism');
+    body.classList.remove('theme-engineering', 'theme-athletics', 'theme-music', 'theme-activism', 'theme-ai');
     
     // Add appropriate theme class based on route
     if (location.pathname === '/engineering') {
@@ -19,6 +19,8 @@ export const useSectionTheme = () => {
       body.classList.add('theme-music');
     } else if (location.pathname === '/contact') {
       body.classList.add('theme-activism');
+    } else if (location.pathname === '/ai-projects') {
+      body.classList.add('theme-ai');
     }
   }, [location.pathname]);
 
