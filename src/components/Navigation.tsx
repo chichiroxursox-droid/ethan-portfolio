@@ -19,6 +19,7 @@ const Navigation = () => {
   const isMusicPage = location.pathname === "/chat";
   const isActivismPage = location.pathname === "/contact";
   const isAIPage = location.pathname === "/ai-projects";
+  const aiGhostButtonClass = isAIPage ? "text-foreground hover:text-foreground hover:bg-accent/60" : "";
 
   const getNavStyle = () => {
     if (isEngineeringPage) {
@@ -36,7 +37,7 @@ const Navigation = () => {
   };
   
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-500 ${getNavStyle()}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-500 ${isAIPage ? 'dark text-foreground' : ''} ${getNavStyle()}`}>
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group">
@@ -56,7 +57,7 @@ const Navigation = () => {
               EH
             </div>
             <span className={`font-semibold text-lg transition-all duration-500 ${
-              isEngineeringPage ? 'text-white font-mono' : isAIPage ? 'text-white' : ''
+              isEngineeringPage ? 'text-white font-mono' : isAIPage ? 'text-foreground' : ''
             }`}>Ethan Hauger</span>
           </Link>
           
@@ -68,8 +69,8 @@ const Navigation = () => {
                 className={`gap-2 ${
                   isEngineeringPage && location.pathname !== "/home"
                     ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10'
-                    : isAIPage && location.pathname !== "/ai-projects"
-                    ? 'text-gray-300 hover:text-white hover:bg-[#8B5CF6]/10'
+                    : isAIPage
+                    ? aiGhostButtonClass
                     : ''
                 }`}
               >
@@ -86,6 +87,8 @@ const Navigation = () => {
                     ? 'bg-gradient-to-r from-[#00FF9F] to-[#00D9FF] text-black hover:opacity-90'
                     : isEngineeringPage
                     ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10'
+                    : isAIPage
+                    ? aiGhostButtonClass
                     : ''
                 }`}
               >
@@ -116,8 +119,8 @@ const Navigation = () => {
                 className={`gap-2 ${
                   isEngineeringPage && location.pathname !== "/athletics"
                     ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10'
-                    : isAIPage && location.pathname !== "/ai-projects"
-                    ? 'text-gray-300 hover:text-white hover:bg-[#8B5CF6]/10'
+                    : isAIPage
+                    ? aiGhostButtonClass
                     : ''
                 }`}
               >
@@ -132,8 +135,8 @@ const Navigation = () => {
                 className={`gap-2 ${
                   isEngineeringPage && location.pathname !== "/games"
                     ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10'
-                    : isAIPage && location.pathname !== "/ai-projects"
-                    ? 'text-gray-300 hover:text-white hover:bg-[#8B5CF6]/10'
+                    : isAIPage
+                    ? aiGhostButtonClass
                     : ''
                 }`}
               >
@@ -148,8 +151,8 @@ const Navigation = () => {
                 className={`gap-2 ${
                   isEngineeringPage && location.pathname !== "/chat"
                     ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10'
-                    : isAIPage && location.pathname !== "/ai-projects"
-                    ? 'text-gray-300 hover:text-white hover:bg-[#8B5CF6]/10'
+                    : isAIPage
+                    ? aiGhostButtonClass
                     : ''
                 }`}
               >
@@ -164,8 +167,8 @@ const Navigation = () => {
                 className={`gap-2 ${
                   isEngineeringPage && location.pathname !== "/contact"
                     ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10'
-                    : isAIPage && location.pathname !== "/ai-projects"
-                    ? 'text-gray-300 hover:text-white hover:bg-[#8B5CF6]/10'
+                    : isAIPage
+                    ? aiGhostButtonClass
                     : ''
                 }`}
               >
@@ -184,6 +187,8 @@ const Navigation = () => {
                     className={`gap-2 ${
                       isEngineeringPage
                         ? 'text-gray-300 hover:text-white hover:bg-[#00FF9F]/10'
+                        : isAIPage
+                        ? aiGhostButtonClass
                         : ''
                     }`}
                   >
