@@ -30,7 +30,7 @@ const Navigation = () => {
     } else if (isActivismPage) {
       return 'bg-background/80 backdrop-blur-md border-activism/30';
     } else if (isAIPage) {
-      return 'bg-[#0A0820]/80 backdrop-blur-md border-[#8B5CF6]/20';
+      return 'bg-[#0A0820]/90 backdrop-blur-md border-[#8B5CF6]/20';
     }
     return 'bg-background/80 backdrop-blur-md border-border';
   };
