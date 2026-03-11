@@ -50,7 +50,7 @@ const projects = [
     tech: ["Python", "Gmail API", "Claude API", "OAuth"],
     status: "In Development",
     statusColor: "bg-orange-500/20 text-orange-400 border-orange-500/30",
-    icon: Bot,
+    icon: Mail,
     accentColor: "from-violet-600 to-indigo-600",
   },
 ];
