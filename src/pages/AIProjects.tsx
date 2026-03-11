@@ -2,7 +2,7 @@ import Navigation from "@/components/Navigation";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { useSectionTheme } from "@/hooks/use-section-theme";
 import { SparklesCore } from "@/components/ui/sparkles";
-import { Brain, Bot, Globe, Mic, Mail, Waves, ExternalLink } from "lucide-react";
+import { Brain, Bot, Globe, Mic, Mail } from "lucide-react";
 
 const projects = [
   {
@@ -16,7 +16,6 @@ const projects = [
     statusColor: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
     icon: Globe,
     accentColor: "from-violet-500 to-purple-600",
-    link: null,
   },
   {
     name: "ClassBot",
@@ -29,10 +28,9 @@ const projects = [
     statusColor: "bg-orange-500/20 text-orange-400 border-orange-500/30",
     icon: Mic,
     accentColor: "from-purple-500 to-violet-600",
-    link: null,
   },
   {
-    name: "The Lamppost",
+    name: "The Lamppost - lamppost.life",
     brand: null,
     tagline: "Full-stack family web platform with auth and community features",
     description:
@@ -42,20 +40,6 @@ const projects = [
     statusColor: "bg-blue-500/20 text-blue-400 border-blue-500/30",
     icon: Bot,
     accentColor: "from-fuchsia-500 to-purple-600",
-    link: null,
-  },
-  {
-    name: "Luminary",
-    brand: null,
-    tagline: "Cinematic scroll-driven website with frame-by-frame video playback",
-    description:
-      "A visually stunning deep-sea themed website featuring scroll-triggered video that plays frame by frame as you scroll. Built with advanced scroll animations, bioluminescent visual effects, and cinematic storytelling.",
-    tech: ["HTML", "CSS", "JavaScript", "Scroll Animation"],
-    status: "Complete",
-    statusColor: "bg-blue-500/20 text-blue-400 border-blue-500/30",
-    icon: Waves,
-    accentColor: "from-cyan-500 to-blue-600",
-    link: "https://luminaryv1.netlify.app/",
   },
   {
     name: "Gmail Inbox Organizer",
@@ -68,7 +52,6 @@ const projects = [
     statusColor: "bg-orange-500/20 text-orange-400 border-orange-500/30",
     icon: Mail,
     accentColor: "from-violet-600 to-indigo-600",
-    link: null,
   },
 ];
 
@@ -211,18 +194,6 @@ const AIProjects = () => {
                     </span>
                   ))}
                 </div>
-
-                {/* Live link */}
-                {project.link && (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 mt-4 text-sm text-[#A78BFA] hover:text-[#C084FC] transition-colors font-medium"
-                  >
-                    View Live <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                )}
               </div>
             );
           })}
