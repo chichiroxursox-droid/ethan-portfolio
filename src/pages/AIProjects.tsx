@@ -115,10 +115,7 @@ const AIProjects = () => {
 
           {/* Title */}
           <h1 className="text-6xl md:text-7xl font-bold leading-tight mb-6">
-            <span className="text-white">Building</span>{" "}
-            <span className="text-[#C084FC]">
-              with AI
-            </span>
+            <span className="text-white">Building</span> <span className="text-[#C084FC]">with AI</span>
           </h1>
 
           {/* Tagline */}
@@ -129,8 +126,8 @@ const AIProjects = () => {
           {/* Narrative intro */}
           <p className="text-base text-gray-500 max-w-2xl mx-auto leading-relaxed">
             I'm a senior at SLA Beeber who's been using Claude Code as a development partner to ship real products.
-            Since late 2025, I've launched a full-stack web app, co-founded an AI startup, built a Python automation
-            bot, and created educational AI content — all using Claude Code.
+            Since late 2025, I've launched a full-stack web app, co-founded an AI startup, and built a Python automation
+            bot — all using Claude Code.
           </p>
         </div>
 
