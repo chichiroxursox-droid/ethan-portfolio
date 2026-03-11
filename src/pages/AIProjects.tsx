@@ -211,6 +211,18 @@ const AIProjects = () => {
                     </span>
                   ))}
                 </div>
+
+                {/* Live link */}
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 mt-4 text-sm text-[#A78BFA] hover:text-[#C084FC] transition-colors font-medium"
+                  >
+                    View Live <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                )}
               </div>
             );
           })}
