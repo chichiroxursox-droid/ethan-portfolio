@@ -173,9 +173,9 @@ const Athletics = () => {
                         <TableCell className="font-medium">2025-26 (Sr.)</TableCell>
                         <TableCell className="text-center">Varsity</TableCell>
                         <TableCell className="text-center">14</TableCell>
-                        <TableCell className="text-center font-semibold">16.0</TableCell>
+                        <TableCell className="text-center font-semibold">14.0</TableCell>
                         <TableCell className="text-center">-</TableCell>
-                        <TableCell className="text-center">-</TableCell>
+                        <TableCell className="text-center">5.0</TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell className="font-medium">2024-25 (Jr.)</TableCell>
