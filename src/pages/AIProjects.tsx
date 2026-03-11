@@ -2,7 +2,7 @@ import Navigation from "@/components/Navigation";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { useSectionTheme } from "@/hooks/use-section-theme";
 import { SparklesCore } from "@/components/ui/sparkles";
-import { Brain, Bot, Globe, Mic, Video } from "lucide-react";
+import { Brain, Bot, Globe, Mic, Mail } from "lucide-react";
 
 const projects = [
   {
@@ -42,15 +42,15 @@ const projects = [
     accentColor: "from-fuchsia-500 to-purple-600",
   },
   {
-    name: "AI Reality Check",
+    name: "Gmail Inbox Organizer",
     brand: null,
-    tagline: "Educational YouTube/TikTok series about AI for students",
+    tagline: "AI-powered email classification and auto-reply drafting",
     description:
-      "A planned content series with three pillars: AI awareness, practical tool demos, and student preparation for an AI-shaped future. Full scripts, content calendar, and b-roll shot lists already written.",
-    tech: ["Content Creation", "Scripting", "Video Production"],
-    status: "In Production",
-    statusColor: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
-    icon: Video,
+      "A Python pipeline that connects to Gmail via OAuth, fetches unread emails, and classifies them using Claude AI to auto-apply labels. It also drafts replies in your voice by learning your tone and phrasing from sent emails. Runs end-to-end with a single command.",
+    tech: ["Python", "Gmail API", "Claude API", "OAuth"],
+    status: "In Development",
+    statusColor: "bg-orange-500/20 text-orange-400 border-orange-500/30",
+    icon: Mail,
     accentColor: "from-violet-600 to-indigo-600",
   },
 ];
