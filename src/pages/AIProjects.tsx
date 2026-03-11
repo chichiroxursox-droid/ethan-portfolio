@@ -16,6 +16,7 @@ const projects = [
     statusColor: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
     icon: Globe,
     accentColor: "from-violet-500 to-purple-600",
+    link: null,
   },
   {
     name: "ClassBot",
@@ -28,6 +29,7 @@ const projects = [
     statusColor: "bg-orange-500/20 text-orange-400 border-orange-500/30",
     icon: Mic,
     accentColor: "from-purple-500 to-violet-600",
+    link: null,
   },
   {
     name: "The Lamppost",
@@ -40,6 +42,20 @@ const projects = [
     statusColor: "bg-blue-500/20 text-blue-400 border-blue-500/30",
     icon: Bot,
     accentColor: "from-fuchsia-500 to-purple-600",
+    link: null,
+  },
+  {
+    name: "Luminary",
+    brand: null,
+    tagline: "Cinematic scroll-driven website with frame-by-frame video playback",
+    description:
+      "A visually stunning deep-sea themed website featuring scroll-triggered video that plays frame by frame as you scroll. Built with advanced scroll animations, bioluminescent visual effects, and cinematic storytelling.",
+    tech: ["HTML", "CSS", "JavaScript", "Scroll Animation"],
+    status: "Complete",
+    statusColor: "bg-blue-500/20 text-blue-400 border-blue-500/30",
+    icon: Waves,
+    accentColor: "from-cyan-500 to-blue-600",
+    link: "https://luminaryv1.netlify.app/",
   },
   {
     name: "Gmail Inbox Organizer",
@@ -52,6 +68,7 @@ const projects = [
     statusColor: "bg-orange-500/20 text-orange-400 border-orange-500/30",
     icon: Mail,
     accentColor: "from-violet-600 to-indigo-600",
+    link: null,
   },
 ];
 
