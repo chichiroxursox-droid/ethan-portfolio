@@ -186,7 +186,7 @@ const AIProjects = () => {
                 {(project.name === "ClassBot" || project.name === "Gmail Inbox Organizer") && (
                   <div className="mb-4 rounded-lg overflow-hidden border border-[#8B5CF6]/20">
                     <video
-                      src="/videos/classbot-demo.mov"
+                      src={project.name === "ClassBot" ? "/videos/classbot-demo.mov" : "/videos/gmail-organizer-demo.mov"}
                       controls
                       muted
                       playsInline
