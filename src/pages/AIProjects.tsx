@@ -196,6 +196,19 @@ const AIProjects = () => {
                   </div>
                 )}
 
+                {/* Embedded preview for Luminary */}
+                {project.name === "Luminary" && (
+                  <div className="mb-4 rounded-lg overflow-hidden border border-[#8B5CF6]/20 aspect-video">
+                    <iframe
+                      src="https://luminaryv1.netlify.app/"
+                      title="Luminary - Scroll Animation Demo"
+                      className="w-full h-full rounded-lg"
+                      sandbox="allow-scripts allow-same-origin"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
+
                 {/* View Live link */}
                 {(project as any).link && (
                   <a
