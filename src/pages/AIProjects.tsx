@@ -36,8 +36,8 @@ const projects = [
     description:
       "Built a complete web app for a family member with user authentication, a donation page, community stories section, prayer/promise wall, and email signup. Lovable for the frontend, Supabase handling all backend logic.",
     tech: ["React", "Vite", "Supabase", "TypeScript", "Tailwind"],
-    status: "Complete",
-    statusColor: "bg-blue-500/20 text-blue-400 border-blue-500/30",
+    status: "Active",
+    statusColor: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
     icon: Bot,
     accentColor: "from-fuchsia-500 to-purple-600",
   },
@@ -182,11 +182,11 @@ const AIProjects = () => {
                 {/* Description */}
                 <p className="text-sm text-gray-500 leading-relaxed mb-4">{project.description}</p>
 
-                {/* Demo videos */}
-                {(project.name === "ClassBot" || project.name === "Gmail Inbox Organizer") && (
+                {/* Demo video for ClassBot */}
+                {project.name === "ClassBot" && (
                   <div className="mb-4 rounded-lg overflow-hidden border border-[#8B5CF6]/20">
                     <video
-                      src={project.name === "ClassBot" ? "/videos/classbot-demo.mov" : "/videos/gmail-organizer-demo.mov"}
+                      src="/videos/classbot-demo.mov"
                       controls
                       muted
                       playsInline
