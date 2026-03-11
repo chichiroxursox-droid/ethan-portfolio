@@ -2,7 +2,7 @@ import Navigation from "@/components/Navigation";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { useSectionTheme } from "@/hooks/use-section-theme";
 import { SparklesCore } from "@/components/ui/sparkles";
-import { Brain, Bot, Globe, Mic, Mail } from "lucide-react";
+import { Brain, Bot, Globe, Mic, Mail, Waves, ExternalLink } from "lucide-react";
 
 const projects = [
   {
