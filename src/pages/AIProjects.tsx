@@ -53,6 +53,19 @@ const projects = [
     icon: Mail,
     accentColor: "from-violet-600 to-indigo-600",
   },
+  {
+    name: "Luminary",
+    brand: null,
+    tagline: "Cinematic scroll-driven video playback website",
+    description:
+      "A visually striking website with a frame-by-frame video scroll animation. As users scroll, video frames advance in sync, creating a cinematic storytelling experience. Built entirely with vanilla web technologies and custom scroll logic.",
+    tech: ["HTML", "CSS", "JavaScript", "Scroll Animation"],
+    status: "Complete",
+    statusColor: "bg-blue-500/20 text-blue-400 border-blue-500/30",
+    icon: Waves,
+    accentColor: "from-cyan-500 to-blue-600",
+    link: "https://luminaryv1.netlify.app/",
+  },
 ];
 
 const AIProjects = () => {
