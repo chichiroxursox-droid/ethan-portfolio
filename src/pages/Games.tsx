@@ -52,7 +52,7 @@ const Games = () => {
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-white">
-              The Humanium
+              The Humanium Metal Game
               <br />
               <span className="bg-gradient-to-r from-[#FFD700] to-[#FFA500] bg-clip-text text-transparent">Game</span>
             </h2>
