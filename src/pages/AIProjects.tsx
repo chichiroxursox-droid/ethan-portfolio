@@ -196,6 +196,18 @@ const AIProjects = () => {
                   </div>
                 )}
 
+                {/* View Live link */}
+                {(project as any).link && (
+                  <a
+                    href={(project as any).link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm text-[#A78BFA] hover:text-[#C084FC] transition-colors mb-4 font-medium"
+                  >
+                    View Live <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                )}
+
                 {/* Tech stack chips */}
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map((t) => (
