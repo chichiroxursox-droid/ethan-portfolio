@@ -169,6 +169,20 @@ const AIProjects = () => {
                 {/* Description */}
                 <p className="text-sm text-gray-500 leading-relaxed mb-4">{project.description}</p>
 
+                {/* Demo video for ClassBot */}
+                {project.name === "ClassBot" && (
+                  <div className="mb-4 rounded-lg overflow-hidden border border-[#8B5CF6]/20">
+                    <video
+                      src="/videos/classbot-demo.mov"
+                      controls
+                      muted
+                      playsInline
+                      className="w-full rounded-lg"
+                      poster=""
+                    />
+                  </div>
+                )}
+
                 {/* Tech stack chips */}
                 <div className="flex flex-wrap gap-2">
                   {project.tech.map((t) => (
