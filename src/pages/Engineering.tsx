@@ -42,108 +42,160 @@ const Engineering = () => {
   const miniHouseReveal = useScrollReveal();
   const goatHousesReveal = useScrollReveal();
   const rubeGoldbergReveal = useScrollReveal();
-  const miniHouseImages = [{
-    src: miniHouse1,
-    caption: "Foundation and frame construction"
-  }, {
-    src: miniHouse2,
-    caption: "Platform stage development"
-  }, {
-    src: miniHouse4,
-    caption: "Wall framing progress"
-  }, {
-    src: miniHouse3,
-    caption: "Roof framing assembly"
-  }, {
-    src: miniHouse5,
-    caption: "Completed exterior structure"
-  }, {
-    src: miniHouse6,
-    caption: "Finished house with roofing"
-  }];
-  const goatHouseImages = [{
-    src: goatHouse2,
-    caption: "Initial planning and measurements"
-  }, {
-    src: goatHouse3,
-    caption: "Foundation preparation"
-  }, {
-    src: goatHouse4,
-    caption: "Base construction phase"
-  }, {
-    src: goatHouse1,
-    caption: "Frame assembly beginning"
-  }, {
-    src: goatHouse5,
-    caption: "Wall structure development"
-  }, {
-    src: goatHouse6,
-    caption: "Roof framing progress"
-  }, {
-    src: goatHouse7,
-    caption: "Team collaboration on structure"
-  }, {
-    src: goatHouse8,
-    caption: "Exterior finishing work"
-  }, {
-    src: goatHouse9,
-    caption: "Final assembly stages"
-  }, {
-    src: goatHouse10,
-    caption: "Detail work and refinements"
-  }, {
-    src: goatHouse11,
-    caption: "Second house foundation"
-  }, {
-    src: goatHouse12,
-    caption: "Parallel construction work"
-  }, {
-    src: goatHouse13,
-    caption: "Third house framing"
-  }, {
-    src: goatHouse14,
-    caption: "Roofing installation"
-  }, {
-    src: goatHouse15,
-    caption: "Near completion phase"
-  }, {
-    src: goatHouse16,
-    caption: "All three goat houses completed"
-  }];
-  const processSlides = [goatProcess1, goatProcess2, goatProcess3, goatProcess4, goatProcess5, goatProcess6, goatProcess7];
+  const miniHouseImages = [
+    {
+      src: miniHouse1,
+      caption: "Foundation and frame construction",
+    },
+    {
+      src: miniHouse2,
+      caption: "Platform stage development",
+    },
+    {
+      src: miniHouse4,
+      caption: "Wall framing progress",
+    },
+    {
+      src: miniHouse3,
+      caption: "Roof framing assembly",
+    },
+    {
+      src: miniHouse5,
+      caption: "Completed exterior structure",
+    },
+    {
+      src: miniHouse6,
+      caption: "Finished house with roofing",
+    },
+  ];
+  const goatHouseImages = [
+    {
+      src: goatHouse2,
+      caption: "Initial planning and measurements",
+    },
+    {
+      src: goatHouse3,
+      caption: "Foundation preparation",
+    },
+    {
+      src: goatHouse4,
+      caption: "Base construction phase",
+    },
+    {
+      src: goatHouse1,
+      caption: "Frame assembly beginning",
+    },
+    {
+      src: goatHouse5,
+      caption: "Wall structure development",
+    },
+    {
+      src: goatHouse6,
+      caption: "Roof framing progress",
+    },
+    {
+      src: goatHouse7,
+      caption: "Team collaboration on structure",
+    },
+    {
+      src: goatHouse8,
+      caption: "Exterior finishing work",
+    },
+    {
+      src: goatHouse9,
+      caption: "Final assembly stages",
+    },
+    {
+      src: goatHouse10,
+      caption: "Detail work and refinements",
+    },
+    {
+      src: goatHouse11,
+      caption: "Second house foundation",
+    },
+    {
+      src: goatHouse12,
+      caption: "Parallel construction work",
+    },
+    {
+      src: goatHouse13,
+      caption: "Third house framing",
+    },
+    {
+      src: goatHouse14,
+      caption: "Roofing installation",
+    },
+    {
+      src: goatHouse15,
+      caption: "Near completion phase",
+    },
+    {
+      src: goatHouse16,
+      caption: "All three goat houses completed",
+    },
+  ];
+  const processSlides = [
+    goatProcess1,
+    goatProcess2,
+    goatProcess3,
+    goatProcess4,
+    goatProcess5,
+    goatProcess6,
+    goatProcess7,
+  ];
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide(prev => (prev + 1) % processSlides.length);
+      setCurrentSlide((prev) => (prev + 1) % processSlides.length);
     }, 3000);
     return () => clearInterval(interval);
   }, [processSlides.length]);
-  return <div className="min-h-screen bg-[#0A0A0A] font-inter transition-all duration-500">
+  return (
+    <div className="min-h-screen bg-[#0A0A0A] font-inter transition-all duration-500">
       <Navigation />
-      
+
       {/* Lightbox Modal */}
-      {selectedImage && <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 animate-fade-in backdrop-blur-sm" onClick={() => setSelectedImage(null)}>
-          <button className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10" onClick={() => setSelectedImage(null)}>
+      {selectedImage && (
+        <div
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 animate-fade-in backdrop-blur-sm"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10"
+            onClick={() => setSelectedImage(null)}
+          >
             <X className="w-8 h-8" />
           </button>
-          <img src={selectedImage} alt="Full size view" className="max-w-full max-h-[90vh] object-contain animate-scale-in" onClick={e => e.stopPropagation()} />
-        </div>}
-      
+          <img
+            src={selectedImage}
+            alt="Full size view"
+            className="max-w-full max-h-[90vh] object-contain animate-scale-in"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+
       <main className="container mx-auto px-6 pt-32 pb-24 relative">
         {/* Animated Grid Background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
-          <div className="absolute inset-0" style={{
-          backgroundImage: `
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `
               linear-gradient(to right, rgba(0, 255, 159, 0.1) 1px, transparent 1px),
               linear-gradient(to bottom, rgba(0, 255, 159, 0.1) 1px, transparent 1px)
             `,
-          backgroundSize: '50px 50px',
-          maskImage: 'radial-gradient(ellipse 80% 50% at 50% 0%, black 40%, transparent 100%)',
-          WebkitMaskImage: 'radial-gradient(ellipse 80% 50% at 50% 0%, black 40%, transparent 100%)'
-        }} />
+              backgroundSize: "50px 50px",
+              maskImage: "radial-gradient(ellipse 80% 50% at 50% 0%, black 40%, transparent 100%)",
+              WebkitMaskImage: "radial-gradient(ellipse 80% 50% at 50% 0%, black 40%, transparent 100%)",
+            }}
+          />
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00FF9F]/20 rounded-full blur-[100px] animate-pulse" />
-          <div className="absolute top-20 right-1/4 w-96 h-96 bg-[#00D9FF]/20 rounded-full blur-[100px] animate-pulse" style={{
-          animationDelay: '1s'
-        }} />
+          <div
+            className="absolute top-20 right-1/4 w-96 h-96 bg-[#00D9FF]/20 rounded-full blur-[100px] animate-pulse"
+            style={{
+              animationDelay: "1s",
+            }}
+          />
         </div>
 
         {/* Hero Section */}
@@ -156,7 +208,8 @@ const Engineering = () => {
             </div>
             <div className="relative">
               <h1 className="text-6xl md:text-7xl font-bold text-white leading-tight relative z-20">
-                Building the<br />
+                Engineering Projects
+                <br />
                 <span className="bg-gradient-to-r from-[#00FF9F] to-[#00D9FF] bg-clip-text text-transparent">
                   Future
                 </span>
@@ -175,30 +228,34 @@ const Engineering = () => {
               </div>
             </div>
             <p className="text-xl text-gray-400 max-w-2xl font-light">
-              These are some projects I've worked on in my engineering class. I like figuring out how to turn an idea into something real.
+              These are some projects I've worked on in my engineering class. I like figuring out how to turn an idea
+              into something real.
             </p>
           </div>
         </div>
 
         <div className="max-w-7xl mx-auto space-y-32">
           {/* Mini House Project */}
-          <section ref={miniHouseReveal.ref} className={`transition-all duration-1000 ${miniHouseReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
+          <section
+            ref={miniHouseReveal.ref}
+            className={`transition-all duration-1000 ${miniHouseReveal.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"}`}
+          >
             <div className="grid lg:grid-cols-2 gap-16 items-start">
               <div className="space-y-8 lg:sticky lg:top-24 z-20 bg-[#0A0A0A] p-6 rounded-lg">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-[#00FF9F]/10 rounded-lg border border-[#00FF9F]/20">
                     <Home className="w-6 h-6 text-[#00FF9F]" />
                   </div>
-                  <h2 className="text-4xl font-bold text-white font-mono">
-                    APOCALYPSE_SHELTER.EXE
-                  </h2>
+                  <h2 className="text-4xl font-bold text-white font-mono">APOCALYPSE_SHELTER.EXE</h2>
                 </div>
-                
+
                 <div className="space-y-4">
                   <p className="text-gray-400 text-lg leading-relaxed">
-                    For this project, I helped design and build a 16' x 16' shelter. The premise was survival in an apocalypse scenario, but really it was an excuse to learn construction from the ground up: foundation, framing, roofing, all of it.
+                    For this project, I helped design and build a 16' x 16' shelter. The premise was survival in an
+                    apocalypse scenario, but really it was an excuse to learn construction from the ground up:
+                    foundation, framing, roofing, all of it.
                   </p>
-                  
+
                   <div className="bg-[#111111] border border-gray-800 rounded-lg p-6 space-y-4">
                     <h3 className="font-mono text-[#00FF9F] text-sm uppercase tracking-wider">
                       Technical Specifications
@@ -224,14 +281,19 @@ const Engineering = () => {
                   </div>
 
                   <div className="space-y-3 pt-4">
-                    <h4 className="font-mono text-white text-sm uppercase tracking-wider">
-                      Key Features
-                    </h4>
+                    <h4 className="font-mono text-white text-sm uppercase tracking-wider">Key Features</h4>
                     <ul className="space-y-2 text-gray-400">
-                      {["Structural foundation using engineering principles", "Wall framing and structural support", "Roof framing and truss assembly", "Advanced weatherproofing and insulation"].map((item, i) => <li key={i} className="flex items-start gap-3 group">
+                      {[
+                        "Structural foundation using engineering principles",
+                        "Wall framing and structural support",
+                        "Roof framing and truss assembly",
+                        "Advanced weatherproofing and insulation",
+                      ].map((item, i) => (
+                        <li key={i} className="flex items-start gap-3 group">
                           <span className="text-[#00FF9F] mt-1 group-hover:scale-110 transition-transform">→</span>
                           <span className="group-hover:text-white transition-colors">{item}</span>
-                        </li>)}
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -239,41 +301,58 @@ const Engineering = () => {
 
               {/* Interactive Image Grid */}
               <div className="grid grid-cols-2 gap-4">
-                {miniHouseImages.map((image, index) => <div key={index} className="relative aspect-square cursor-pointer group overflow-hidden rounded-lg" onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)} onClick={() => setSelectedImage(image.src)}>
-                    <img src={image.src} alt={image.caption} className={`w-full h-full object-cover transition-all duration-500 ${hoveredIndex === index ? 'scale-110' : 'scale-100'}`} />
-                    <div className={`absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-300 ${hoveredIndex === index ? 'opacity-100' : 'opacity-0'}`}>
+                {miniHouseImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className="relative aspect-square cursor-pointer group overflow-hidden rounded-lg"
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                    onClick={() => setSelectedImage(image.src)}
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.caption}
+                      className={`w-full h-full object-cover transition-all duration-500 ${hoveredIndex === index ? "scale-110" : "scale-100"}`}
+                    />
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-300 ${hoveredIndex === index ? "opacity-100" : "opacity-0"}`}
+                    >
                       <div className="absolute bottom-0 left-0 right-0 p-4">
                         <p className="text-white font-mono text-xs">{image.caption}</p>
                       </div>
                     </div>
-                    <div className={`absolute inset-0 border-2 border-[#00FF9F] transition-opacity duration-300 ${hoveredIndex === index ? 'opacity-100' : 'opacity-0'}`} />
-                  </div>)}
+                    <div
+                      className={`absolute inset-0 border-2 border-[#00FF9F] transition-opacity duration-300 ${hoveredIndex === index ? "opacity-100" : "opacity-0"}`}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </section>
 
           {/* Goat Houses Project */}
-          <section ref={goatHousesReveal.ref} className={`transition-all duration-1000 ${goatHousesReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
+          <section
+            ref={goatHousesReveal.ref}
+            className={`transition-all duration-1000 ${goatHousesReveal.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"}`}
+          >
             <div className="grid lg:grid-cols-2 gap-16 items-start">
               <div className="space-y-8 lg:sticky lg:top-24 z-20 bg-[#0A0A0A] p-6 rounded-lg">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-[#FFB800]/10 rounded-lg border border-[#FFB800]/20">
                     <Home className="w-6 h-6 text-[#FFB800]" />
                   </div>
-                  <h2 className="text-4xl font-bold text-white font-mono">
-                    GOAT_SHELTERS.BUILD
-                  </h2>
+                  <h2 className="text-4xl font-bold text-white font-mono">GOAT_SHELTERS.BUILD</h2>
                 </div>
-                
+
                 <div className="space-y-4">
                   <p className="text-gray-400 text-lg leading-relaxed">
-                    Yes, there's a farm in Philadelphia. During a summer engineering program, I worked with a team to build three complete goat houses. It was 90-degree heat, manual labor, and a lot of sweat, but seeing the finished structures made it worth it.
+                    Yes, there's a farm in Philadelphia. During a summer engineering program, I worked with a team to
+                    build three complete goat houses. It was 90-degree heat, manual labor, and a lot of sweat, but
+                    seeing the finished structures made it worth it.
                   </p>
-                  
+
                   <div className="bg-[#111111] border border-gray-800 rounded-lg p-6 space-y-4">
-                    <h3 className="font-mono text-[#FFB800] text-sm uppercase tracking-wider">
-                      Project Details
-                    </h3>
+                    <h3 className="font-mono text-[#FFB800] text-sm uppercase tracking-wider">Project Details</h3>
                     <div className="grid grid-cols-2 gap-4 font-mono text-sm">
                       <div>
                         <div className="text-gray-500">Structures Built</div>
@@ -295,14 +374,19 @@ const Engineering = () => {
                   </div>
 
                   <div className="space-y-3 pt-4">
-                    <h4 className="font-mono text-white text-sm uppercase tracking-wider">
-                      Skills Applied
-                    </h4>
+                    <h4 className="font-mono text-white text-sm uppercase tracking-wider">Skills Applied</h4>
                     <ul className="space-y-2 text-gray-400">
-                      {["Team leadership and collaboration", "Construction planning and execution", "Material selection and management", "Hands-on carpentry and assembly"].map((item, i) => <li key={i} className="flex items-start gap-3 group">
+                      {[
+                        "Team leadership and collaboration",
+                        "Construction planning and execution",
+                        "Material selection and management",
+                        "Hands-on carpentry and assembly",
+                      ].map((item, i) => (
+                        <li key={i} className="flex items-start gap-3 group">
                           <span className="text-[#FFB800] mt-1 group-hover:scale-110 transition-transform">→</span>
                           <span className="group-hover:text-white transition-colors">{item}</span>
-                        </li>)}
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -312,46 +396,61 @@ const Engineering = () => {
             {/* Process Slideshow */}
             <div className="mt-16 space-y-6">
               <div className="flex items-center gap-3">
-                <h3 className="text-2xl font-bold text-white font-mono">
-                  BUILD_PROCESS.SLIDESHOW
-                </h3>
+                <h3 className="text-2xl font-bold text-white font-mono">BUILD_PROCESS.SLIDESHOW</h3>
               </div>
-              
+
               <div className="relative aspect-video rounded-lg overflow-hidden border-2 border-[#FFB800]/20">
-                {processSlides.map((slide, index) => <div key={index} className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}>
-                    <img src={slide} alt={`Build process step ${index + 1}`} className="w-full h-full object-contain bg-black" />
-                  </div>)}
-                
+                {processSlides.map((slide, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? "opacity-100" : "opacity-0"}`}
+                  >
+                    <img
+                      src={slide}
+                      alt={`Build process step ${index + 1}`}
+                      className="w-full h-full object-contain bg-black"
+                    />
+                  </div>
+                ))}
+
                 {/* Progress Indicators */}
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-                  {processSlides.map((_, index) => <button key={index} onClick={() => setCurrentSlide(index)} className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentSlide ? 'bg-[#FFB800] w-6' : 'bg-white/30 hover:bg-white/50'}`} aria-label={`Go to slide ${index + 1}`} />)}
+                  {processSlides.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentSlide(index)}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentSlide ? "bg-[#FFB800] w-6" : "bg-white/30 hover:bg-white/50"}`}
+                      aria-label={`Go to slide ${index + 1}`}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
           </section>
 
           {/* Rube Goldberg Project */}
-          <section ref={rubeGoldbergReveal.ref} className={`transition-all duration-1000 delay-200 ${rubeGoldbergReveal.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
+          <section
+            ref={rubeGoldbergReveal.ref}
+            className={`transition-all duration-1000 delay-200 ${rubeGoldbergReveal.isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"}`}
+          >
             <div className="grid lg:grid-cols-2 gap-16 items-start">
               <div className="space-y-8 lg:sticky lg:top-24 z-20 bg-[#0A0A0A] p-6 rounded-lg">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-[#00D9FF]/10 rounded-lg border border-[#00D9FF]/20">
                     <Youtube className="w-6 h-6 text-[#00D9FF]" />
                   </div>
-                  <h2 className="text-4xl font-bold text-white font-mono">
-                    RUBE_GOLDBERG.SYS
-                  </h2>
+                  <h2 className="text-4xl font-bold text-white font-mono">RUBE_GOLDBERG.SYS</h2>
                 </div>
-                
+
                 <div className="space-y-4">
                   <p className="text-gray-400 text-lg leading-relaxed">
-                    In 10th grade, my team and I built a Rube Goldberg machine. We were responsible for the very first section, the part that kicks off the whole chain reaction. It was a fun exercise in precision and teamwork.
+                    In 10th grade, my team and I built a Rube Goldberg machine. We were responsible for the very first
+                    section, the part that kicks off the whole chain reaction. It was a fun exercise in precision and
+                    teamwork.
                   </p>
-                  
+
                   <div className="bg-[#111111] border border-gray-800 rounded-lg p-6 space-y-4">
-                    <h3 className="font-mono text-[#00D9FF] text-sm uppercase tracking-wider">
-                      Project Highlights
-                    </h3>
+                    <h3 className="font-mono text-[#00D9FF] text-sm uppercase tracking-wider">Project Highlights</h3>
                     <div className="space-y-3 text-sm">
                       <div className="flex justify-between border-b border-gray-800 pb-2">
                         <span className="text-gray-500">Role</span>
@@ -369,14 +468,19 @@ const Engineering = () => {
                   </div>
 
                   <div className="space-y-3 pt-4">
-                    <h4 className="font-mono text-white text-sm uppercase tracking-wider">
-                      Engineering Principles
-                    </h4>
+                    <h4 className="font-mono text-white text-sm uppercase tracking-wider">Engineering Principles</h4>
                     <ul className="space-y-2 text-gray-400">
-                      {["Energy transfer and momentum", "Precise timing and synchronization", "Mechanical chain reactions", "Problem-solving and iteration"].map((item, i) => <li key={i} className="flex items-start gap-3 group">
+                      {[
+                        "Energy transfer and momentum",
+                        "Precise timing and synchronization",
+                        "Mechanical chain reactions",
+                        "Problem-solving and iteration",
+                      ].map((item, i) => (
+                        <li key={i} className="flex items-start gap-3 group">
                           <span className="text-[#00D9FF] mt-1 group-hover:scale-110 transition-transform">→</span>
                           <span className="group-hover:text-white transition-colors">{item}</span>
-                        </li>)}
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -385,7 +489,16 @@ const Engineering = () => {
               {/* Video Embed */}
               <div className="relative">
                 <div className="aspect-video rounded-lg overflow-hidden border-2 border-[#00D9FF]/20 hover:border-[#00D9FF]/40 transition-colors">
-                  <iframe width="100%" height="100%" src="https://www.youtube.com/embed/l9VnBqaSKGw?si=7qHm62m26NW4Ad3o" title="Rube Goldberg Machine Project" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="w-full h-full" />
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src="https://www.youtube.com/embed/l9VnBqaSKGw?si=7qHm62m26NW4Ad3o"
+                    title="Rube Goldberg Machine Project"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                  />
                 </div>
                 <div className="mt-4 text-sm text-gray-500 font-mono text-center">
                   Watch the full Rube Goldberg machine in action
@@ -395,6 +508,7 @@ const Engineering = () => {
           </section>
         </div>
       </main>
-    </div>;
+    </div>
+  );
 };
 export default Engineering;
