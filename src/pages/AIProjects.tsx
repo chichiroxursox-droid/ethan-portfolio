@@ -2,7 +2,7 @@ import Navigation from "@/components/Navigation";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { useSectionTheme } from "@/hooks/use-section-theme";
 import { SparklesCore } from "@/components/ui/sparkles";
-import { Brain, Bot, Globe, Mic, Mail } from "lucide-react";
+import { Brain, Bot, Globe, Mic, Mail, Waves, ExternalLink } from "lucide-react";
 
 const projects = [
   {
@@ -52,6 +52,19 @@ const projects = [
     statusColor: "bg-orange-500/20 text-orange-400 border-orange-500/30",
     icon: Mail,
     accentColor: "from-violet-600 to-indigo-600",
+  },
+  {
+    name: "Luminary",
+    brand: null,
+    tagline: "Cinematic scroll-driven video playback website",
+    description:
+      "A visually striking website with a frame-by-frame video scroll animation. As users scroll, video frames advance in sync, creating a cinematic storytelling experience. Built entirely with vanilla web technologies and custom scroll logic.",
+    tech: ["HTML", "CSS", "JavaScript", "Scroll Animation"],
+    status: "Complete",
+    statusColor: "bg-blue-500/20 text-blue-400 border-blue-500/30",
+    icon: Waves,
+    accentColor: "from-cyan-500 to-blue-600",
+    link: "https://luminaryv1.netlify.app/",
   },
 ];
 
@@ -181,6 +194,18 @@ const AIProjects = () => {
                       poster=""
                     />
                   </div>
+                )}
+
+                {/* View Live link */}
+                {(project as any).link && (
+                  <a
+                    href={(project as any).link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm text-[#A78BFA] hover:text-[#C084FC] transition-colors mb-4 font-medium"
+                  >
+                    View Live <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
                 )}
 
                 {/* Tech stack chips */}
