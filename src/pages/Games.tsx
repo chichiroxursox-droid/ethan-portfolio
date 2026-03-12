@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import Navigation from "@/components/Navigation";
 import { TerminalHacker } from "@/components/games/TerminalHacker";
 import { useSectionTheme } from "@/hooks/use-section-theme";
@@ -7,23 +7,50 @@ import { SparklesCore } from "@/components/ui/sparkles";
 const Games = () => {
   useSectionTheme();
   const humaniumFrameRef = useRef<HTMLIFrameElement | null>(null);
+  const scrollLockRef = useRef(false);
+  const previousOverflowRef = useRef({ html: "", body: "" });
 
-  // Prevent page scroll from arrow/space keys while on this page
+  const lockPageScroll = useCallback(() => {
+    if (scrollLockRef.current) return;
+
+    previousOverflowRef.current = {
+      html: document.documentElement.style.overflow,
+      body: document.body.style.overflow,
+    };
+
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+    scrollLockRef.current = true;
+  }, []);
+
+  const unlockPageScroll = useCallback(() => {
+    if (!scrollLockRef.current) return;
+
+    document.documentElement.style.overflow = previousOverflowRef.current.html;
+    document.body.style.overflow = previousOverflowRef.current.body;
+    scrollLockRef.current = false;
+  }, []);
+
+  // Prevent page scroll from arrow/space keys while playing in the iframe
   useEffect(() => {
     const blockedKeys = new Set(["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " ", "Space", "Spacebar"]);
 
     const handleKeyDown = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement | null;
       const isFormField = !!target && (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName));
+      const isHumaniumFocused = document.activeElement === humaniumFrameRef.current;
 
-      if (!isFormField && blockedKeys.has(e.key)) {
+      if (!isFormField && blockedKeys.has(e.key) && (isHumaniumFocused || scrollLockRef.current)) {
         e.preventDefault();
       }
     };
 
     window.addEventListener("keydown", handleKeyDown, true);
-    return () => window.removeEventListener("keydown", handleKeyDown, true);
-  }, []);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown, true);
+      unlockPageScroll();
+    };
+  }, [unlockPageScroll]);
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] font-inter transition-all duration-500">
@@ -88,7 +115,12 @@ const Games = () => {
                 className="w-full aspect-video"
                 allow="fullscreen"
                 tabIndex={0}
-                onPointerDown={() => humaniumFrameRef.current?.focus()}
+                onFocus={lockPageScroll}
+                onBlur={unlockPageScroll}
+                onPointerDown={() => {
+                  humaniumFrameRef.current?.focus();
+                  lockPageScroll();
+                }}
                 style={{ minHeight: "600px" }}
               />
             </div>
@@ -111,3 +143,4 @@ const Games = () => {
 };
 
 export default Games;
+
