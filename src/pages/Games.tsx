@@ -7,6 +7,7 @@ import { SparklesCore } from "@/components/ui/sparkles";
 const Games = () => {
   useSectionTheme();
   const humaniumFrameRef = useRef<HTMLIFrameElement | null>(null);
+  const humaniumContainerRef = useRef<HTMLDivElement | null>(null);
   const scrollLockRef = useRef(false);
   const previousOverflowRef = useRef({ html: "", body: "" });
 
@@ -43,6 +44,10 @@ const Games = () => {
       if (!isFormField && blockedKeys.has(e.key) && (isHumaniumFocused || scrollLockRef.current)) {
         e.preventDefault();
       }
+
+      if (e.key === "Escape" && scrollLockRef.current) {
+        unlockPageScroll();
+      }
     };
 
     window.addEventListener("keydown", handleKeyDown, true);
@@ -50,6 +55,20 @@ const Games = () => {
       window.removeEventListener("keydown", handleKeyDown, true);
       unlockPageScroll();
     };
+  }, [unlockPageScroll]);
+
+  useEffect(() => {
+    const handlePointerDown = (e: PointerEvent) => {
+      if (!scrollLockRef.current) return;
+
+      const container = humaniumContainerRef.current;
+      if (container && !container.contains(e.target as Node)) {
+        unlockPageScroll();
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown, true);
+    return () => document.removeEventListener("pointerdown", handlePointerDown, true);
   }, [unlockPageScroll]);
 
   return (
