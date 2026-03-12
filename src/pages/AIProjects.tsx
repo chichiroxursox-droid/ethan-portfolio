@@ -6,7 +6,7 @@ import { Brain, Bot, Globe, Mic, Mail, Waves, ExternalLink } from "lucide-react"
 
 const projects = [
   {
-    name: "CULTIVaITE",
+    name: "CULTIVaiTE",
     brand: null,
     tagline: "AI-powered communications for small nonprofits",
     description:
@@ -187,7 +187,9 @@ const AIProjects = () => {
                 {(project.name === "ClassBot" || project.name === "Gmail Inbox Organizer") && (
                   <div className="mb-4 rounded-lg overflow-hidden border border-[#8B5CF6]/20">
                     <video
-                      src={project.name === "ClassBot" ? "/videos/classbot-demo.mov" : "/videos/gmail-organizer-demo.mov"}
+                      src={
+                        project.name === "ClassBot" ? "/videos/classbot-demo.mov" : "/videos/gmail-organizer-demo.mov"
+                      }
                       controls
                       muted
                       playsInline
@@ -201,7 +203,11 @@ const AIProjects = () => {
                 {(project.name === "CULTIVaITE" || project.name === "Luminary") && (
                   <div className="mb-4 rounded-lg overflow-hidden border border-[#8B5CF6]/20 aspect-video">
                     <iframe
-                      src={project.name === "CULTIVaITE" ? "https://cultivaiteus.netlify.app/" : "https://luminaryv1.netlify.app/"}
+                      src={
+                        project.name === "CULTIVaITE"
+                          ? "https://cultivaiteus.netlify.app/"
+                          : "https://luminaryv1.netlify.app/"
+                      }
                       title={`${project.name} - Live Preview`}
                       className="w-full h-full rounded-lg"
                       sandbox="allow-scripts allow-same-origin"
