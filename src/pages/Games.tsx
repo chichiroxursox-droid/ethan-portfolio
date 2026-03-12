@@ -126,7 +126,14 @@ const Games = () => {
               West Chester iCamp
             </p>
 
-            <div className="mt-8 rounded-xl overflow-hidden border border-white/10 bg-black/50">
+            <div
+              ref={humaniumContainerRef}
+              className="mt-8 rounded-xl overflow-hidden border border-white/10 bg-black/50"
+              onPointerDown={() => {
+                lockPageScroll();
+                humaniumFrameRef.current?.focus();
+              }}
+            >
               <iframe
                 ref={humaniumFrameRef}
                 src="https://icampwcu.org/games/Humanium/"
@@ -135,7 +142,6 @@ const Games = () => {
                 allow="fullscreen"
                 tabIndex={0}
                 onFocus={lockPageScroll}
-                onBlur={unlockPageScroll}
                 onPointerDown={() => {
                   humaniumFrameRef.current?.focus();
                   lockPageScroll();
