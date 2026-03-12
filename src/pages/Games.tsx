@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import { TerminalHacker } from "@/components/games/TerminalHacker";
 import { useSectionTheme } from "@/hooks/use-section-theme";
