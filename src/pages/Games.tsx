@@ -6,6 +6,17 @@ import { SparklesCore } from "@/components/ui/sparkles";
 const Games = () => {
   useSectionTheme();
 
+  // Prevent page scroll when iframe game is focused
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (document.activeElement?.tagName === "IFRAME" && ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].includes(e.key)) {
+        e.preventDefault();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#0A0A0A] font-inter transition-all duration-500">
       <Navigation />
