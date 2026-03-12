@@ -204,7 +204,7 @@ const AIProjects = () => {
                   <div className="mb-4 rounded-lg overflow-hidden border border-[#8B5CF6]/20 aspect-video">
                     <iframe
                       src={
-                        project.name === "CULTIVaITE"
+                        project.name === "CULTIVaiTE"
                           ? "https://cultivaiteus.netlify.app/"
                           : "https://luminaryv1.netlify.app/"
                       }
