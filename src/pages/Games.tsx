@@ -82,10 +82,13 @@ const Games = () => {
 
             <div className="mt-8 rounded-xl overflow-hidden border border-white/10 bg-black/50">
               <iframe
+                ref={humaniumFrameRef}
                 src="https://icampwcu.org/games/Humanium/"
                 title="Humanium Game"
                 className="w-full aspect-video"
                 allow="fullscreen"
+                tabIndex={0}
+                onPointerDown={() => humaniumFrameRef.current?.focus()}
                 style={{ minHeight: "600px" }}
               />
             </div>
