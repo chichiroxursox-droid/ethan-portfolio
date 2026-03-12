@@ -6,16 +6,23 @@ import { SparklesCore } from "@/components/ui/sparkles";
 
 const Games = () => {
   useSectionTheme();
+  const humaniumFrameRef = useRef<HTMLIFrameElement | null>(null);
 
-  // Prevent page scroll when iframe game is focused
+  // Prevent page scroll from arrow/space keys while on this page
   useEffect(() => {
+    const blockedKeys = new Set(["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " ", "Space", "Spacebar"]);
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (document.activeElement?.tagName === "IFRAME" && ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].includes(e.key)) {
+      const target = e.target as HTMLElement | null;
+      const isFormField = !!target && (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName));
+
+      if (!isFormField && blockedKeys.has(e.key)) {
         e.preventDefault();
       }
     };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+
+    window.addEventListener("keydown", handleKeyDown, true);
+    return () => window.removeEventListener("keydown", handleKeyDown, true);
   }, []);
 
   return (
