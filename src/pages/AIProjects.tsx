@@ -133,12 +133,12 @@ const AIProjects = () => {
           </h1>
 
           {/* Tagline */}
-          <p className="text-lg text-gray-400 max-w-xl mx-auto mb-8 leading-relaxed">
+          <p className="text-lg text-gray-300 max-w-xl mx-auto mb-8 leading-relaxed">
             Real products, real code — built by a high school senior using Claude Code.
           </p>
 
           {/* Narrative intro */}
-          <p className="text-base text-gray-500 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base text-gray-400 max-w-2xl mx-auto leading-relaxed">
             I'm a senior at SLA Beeber who's been using Claude Code as a development partner to ship real products.
             Since late 2025, I've launched a full-stack web app, co-founded an AI startup, and built a Python automation
             bot — all using Claude Code.
@@ -178,10 +178,10 @@ const AIProjects = () => {
                 </div>
 
                 {/* Tagline */}
-                <p className="text-sm text-gray-400 mb-3 font-medium">{project.tagline}</p>
+                <p className="text-sm text-gray-300 mb-3 font-medium">{project.tagline}</p>
 
                 {/* Description */}
-                <p className="text-sm text-gray-500 leading-relaxed mb-4">{project.description}</p>
+                <p className="text-sm text-gray-400 leading-relaxed mb-4">{project.description}</p>
 
                 {/* Demo videos for ClassBot and Gmail Inbox Organizer */}
                 {(project.name === "ClassBot" || project.name === "Gmail Inbox Organizer") && (
@@ -239,7 +239,7 @@ const AIProjects = () => {
         </div>
 
         {/* Footer note */}
-        <p className="text-center text-gray-600 text-xs font-mono mt-16 relative z-10">
+        <p className="text-center text-gray-400 text-xs font-mono mt-16 relative z-10">
           This page of the portfolio was also built with Claude Code.
         </p>
       </main>
