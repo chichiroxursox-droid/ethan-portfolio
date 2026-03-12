@@ -16,6 +16,7 @@ const projects = [
     statusColor: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
     icon: Globe,
     accentColor: "from-violet-500 to-purple-600",
+    link: "https://cultivaiteus.netlify.app/",
   },
   {
     name: "ClassBot",
