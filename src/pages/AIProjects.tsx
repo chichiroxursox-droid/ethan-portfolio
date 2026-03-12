@@ -197,12 +197,12 @@ const AIProjects = () => {
                   </div>
                 )}
 
-                {/* Embedded preview for Luminary */}
-                {project.name === "Luminary" && (
+                {/* Embedded preview for CULTIVaITE and Luminary */}
+                {(project.name === "CULTIVaITE" || project.name === "Luminary") && (
                   <div className="mb-4 rounded-lg overflow-hidden border border-[#8B5CF6]/20 aspect-video">
                     <iframe
-                      src="https://luminaryv1.netlify.app/"
-                      title="Luminary - Scroll Animation Demo"
+                      src={project.name === "CULTIVaITE" ? "https://cultivaiteus.netlify.app/" : "https://luminaryv1.netlify.app/"}
+                      title={`${project.name} - Live Preview`}
                       className="w-full h-full rounded-lg"
                       sandbox="allow-scripts allow-same-origin"
                       loading="lazy"
