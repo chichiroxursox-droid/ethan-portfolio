@@ -57,7 +57,8 @@ const Games = () => {
               <span className="bg-gradient-to-r from-[#FFD700] to-[#FFA500] bg-clip-text text-transparent">Game</span>
             </h2>
             <p className="text-xl text-gray-400 max-w-2xl font-light">
-              An interactive experience exploring the Humanium Metal initiative — turning weapons into peace.
+              An interactive experience exploring the Humanium Metal initiative — turning weapons into peace. Built at
+              West Chest iCamp
             </p>
 
             <div className="mt-8 rounded-xl overflow-hidden border border-white/10 bg-black/50">
