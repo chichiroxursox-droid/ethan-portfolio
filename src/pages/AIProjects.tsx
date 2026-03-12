@@ -200,7 +200,7 @@ const AIProjects = () => {
                 )}
 
                 {/* Embedded preview for CULTIVaITE and Luminary */}
-                {(project.name === "CULTIVaITE" || project.name === "Luminary") && (
+                {(project.name === "CULTIVaiTE" || project.name === "Luminary") && (
                   <div className="mb-4 rounded-lg overflow-hidden border border-[#8B5CF6]/20 aspect-video">
                     <iframe
                       src={
