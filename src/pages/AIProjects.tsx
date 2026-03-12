@@ -239,7 +239,7 @@ const AIProjects = () => {
         </div>
 
         {/* Footer note */}
-        <p className="text-center text-gray-600 text-xs font-mono mt-16 relative z-10">
+        <p className="text-center text-gray-400 text-xs font-mono mt-16 relative z-10">
           This page of the portfolio was also built with Claude Code.
         </p>
       </main>
