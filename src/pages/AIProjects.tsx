@@ -138,7 +138,7 @@ const AIProjects = () => {
           </p>
 
           {/* Narrative intro */}
-          <p className="text-base text-gray-500 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base text-gray-400 max-w-2xl mx-auto leading-relaxed">
             I'm a senior at SLA Beeber who's been using Claude Code as a development partner to ship real products.
             Since late 2025, I've launched a full-stack web app, co-founded an AI startup, and built a Python automation
             bot — all using Claude Code.
