@@ -178,10 +178,10 @@ const AIProjects = () => {
                 </div>
 
                 {/* Tagline */}
-                <p className="text-sm text-gray-400 mb-3 font-medium">{project.tagline}</p>
+                <p className="text-sm text-gray-300 mb-3 font-medium">{project.tagline}</p>
 
                 {/* Description */}
-                <p className="text-sm text-gray-500 leading-relaxed mb-4">{project.description}</p>
+                <p className="text-sm text-gray-400 leading-relaxed mb-4">{project.description}</p>
 
                 {/* Demo videos for ClassBot and Gmail Inbox Organizer */}
                 {(project.name === "ClassBot" || project.name === "Gmail Inbox Organizer") && (
