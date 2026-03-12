@@ -133,7 +133,7 @@ const AIProjects = () => {
           </h1>
 
           {/* Tagline */}
-          <p className="text-lg text-gray-400 max-w-xl mx-auto mb-8 leading-relaxed">
+          <p className="text-lg text-gray-300 max-w-xl mx-auto mb-8 leading-relaxed">
             Real products, real code — built by a high school senior using Claude Code.
           </p>
 
