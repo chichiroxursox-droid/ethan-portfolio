@@ -85,19 +85,16 @@ const Athletics = () => {
                     <p className="text-sm text-muted-foreground">Games Played</p>
                   </div>
                 </div>
+
+                <img 
+                  src={basketballLayup} 
+                  alt="Ethan Hauger driving to the basket for a layup" 
+                  className="w-full rounded-lg object-cover"
+                />
               </CardContent>
             </Card>
           </div>
 
-          <Card className="mb-12 overflow-hidden">
-            <CardContent className="p-0">
-              <img 
-                src={basketballLayup} 
-                alt="Ethan Hauger driving to the basket for a layup against defenders" 
-                className="w-full max-h-[500px] object-cover object-top rounded-lg"
-              />
-            </CardContent>
-          </Card>
 
           <div className="space-y-8">
             <Card>
