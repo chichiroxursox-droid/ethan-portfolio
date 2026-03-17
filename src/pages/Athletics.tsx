@@ -4,6 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Legend } from "recharts";
 import basketballShot from "@/assets/basketball-shot.png";
+import basketballLayup from "@/assets/basketball-layup.jpg";
 import { useSectionTheme } from "@/hooks/use-section-theme";
 
 const Athletics = () => {
@@ -87,6 +88,16 @@ const Athletics = () => {
               </CardContent>
             </Card>
           </div>
+
+          <Card className="mb-12 overflow-hidden">
+            <CardContent className="p-0">
+              <img 
+                src={basketballLayup} 
+                alt="Ethan Hauger driving to the basket for a layup against defenders" 
+                className="w-full max-h-[500px] object-cover object-top rounded-lg"
+              />
+            </CardContent>
+          </Card>
 
           <div className="space-y-8">
             <Card>
