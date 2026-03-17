@@ -4,6 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Legend } from "recharts";
 import basketballShot from "@/assets/basketball-shot.png";
+import basketballLayup from "@/assets/basketball-layup.jpg";
 import { useSectionTheme } from "@/hooks/use-section-theme";
 
 const Athletics = () => {
