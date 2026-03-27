@@ -200,15 +200,11 @@ const AIProjects = () => {
                   </div>
                 )}
 
-                {/* Embedded preview for CULTIVaITE and Luminary */}
-                {(project.name === "CULTIVaiTE" || project.name === "Luminary") && (
+                {/* Embedded preview for CULTIVaITE, ClassBot, and Luminary */}
+                {(project.name === "CULTIVaiTE" || project.name === "Luminary" || project.name === "ClassBot") && (
                   <div className="mb-4 rounded-lg overflow-hidden border border-[#8B5CF6]/20 aspect-video">
                     <iframe
-                      src={
-                        project.name === "CULTIVaiTE"
-                          ? "https://faithfullyai.netlify.app/"
-                          : "https://luminaryv1.netlify.app/"
-                      }
+                      src={project.link}
                       title={`${project.name} - Live Preview`}
                       className="w-full h-full rounded-lg"
                       sandbox="allow-scripts allow-same-origin"
