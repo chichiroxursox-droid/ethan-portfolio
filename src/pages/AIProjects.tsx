@@ -21,14 +21,15 @@ const projects = [
   {
     name: "ClassBot",
     brand: null,
-    tagline: "Python bot that auto-joins and transcribes Google Meet",
+    tagline: "Chrome extension that auto-joins and transcribes Google Meet",
     description:
-      "A headless Python bot that automatically joins Google Meet sessions, records audio using sounddevice, and transcribes + responds via the Groq API. Runs entirely through Playwright browser automation.",
-    tech: ["Python", "Playwright", "Groq API", "sounddevice"],
+      "A Chrome extension that automatically joins Google Meet sessions, records audio, and transcribes + responds via any connected AI API. Built with Playwright browser automation and packaged as a lightweight extension.",
+    tech: ["Python", "Playwright", "Chrome Extension", "sounddevice"],
     status: "In Development",
     statusColor: "bg-orange-500/20 text-orange-400 border-orange-500/30",
     icon: Mic,
     accentColor: "from-purple-500 to-violet-600",
+    link: "https://classbot-test.netlify.app/",
   },
   {
     name: "The Lamppost - lamppost.life",
@@ -199,15 +200,11 @@ const AIProjects = () => {
                   </div>
                 )}
 
-                {/* Embedded preview for CULTIVaITE and Luminary */}
-                {(project.name === "CULTIVaiTE" || project.name === "Luminary") && (
+                {/* Embedded preview for CULTIVaITE, ClassBot, and Luminary */}
+                {(project.name === "CULTIVaiTE" || project.name === "Luminary" || project.name === "ClassBot") && (
                   <div className="mb-4 rounded-lg overflow-hidden border border-[#8B5CF6]/20 aspect-video">
                     <iframe
-                      src={
-                        project.name === "CULTIVaiTE"
-                          ? "https://faithfullyai.netlify.app/"
-                          : "https://luminaryv1.netlify.app/"
-                      }
+                      src={project.link}
                       title={`${project.name} - Live Preview`}
                       className="w-full h-full rounded-lg"
                       sandbox="allow-scripts allow-same-origin"
