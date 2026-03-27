@@ -205,7 +205,7 @@ const AIProjects = () => {
                     <iframe
                       src={
                         project.name === "CULTIVaiTE"
-                          ? "https://cultivaiteus.netlify.app/"
+                          ? "https://faithfullyai.netlify.app/"
                           : "https://luminaryv1.netlify.app/"
                       }
                       title={`${project.name} - Live Preview`}
