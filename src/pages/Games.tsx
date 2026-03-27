@@ -38,7 +38,8 @@ const Games = () => {
 
     const handleKeyDown = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement | null;
-      const isFormField = !!target && (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName));
+      const isFormField =
+        !!target && (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName));
       const isHumaniumFocused = document.activeElement === humaniumFrameRef.current;
 
       if (!isFormField && blockedKeys.has(e.key) && (isHumaniumFocused || scrollLockRef.current)) {
@@ -85,7 +86,7 @@ const Games = () => {
             </div>
             <div className="relative">
               <h1 className="text-6xl md:text-7xl font-bold text-white leading-tight relative z-20">
-                Just for Fun
+                Just for
                 <br />
                 <span className="bg-gradient-to-r from-[#00FF9F] to-[#00D9FF] bg-clip-text text-transparent">Fun</span>
               </h1>
@@ -117,7 +118,7 @@ const Games = () => {
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-white">
-              The Humanium Metal Game
+              The Humanium Metal
               <br />
               <span className="bg-gradient-to-r from-[#FFD700] to-[#FFA500] bg-clip-text text-transparent">Game</span>
             </h2>
@@ -168,4 +169,3 @@ const Games = () => {
 };
 
 export default Games;
-
