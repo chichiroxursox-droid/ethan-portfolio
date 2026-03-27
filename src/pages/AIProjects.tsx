@@ -21,14 +21,15 @@ const projects = [
   {
     name: "ClassBot",
     brand: null,
-    tagline: "Python bot that auto-joins and transcribes Google Meet",
+    tagline: "Chrome extension that auto-joins and transcribes Google Meet",
     description:
-      "A headless Python bot that automatically joins Google Meet sessions, records audio using sounddevice, and transcribes + responds via the Groq API. Runs entirely through Playwright browser automation.",
-    tech: ["Python", "Playwright", "Groq API", "sounddevice"],
+      "A Chrome extension that automatically joins Google Meet sessions, records audio, and transcribes + responds via any connected AI API. Built with Playwright browser automation and packaged as a lightweight extension.",
+    tech: ["Python", "Playwright", "Chrome Extension", "sounddevice"],
     status: "In Development",
     statusColor: "bg-orange-500/20 text-orange-400 border-orange-500/30",
     icon: Mic,
     accentColor: "from-purple-500 to-violet-600",
+    link: "https://classbot-test.netlify.app/",
   },
   {
     name: "The Lamppost - lamppost.life",
