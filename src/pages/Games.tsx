@@ -129,7 +129,7 @@ const Games = () => {
 
             <div
               ref={humaniumContainerRef}
-              className="mt-8 rounded-xl overflow-hidden border border-white/10 bg-black/50"
+              className="mt-8 rounded-xl overflow-hidden border border-white/10 bg-black/50 relative group"
               onPointerDown={() => {
                 lockPageScroll();
                 humaniumFrameRef.current?.focus();
@@ -141,6 +141,7 @@ const Games = () => {
                 title="Humanium Game"
                 className="w-full aspect-video"
                 allow="fullscreen"
+                allowFullScreen
                 tabIndex={0}
                 onFocus={lockPageScroll}
                 onPointerDown={() => {
@@ -149,6 +150,25 @@ const Games = () => {
                 }}
                 style={{ minHeight: "600px" }}
               />
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const el = humaniumContainerRef.current;
+                  if (!el) return;
+                  if (document.fullscreenElement) {
+                    document.exitFullscreen();
+                  } else {
+                    el.requestFullscreen?.().then(() => {
+                      humaniumFrameRef.current?.focus();
+                      lockPageScroll();
+                    });
+                  }
+                }}
+                className="absolute top-3 right-3 z-10 px-3 py-1.5 rounded-md bg-[#FFD700]/90 hover:bg-[#FFD700] text-black text-xs font-mono font-semibold uppercase tracking-wider transition-colors"
+              >
+                Fullscreen
+              </button>
             </div>
             <p className="text-sm text-gray-500 mt-2">
               Built with Construct 3 • Part of the{" "}
